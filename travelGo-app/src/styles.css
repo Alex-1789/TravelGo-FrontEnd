@@ -10,8 +10,13 @@
     --footer: #B5D0CD;
 }
 
+.bg-theme {
+    background-color: var(--footer);
+}
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 17px;
     color: var(--background);
+    background-color: var(--background);
 }

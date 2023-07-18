@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.css'; 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
+:root {
+    --background: #EDEDED;
+    --text: #56716F;
+    --on-text: #127369;
+    --footer: #B5D0CD;
+}
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 17px;
+    color: var(--background);
+}

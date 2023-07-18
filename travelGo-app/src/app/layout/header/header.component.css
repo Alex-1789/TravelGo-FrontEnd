@@ -1,0 +1,36 @@
+header {
+    height: 80px;
+    
+}
+
+.site-logo{
+    
+    width: 80px;
+	height: 40px;
+	transform: skewX(-30deg);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background-color: var(--on-text);
+    text-decoration: none;
+
+}
+
+.site-logo > span {
+    transform: skewX(30deg);
+    color: var(--background);
+}
+.site-logo > span:hover{
+    color:var(--footer)
+}
+.login{
+    margin-right: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--on-text);
+    color: var(--background);
+    text-decoration: none;
+}
+.login:hover{
+    color:var(--footer);
+}

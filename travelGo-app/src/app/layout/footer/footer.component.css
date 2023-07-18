@@ -1,0 +1,16 @@
+footer{
+    height: 100px;
+    padding: 5px;
+    background-color: var(--footer);
+    margin-top: 85vh;
+}
+
+.nav-link{
+    color: var(--text);
+}
+.nav-link:hover{
+    color: var(--on-text);
+}
+p{
+    color: var(--background);
+}

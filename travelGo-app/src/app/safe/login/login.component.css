@@ -1,0 +1,8 @@
+div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+button{
+    justify-content: center;
+}

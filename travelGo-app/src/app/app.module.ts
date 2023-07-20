@@ -16,6 +16,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { CommentFormComponent } from './comments/comment-form/comment-form.component';
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { LoginComponent } from './safe/login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     ContactUsComponent,
     CommentFormComponent,
     CommentListComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

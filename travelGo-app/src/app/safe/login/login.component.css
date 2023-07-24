@@ -5,4 +5,5 @@ div{
 }
 button{
     justify-content: center;
+    background-color: var(--footer);
 }

@@ -1,0 +1,11 @@
+div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--text);
+
+}
+
+button{
+    background-color: var(--footer);
+    border-color: var(--text);
+}

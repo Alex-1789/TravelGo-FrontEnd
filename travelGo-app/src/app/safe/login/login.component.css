@@ -1,9 +1,11 @@
 div{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 1.9%;
+    margin-bottom: 1.9%;
     color: var(--text);
+
 }
+
 button{
-    justify-content: center;
     background-color: var(--footer);
+    border-color: var(--text);
 }

@@ -9,20 +9,21 @@ import { LoginComponent } from './safe/login/login.component';
 import { SignupComponent } from './safe/signup/signup.component';
 import { SinglePostComponent } from './pages/single-post/single-post.component';
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'category', component: SingleCategoryComponent },
-
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'terms-conditions', component: TermsAndConditionsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'post', component: SinglePostComponent },
+ 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

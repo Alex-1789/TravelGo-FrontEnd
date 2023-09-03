@@ -2,7 +2,7 @@ footer{
     height: 100px;
     padding: 5px;
     background-color: var(--footer);
-    
+
 }
 
 .nav-link{
@@ -13,4 +13,8 @@ footer{
 }
 p{
     color: var(--background);
+}
+
+.nav-item {
+  padding-left: 30px;
 }

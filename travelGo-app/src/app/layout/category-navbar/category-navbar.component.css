@@ -1,5 +1,4 @@
 nav {
-    
     height: 30px;
     background-color: var(--footer);
 }
@@ -12,4 +11,8 @@ nav {
 .nav-link:hover{
     text-transform: uppercase;
     color: var(--on-text);
+}
+
+.nav-item {
+  padding-left: 30px;
 }

@@ -1,0 +1,12 @@
+.text-container {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  margin-left: 25%;
+  margin-top: 10%;
+  /*background-color: rgb(41, 41, 41, 0.8);*/
+  font-size: 75px;
+}
+
+img {
+  height: 400px;
+}

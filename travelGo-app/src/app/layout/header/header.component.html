@@ -3,6 +3,7 @@
         <a href="http://localhost:4200/" class ="site-logo"><span>TravelGo</span></a>
     </div>
     <div class="justify-content-right ">
-        <a href="http://localhost:4200/login" class ="login">Login</a>
+        <a href="http://localhost:4200/login" *ngIf="!isLoggedIn()" class ="login">Login</a>
+        <a href="http://localhost:4200/account" *ngIf="isLoggedIn()" class ="login">Logout</a>
     </div>
 </header>

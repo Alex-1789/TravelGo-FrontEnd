@@ -4,27 +4,43 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private authTokenKey = 'authToken';
+  private isAuthenticated: boolean = false;
+  private accessToken: string | null = null;
 
-  constructor() {}
-
-  // Store the authentication token
-  storeToken(token: string): void {
-    localStorage.setItem(this.authTokenKey, token);
+  constructor() {
+    // Initialize the authentication state from local storage if available
+    const storedToken = localStorage.getItem('accessToken');
+    if (storedToken) {
+      this.isAuthenticated = true;
+      this.accessToken = storedToken;
+    }
   }
 
-  // Retrieve the stored authentication token
-  getToken(): string | null {
-    return localStorage.getItem(this.authTokenKey);
+  // Method to perform login
+  login(accessToken: string) {
+    this.isAuthenticated = true;
+    this.accessToken = accessToken;
+
+    // Store the access token in local storage for persistence
+    localStorage.setItem('accessToken', accessToken);
   }
 
-  // Clear the stored authentication token (sign out)
-  clearToken(): void {
-    localStorage.removeItem(this.authTokenKey);
+  // Method to perform logout
+  logout() {
+    this.isAuthenticated = false;
+    this.accessToken = null;
+
+    // Remove the access token from local storage
+    localStorage.removeItem('accessToken');
   }
 
-  // Check if the user is authenticated
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  // Method to check if the user is authenticated
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+
+  // Method to get the access token
+  getAccessToken(): string | null {
+    return this.accessToken;
   }
 }

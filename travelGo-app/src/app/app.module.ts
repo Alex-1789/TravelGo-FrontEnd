@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForumComponent } from './pages/forum/forum.component';
 import { PostCardComponent } from './layout/post-card/post-card.component';
+import { AccountComponent } from './safe/account/account.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PostCardComponent } from './layout/post-card/post-card.component';
     SignupComponent,
     ForumComponent,
     PostCardComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

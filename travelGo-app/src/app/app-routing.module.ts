@@ -8,6 +8,7 @@ import { LoginComponent } from './safe/login/login.component';
 import { SignupComponent } from './safe/signup/signup.component';
 import { SinglePostComponent } from './pages/single-post/single-post.component';
 import { ForumComponent } from './pages/forum/forum.component';
+import { AccountComponent } from './safe/account/account.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'post', component: SinglePostComponent },
-  { path: 'forum', component: ForumComponent}
+  { path: 'forum', component: ForumComponent },
+  { path: 'account', component: AccountComponent }
 ];
 
 @NgModule({

@@ -1,8 +1,10 @@
 <div class="card mb-3">
-  <div class="card-body">
-    <small class="text-center">Design</small>
-    <small class="text-center ml-3">XD</small>
-    <small class="text-center ml-3">LOL</small>
+  <div *ngFor="let postCard of postCards" class="card-body">
+    <h2 class="text-center">{{postCard.id}}</h2>
+    <small class="text-center ml-3">{{postCard.title}}</small>
+    <small class="text-center ml-3">{{postCard.content}}</small>
+    <small class="text-center ml-3">{{postCard.userId}}</small>
+    <small class="text-center ml-3">{{postCard.status}}</small>
 
     <h5 class="mt-1"><a href="http://localhost:4200/post">LDJJDLJDDJLJD</a></h5>
     <p>djdhggjshdjshd</p>

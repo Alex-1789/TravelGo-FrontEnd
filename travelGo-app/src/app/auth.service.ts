@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor() {
     // Initialize the authentication state from local storage if available
-    const storedToken = localStorage.getItem('accessToken');
+    const storedToken = localStorage.getItem('Authorization');
     if (storedToken) {
       this.isAuthenticated = true;
       this.accessToken = storedToken;
@@ -22,7 +22,7 @@ export class AuthService {
     this.accessToken = accessToken;
 
     // Store the access token in local storage for persistence
-    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('Authorization', accessToken);
   }
 
   // Method to perform logout
@@ -31,7 +31,7 @@ export class AuthService {
     this.accessToken = null;
 
     // Remove the access token from local storage
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('Authorization');
   }
 
   // Method to check if the user is authenticated

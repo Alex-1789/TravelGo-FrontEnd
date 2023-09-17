@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ForumComponent } from './pages/forum/forum.component';
 import { PostCardComponent } from './layout/post-card/post-card.component';
 import { AccountComponent } from './safe/account/account.component';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AccountComponent } from './safe/account/account.component';
     ForumComponent,
     PostCardComponent,
     AccountComponent,
+    CreatePostComponent,
   ],
   imports: [
     BrowserModule,

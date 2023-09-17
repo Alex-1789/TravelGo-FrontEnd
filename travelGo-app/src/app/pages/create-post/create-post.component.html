@@ -1,0 +1,27 @@
+<div class="container mb-3 mt-3">
+  <div class="card">
+    <div class="card-body text-center">
+      <form [formGroup]="postForm" (ngSubmit)="create()">
+        <h4 class="mb-4">Create your post</h4>
+        <div class="form-group mb-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Title"
+            formControlName="title"
+            required
+          />
+        </div>
+        <textarea
+          cols="30"
+          rows="15"
+          class="form-control"
+          placeholder="Add you content here!"
+          formControlName="content"
+          required
+        ></textarea>
+        <button class="btn btn-info mt-3">Add</button>
+      </form>
+    </div>
+  </div>
+</div>

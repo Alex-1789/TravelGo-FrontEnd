@@ -1,9 +1,13 @@
-<header class="navbar navbar-expand-lg ">
-    <div class="container justify-content-left ">
-        <a href="http://localhost:4200/" class ="site-logo"><span>TravelGo</span></a>
-    </div>
-    <div class="justify-content-right ">
-        <a href="http://localhost:4200/login" *ngIf="!isLoggedIn()" class ="login">Login</a>
-        <a href="http://localhost:4200/account" *ngIf="isLoggedIn()" class ="login">Logout</a>
-    </div>
+<header class="navbar navbar-expand-lg">
+  <div class="container justify-content-left">
+    <a href="http://localhost:4200/" class="site-logo"><span>TravelGo</span></a>
+  </div>
+  <div class="justify-content-right">
+    <a href="http://localhost:4200/login" *ngIf="!isLoggedIn()" class="login"
+      >Login</a
+    >
+    <a href="http://localhost:4200/account" *ngIf="isLoggedIn()" class="login"
+      >Logout</a
+    >
+  </div>
 </header>

@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 
@@ -14,30 +14,21 @@ interface PostCard {
 @Component({
   selector: 'app-post-card',
   templateUrl: './post-card.component.html',
-  styleUrls: ['./post-card.component.css']
+  styleUrls: ['./post-card.component.css'],
 })
 export class PostCardComponent implements OnInit {
   postCards: PostCard[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-
-
   ngOnInit(): void {
-
-    const accessToken = localStorage.getItem('Authorization') ?? '';
+    const accessToken = this.authService.getAccessToken() ?? '';
     const headers = new HttpHeaders({
       Authorization: accessToken,
     });
-    const options = {
-      headers,
-      withCredentials: true, // Enable credentials
-    };
-
-    console.log(headers);
 
     this.http
-      .get<PostCard[]>('http://localhost:8080/api/posts/', options)
+      .get<PostCard[]>('http://localhost:8080/api/posts/', { headers })
       .subscribe(
         (data) => {
           this.postCards = data;

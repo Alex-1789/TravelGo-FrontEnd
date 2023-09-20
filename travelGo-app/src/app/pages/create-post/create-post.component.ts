@@ -19,8 +19,7 @@ export class CreatePostComponent {
   ) {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required],
-      status: [null],
+      content: ['', Validators.required]
     });
   }
 
@@ -32,14 +31,13 @@ export class CreatePostComponent {
     const postData = {
       title: this.postForm.value.title,
       content: this.postForm.value.content,
-      status: this.postForm.value.status,
+      status: 1
     };
 
-    const accessToken = this.authService.getAccessToken();
+    const accessToken = this.authService.getAccessToken() ?? '';
     const headers = new HttpHeaders({
-      Authorization: `${accessToken}`,
+       Authorization: accessToken,
     });
-    const addition = { headers: headers };
 
     this.http.post<any>('http://localhost:8080/api/posts/', postData, { headers }).subscribe(
       (response) => {

@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 
-interface PostCard {
+interface TripCard {
   id: number;
-  title: string;
-  content: string;
-  userId: number;
-  status: null;
-  likes: number;
+  date: Date;
+  gathering_place: string;
+  trip_name: string;
+  rate: number;
+  number_of_rates: number;
+  achived: number;
 }
 
 @Component({
-  selector: 'app-post-card',
-  templateUrl: './post-card.component.html',
-  styleUrls: ['./post-card.component.css'],
+  selector: 'app-trip-card',
+  templateUrl: './trip-card.component.html',
+  styleUrls: ['./trip-card.component.css'],
 })
-
-export class PostCardComponent implements OnInit {
-  postCards: PostCard[] = [];
+export class TripCardComponent {
+  tripCards: TripCard[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -29,10 +29,10 @@ export class PostCardComponent implements OnInit {
     });
 
     this.http
-      .get<PostCard[]>('http://localhost:8080/api/posts/', { headers })
+      .get<TripCard[]>('http://localhost:8080/api/trips/', { headers })
       .subscribe(
         (data) => {
-          this.postCards = data;
+          this.tripCards = data;
         },
         (error) => {
           console.error('Problem while fetching data', error);

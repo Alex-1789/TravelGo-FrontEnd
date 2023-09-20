@@ -23,6 +23,10 @@ import { ForumComponent } from './pages/forum/forum.component';
 import { PostCardComponent } from './layout/post-card/post-card.component';
 import { AccountComponent } from './safe/account/account.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { TripCardComponent } from './layout/trip-card/trip-card.component';
+import { OfferCardComponent } from './layout/offer-card/offer-card.component';
+import { CreateTripComponent } from './pages/create-trip/create-trip.component';
+import { CreateOfferComponent } from './pages/create-offer/create-offer.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     PostCardComponent,
     AccountComponent,
     CreatePostComponent,
+    TripCardComponent,
+    OfferCardComponent,
+    CreateTripComponent,
+    CreateOfferComponent,
   ],
   imports: [
     BrowserModule,

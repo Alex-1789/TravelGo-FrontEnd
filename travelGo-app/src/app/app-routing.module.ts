@@ -10,6 +10,8 @@ import { SinglePostComponent } from './pages/single-post/single-post.component';
 import { ForumComponent } from './pages/forum/forum.component';
 import { AccountComponent } from './safe/account/account.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { TripsComponent } from './pages/trips/trips.component';
+import { CreateTripComponent } from './pages/create-trip/create-trip.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent },
   { path: 'account', component: AccountComponent },
   { path: 'create-post', component: CreatePostComponent },
+  { path: 'trips', component: TripsComponent },
+  { path: 'create-trip', component: CreateTripComponent },
 ];
 
 @NgModule({

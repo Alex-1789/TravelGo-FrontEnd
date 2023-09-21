@@ -3,29 +3,30 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 
-interface SinglePostCard {
+interface SingleTripCard {
   id: number;
-  title: string;
-  content: string;
-  userId: number;
-  status: null;
-  likes: number;
+  date: Date;
+  gathering_place: string;
+  trip_name: string;
+  rate: number;
+  number_of_rates: number;
+  achived: boolean;
 }
-
 @Component({
-  selector: 'app-single-post',
-  templateUrl: './single-post.component.html',
-  styleUrls: ['./single-post.component.css'],
+  selector: 'app-single-trip',
+  templateUrl: './single-trip.component.html',
+  styleUrls: ['./single-trip.component.css'],
 })
-export class SinglePostComponent implements OnInit {
-  postId: number = -1;
-  singlePostCard: SinglePostCard = {
+export class SingleTripComponent implements OnInit {
+  tripId: number = -1;
+  singleTripCard: SingleTripCard = {
     id: 0,
-    title: '',
-    content: '',
-    userId: 0,
-    status: null,
-    likes: 0,
+    date: new Date(2023,1,1),
+    gathering_place: '',
+    trip_name: '',
+    rate: 0,
+    number_of_rates: 0,
+    achived: false
   };
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +36,7 @@ export class SinglePostComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.postId = params['id'];
+      this.tripId = params['id'];
     });
 
     const accessToken = this.authService.getAccessToken() ?? '';
@@ -44,10 +45,12 @@ export class SinglePostComponent implements OnInit {
     });
 
     this.http
-      .get<SinglePostCard>('http://localhost:8080/api/posts/' + this.postId, { headers })
+      .get<SingleTripCard>('http://localhost:8080/api/trips/' + this.tripId, {
+        headers,
+      })
       .subscribe(
         (data) => {
-          this.singlePostCard = data;
+          this.singleTripCard = data;
         },
         (error) => {
           console.error('Problem while fetching data', error);

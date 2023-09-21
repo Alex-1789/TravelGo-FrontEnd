@@ -1,15 +1,16 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
   <div class="row">
-    <div class="col-md-9">
+
       <div class="card">
-        <div class="card-body">
+        <div  class="card-body">
           <small class="bg-light text-center">Last Updated:</small>
-          <h1 class="mt-3 mb-3">Tytuł</h1>
-          <p>Tekst</p>
+          <h1 class="mt-3 mb-3">{{ singlePostCard.title }}</h1>
+          <p>{{ singlePostCard.content }}</p>
+          <small class="bg-light text-center">{{ singlePostCard.likes }}</small>
         </div>
       </div>
       <app-comment-form></app-comment-form>
       <app-comment-list></app-comment-list>
     </div>
   </div>
-</div>
+

@@ -12,6 +12,7 @@ import { AccountComponent } from './safe/account/account.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { TripsComponent } from './pages/trips/trips.component';
 import { CreateTripComponent } from './pages/create-trip/create-trip.component';
+import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'create-post', component: CreatePostComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'create-trip', component: CreateTripComponent },
+  { path: 'trip', component: SingleTripComponent },
 ];
 
 @NgModule({

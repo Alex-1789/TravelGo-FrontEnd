@@ -32,6 +32,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SingleOfferComponent } from './pages/single-offer/single-offer.component';
+import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OfferCardComponent,
     CreateTripComponent,
     CreateOfferComponent,
+    SingleOfferComponent,
+    SingleTripComponent,
   ],
   imports: [
     BrowserModule,

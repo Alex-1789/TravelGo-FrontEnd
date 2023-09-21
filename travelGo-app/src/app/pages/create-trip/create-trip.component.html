@@ -1,7 +1,7 @@
 <div class="container mb-3 mt-3">
   <div class="card">
     <div class="card-body text-center">
-      <form >
+      <form [formGroup]="tripForm" (ngSubmit)="create_trip()">
         <h4 class="mb-4">Create your trip</h4>
         <div class="form-group mb-2">
           <input
@@ -21,18 +21,14 @@
             required
           />
         </div>
-        <div class="form-group col-md-2">
-        <label for="input6">Data od</label>
-        <div class="input-group date datepicker">
-          <input type="text" class="form-control" id="input6" placeholder="Data od">
-          <span class="input-group-append">
-            <span class="input-group-text bg-white d-block">
-              <i class="fa fa-calendar"></i>
-            </span>
-          </span>
-        </div>
-      </div>
+        <mat-form-field>
+         <input matInput [matDatepicker]="myDatePicker" placeholder="MM/DD/YYYY" formControlName="date">
+         <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+         <mat-datepicker #myDatePicker></mat-datepicker>
+        </mat-form-field>
+        <div class="form-group mb-2">
         <button class="btn btn-info mt-3">Add</button>
+        </div>
       </form>
     </div>
   </div>

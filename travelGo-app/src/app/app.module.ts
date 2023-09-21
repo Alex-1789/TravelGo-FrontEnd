@@ -27,6 +27,11 @@ import { TripCardComponent } from './layout/trip-card/trip-card.component';
 import { OfferCardComponent } from './layout/offer-card/offer-card.component';
 import { CreateTripComponent } from './pages/create-trip/create-trip.component';
 import { CreateOfferComponent } from './pages/create-offer/create-offer.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -59,6 +64,11 @@ import { CreateOfferComponent } from './pages/create-offer/create-offer.componen
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

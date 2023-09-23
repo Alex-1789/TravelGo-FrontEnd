@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,6 +9,7 @@ interface CommentCard {
   user_id: number;
   post_id: number;
   created_at: Date;
+  username: string;
 }
 
 @Component({
@@ -31,10 +32,7 @@ export class CommentListComponent implements OnInit {
       this.postId = params['id'];
     });
 
-    const accessToken = this.authService.getAccessToken() ?? '';
-    const headers = new HttpHeaders({
-      Authorization: accessToken,
-    });
+    const headers = this.authService.getHeaders();
 
     this.http
       .get<CommentCard[]>('http://localhost:8080/api/posts/' + this.postId + '/comments', { headers })

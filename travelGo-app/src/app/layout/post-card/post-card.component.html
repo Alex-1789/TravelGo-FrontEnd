@@ -1,16 +1,14 @@
-<div class="container">
- <div class="row">
-<div *ngFor="let postCard of postCards" class="card col-lg-4 mb-3 text-center">
-  <div  class="card-body">
-    <h2 class="text-center ml-3">{{postCard.title}}</h2>
-    <small class="text-center ml-3">{{postCard.content}}</small>
-    <small class="text-center ml-3">{{postCard.status}}</small>
 
-    <h5 class="mt-1"><a [routerLink]="['/post']" [queryParams]="{ id: postCard.id }">LDJJDLJDDJLJD</a></h5>
-    <p>djdhggjshdjshd</p>
-    <small class="text-center ml-3">Last UPDATED - At you funeral</small>
+ <div class="row">
+<div *ngFor="let postCard of postCards" class="card col-lg-4 mb-3">
+  <div  class="card-body">
+    <h2 class="text-center ml-3"><a [routerLink]="['/post']" [queryParams]="{ id: postCard.id }">{{postCard.title}}</a></h2>
+    <p class="text-center ml-3">{{postCard.about}}</p>
+    <p class="text-center ml-3">{{postCard.username}}</p>
+    <p class="text-center ml-3">{{postCard.likes}}</p>
+    <p class="text-center ml-3">{{postCard.created_at}}</p>
+    <p class="text-center ml-3">{{postCard.updated_at}}</p>
   </div>
-</div>
 </div>
 </div>
 

@@ -39,10 +39,7 @@ export class SingleTripComponent implements OnInit {
       this.tripId = params['id'];
     });
 
-    const accessToken = this.authService.getAccessToken() ?? '';
-    const headers = new HttpHeaders({
-      Authorization: accessToken,
-    });
+    const headers = this.authService.getHeaders();
 
     this.http
       .get<SingleTripCard>('http://localhost:8080/api/trips/' + this.tripId, {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,14 @@ export class AuthService {
   // Method to get the access token
   getAccessToken(): string | null {
     return this.accessToken;
+  }
+
+  getHeaders(): HttpHeaders {
+    const accessToken = this.getAccessToken() ?? '';
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + accessToken,
+    });
+
+    return headers;
   }
 }

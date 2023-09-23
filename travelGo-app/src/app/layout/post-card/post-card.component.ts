@@ -6,9 +6,12 @@ interface PostCard {
   id: number;
   title: string;
   content: string;
-  userId: number;
-  status: null;
   likes: number;
+  username: string;
+  about: string;
+  updated_at: Date;
+  created_at: Date;
+  status: null;
 }
 
 @Component({
@@ -23,11 +26,8 @@ export class PostCardComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
-    const accessToken = this.authService.getAccessToken() ?? '';
-    const headers = new HttpHeaders({
-      Authorization: accessToken,
-    });
-
+    const headers = this.authService.getHeaders();
+    console.log(headers);
     this.http
       .get<PostCard[]>('http://localhost:8080/api/posts/', { headers })
       .subscribe(

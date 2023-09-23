@@ -35,10 +35,7 @@ export class CreateTripComponent {
       gathering_place: this.tripForm.value.gathering_place,
     };
 
-    const accessToken = this.authService.getAccessToken() ?? '';
-    const headers = new HttpHeaders({
-      Authorization: accessToken,
-    });
+    const headers = this.authService.getHeaders();
 
     this.http
       .post<any>('http://localhost:8080/api/trips/', tripData, { headers })

@@ -19,7 +19,8 @@ export class CreatePostComponent {
   ) {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required]
+      about: ['', Validators.required],
+      content: ['', Validators.required],
     });
   }
 
@@ -30,6 +31,7 @@ export class CreatePostComponent {
 
     const postData = {
       title: this.postForm.value.title,
+      about: this.postForm.value.about,
       content: this.postForm.value.content,
       status: 1
     };

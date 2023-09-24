@@ -34,6 +34,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SingleOfferComponent } from './pages/single-offer/single-offer.component';
 import { SingleTripComponent } from './pages/single-trip/single-trip.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { SingleTripComponent } from './pages/single-trip/single-trip.component';
     MatFormFieldModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

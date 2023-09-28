@@ -6,8 +6,10 @@
     <p class="text-center ml-3">{{postCard.about}}</p>
     <p class="text-center ml-3">{{postCard.username}}</p>
     <p class="text-center ml-3">{{postCard.likes}}</p>
-    <p class="text-center ml-3">{{postCard.created_at}}</p>
-    <p class="text-center ml-3">{{postCard.updated_at}}</p>
+    <small>{{postCard.likes}}</small>
+    <mat-icon id="toLike"(click)="giveLike(postCard.id)" *ngIf="!isLiked(postCard.id)">thumb_up</mat-icon>
+    <mat-icon id="liked" (click)="removeLike(postCard.id)" *ngIf="isLiked(postCard.id)">thumb_up</mat-icon>
+
   </div>
 </div>
 </div>

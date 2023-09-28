@@ -3,3 +3,19 @@
   margin-left: 4px;
   max-width: 32.5%;
 }
+
+#toLike {
+  color: var(--footer);
+}
+
+#toLike:hover {
+  color: var(--on-text);
+}
+
+#liked {
+  color: var(--on-text);
+}
+
+#liked:hover {
+  color: var(--footer);
+}

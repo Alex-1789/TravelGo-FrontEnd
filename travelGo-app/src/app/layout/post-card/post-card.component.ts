@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
+import { Subscription } from 'rxjs';
 
 interface PostCard {
   id: number;
@@ -9,9 +10,10 @@ interface PostCard {
   likes: number;
   username: string;
   about: string;
-  updated_at: Date;
-  created_at: Date;
-  status: null;
+  updatedAt: Date;
+  createdAt: Date;
+  status: 1;
+  liked: boolean;
 }
 
 @Component({
@@ -19,7 +21,6 @@ interface PostCard {
   templateUrl: './post-card.component.html',
   styleUrls: ['./post-card.component.css'],
 })
-
 export class PostCardComponent implements OnInit {
   postCards: PostCard[] = [];
 
@@ -27,7 +28,6 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     const headers = this.authService.getHeaders();
-    console.log(headers);
     this.http
       .get<PostCard[]>('http://localhost:8080/api/posts/', { headers })
       .subscribe(
@@ -38,5 +38,79 @@ export class PostCardComponent implements OnInit {
           console.error('Problem while fetching data', error);
         }
       );
+  }
+
+  giveLike(postId: number): void {
+    const likeData = {
+      postId: postId,
+    };
+    const headers = this.authService.getHeaders();
+
+    this.http
+      .post<any>(
+        'http://localhost:8080/api/posts/' + postId + '/like',
+        likeData,
+        {
+          headers,
+        }
+      )
+      .subscribe(
+        (response) => {
+          const post = this.postCards.find((post) => post.id === postId);
+          console.log(post);
+          if (post) {
+            post.liked = true;
+          }
+        },
+        (error) => {
+          console.error('Problem with liking post', error);
+          if (error.error === 'Post already liked') {
+            const post = this.postCards.find((post) => post.id === postId);
+            if (post) {
+              post.liked = true;
+            }
+          }
+        }
+      );
+  }
+
+  removeLike(postId: number): void {
+    const likeData = {
+      postId: postId,
+    };
+    const headers = this.authService.getHeaders();
+    this.http
+      .post<any>(
+        'http://localhost:8080/api/posts/' + postId + '/unlike',
+        likeData,
+        {
+          headers,
+        }
+      )
+      .subscribe(
+        () => {
+          const post = this.postCards.find((post) => post.id === postId);
+          if (post) {
+            console.log(postId);
+            post.liked = false;
+          }
+        },
+        (error) => {
+          console.error('Problem with liking post', error);
+        }
+      );
+  }
+
+
+  isLiked(postId: number): boolean {
+    const post = this.postCards.find((post) => post.id === postId);
+
+    if (post) {
+      if(post.hasOwnProperty('liked')){
+        return post.liked;
+      }
+    }
+
+      return false;
   }
 }

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 
 interface SingleTripCard {
   id: number;
   date: Date;
-  gathering_place: string;
-  trip_name: string;
+  gatheringPlace: string;
+  tripName: string;
   rate: number;
-  number_of_rates: number;
+  numberOfRates: number;
   achived: boolean;
 }
 @Component({
@@ -22,10 +22,10 @@ export class SingleTripComponent implements OnInit {
   singleTripCard: SingleTripCard = {
     id: 0,
     date: new Date(2023,1,1),
-    gathering_place: '',
-    trip_name: '',
+    gatheringPlace: '',
+    tripName: '',
     rate: 0,
-    number_of_rates: 0,
+    numberOfRates: 0,
     achived: false
   };
   constructor(

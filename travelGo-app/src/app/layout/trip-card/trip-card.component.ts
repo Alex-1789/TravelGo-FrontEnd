@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 
 interface TripCard {
   id: number;
   date: Date;
-  gathering_place: string;
-  trip_name: string;
+  gatheringPlace: string;
+  tripName: string;
   rate: number;
-  number_of_rates: number;
+  numberOfRates: number;
   achived: number;
 }
 

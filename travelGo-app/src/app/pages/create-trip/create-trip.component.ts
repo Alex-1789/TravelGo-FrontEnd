@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
@@ -19,8 +19,8 @@ export class CreateTripComponent {
   ) {
     this.tripForm = this.formBuilder.group({
       date: ['', Validators.required],
-      trip_name: ['', Validators.required],
-      gathering_place: ['', Validators.required],
+      tripName: ['', Validators.required],
+      gatheringPlace: ['', Validators.required],
     });
   }
 
@@ -31,8 +31,8 @@ export class CreateTripComponent {
 
     const tripData = {
       date: this.tripForm.value.date,
-      trip_name: this.tripForm.value.trip_name,
-      gathering_place: this.tripForm.value.gathering_place,
+      tripName: this.tripForm.value.trip_name,
+      gatheringPlace: this.tripForm.value.gathering_place,
     };
 
     const headers = this.authService.getHeaders();

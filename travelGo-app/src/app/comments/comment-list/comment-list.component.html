@@ -7,6 +7,7 @@
        <p>{{commentCard.content}}</p>
       </div>
       <small>{{commentCard.created_at}}</small>
+      <small id="delete" (click)="deleteComment(commentCard.id)">Delete</small>
       <hr>
     </div>
   </div>

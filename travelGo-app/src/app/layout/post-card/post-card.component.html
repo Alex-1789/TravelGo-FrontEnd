@@ -9,7 +9,7 @@
     <small>{{postCard.likes}}</small>
     <mat-icon id="toLike"(click)="giveLike(postCard.id)" *ngIf="!isLiked(postCard.id)">thumb_up</mat-icon>
     <mat-icon id="liked" (click)="removeLike(postCard.id)" *ngIf="isLiked(postCard.id)">thumb_up</mat-icon>
-
+     <small id="delete" (click)="deletePost(postCard.id)">Delete</small>
   </div>
 </div>
 </div>

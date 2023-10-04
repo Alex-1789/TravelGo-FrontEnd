@@ -19,3 +19,9 @@
 #liked:hover {
   color: var(--footer);
 }
+
+#delete {
+  cursor:pointer;
+  color:#0dcaf0;
+  text-decoration:underline;
+}

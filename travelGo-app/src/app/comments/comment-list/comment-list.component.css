@@ -2,3 +2,9 @@
   padding: 15px 35px;
   background-color: #ebf4f4;
 }
+
+#delete {
+  cursor:pointer;
+  color:#0dcaf0;
+  text-decoration:underline;
+}

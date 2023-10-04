@@ -86,7 +86,7 @@ export class PostCardComponent implements OnInit {
         }
       )
       .subscribe(
-        () => {
+        (response) => {
           const post = this.postCards.find((post) => post.id === postId);
           if (post) {
             console.log(postId);
@@ -99,16 +99,30 @@ export class PostCardComponent implements OnInit {
       );
   }
 
-
   isLiked(postId: number): boolean {
     const post = this.postCards.find((post) => post.id === postId);
 
     if (post) {
-      if(post.hasOwnProperty('liked')){
+      if (post.hasOwnProperty('liked')) {
         return post.liked;
       }
     }
+    return false;
+  }
 
-      return false;
+  deletePost(postId: number): void {
+    const headers = this.authService.getHeaders();
+    this.http
+      .delete<any>(
+        'http://localhost:8080/api/posts/' +
+          postId,
+        { headers }
+      )
+      .subscribe(
+        (respond) => {},
+        (error) => {
+          console.error('Problem while deleting post', error);
+        }
+      );
   }
 }

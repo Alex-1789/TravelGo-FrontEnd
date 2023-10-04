@@ -35,7 +35,10 @@ export class CommentListComponent implements OnInit {
     const headers = this.authService.getHeaders();
 
     this.http
-      .get<CommentCard[]>('http://localhost:8080/api/posts/' + this.postId + '/comments', { headers })
+      .get<CommentCard[]>(
+        'http://localhost:8080/api/posts/' + this.postId + '/comments',
+        { headers }
+      )
       .subscribe(
         (data) => {
           this.commentCards = data;
@@ -44,5 +47,24 @@ export class CommentListComponent implements OnInit {
           console.error('Problem while fetching data', error);
         }
       );
+  }
+
+  deleteComment(commentId: number): void {
+    this.route.queryParams.subscribe((params) => {
+      this.postId = params['id'];
+    });
+      const headers = this.authService.getHeaders();
+     this.http
+       .delete<any>(
+         'http://localhost:8080/api/posts/' + this.postId + '/comments/' + commentId,
+         { headers }
+       )
+       .subscribe(
+         (respond) => {
+         },
+         (error) => {
+           console.error('Problem while deleting comment', error);
+         }
+       );
   }
 }

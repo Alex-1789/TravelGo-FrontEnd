@@ -7,40 +7,40 @@ import { HttpHeaders } from '@angular/common/http';
 export class AuthService {
   private isAuthenticated: boolean = false;
   private accessToken: string | null = null;
+  private userId: string | null = null;
 
   constructor() {
-    // Initialize the authentication state from local storage if available
     const storedToken = localStorage.getItem('Authorization');
+    const idToken = localStorage.getItem('Id');
     if (storedToken) {
       this.isAuthenticated = true;
       this.accessToken = storedToken;
+      this.userId = idToken;
+
     }
   }
 
-  // Method to perform login
-  login(accessToken: string) {
-    this.isAuthenticated = true;
-    this.accessToken = accessToken;
 
-    // Store the access token in local storage for persistence
-    localStorage.setItem('Authorization', accessToken);
+  login(response: any) {
+    this.isAuthenticated = true;
+    this.accessToken = response.accessToken;
+    this.userId = response.id;
+    localStorage.setItem('Authorization', response.accessToken);
+    localStorage.setItem('Id', response.id);
   }
 
-  // Method to perform logout
   logout() {
     this.isAuthenticated = false;
     this.accessToken = null;
-
-    // Remove the access token from local storage
+    this.userId = null;
     localStorage.removeItem('Authorization');
+    localStorage.removeItem('Id');
   }
 
-  // Method to check if the user is authenticated
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
 
-  // Method to get the access token
   getAccessToken(): string | null {
     return this.accessToken;
   }
@@ -52,5 +52,9 @@ export class AuthService {
     });
 
     return headers;
+  }
+
+  getUserId(): string | null {
+    return this.userId;
   }
 }

@@ -11,6 +11,7 @@ interface SingleTripCard {
   rate: number;
   numberOfRates: number;
   achived: boolean;
+  rated: boolean;
 }
 @Component({
   selector: 'app-single-trip',
@@ -18,15 +19,17 @@ interface SingleTripCard {
   styleUrls: ['./single-trip.component.css'],
 })
 export class SingleTripComponent implements OnInit {
+  selectedRating: number = 0;
   tripId: number = -1;
   singleTripCard: SingleTripCard = {
     id: 0,
-    date: new Date(2023,1,1),
+    date: new Date(2023, 1, 1),
     gatheringPlace: '',
     tripName: '',
     rate: 0,
     numberOfRates: 0,
-    achived: false
+    achived: false,
+    rated: false,
   };
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +54,30 @@ export class SingleTripComponent implements OnInit {
         },
         (error) => {
           console.error('Problem while fetching data', error);
+        }
+      );
+  }
+
+  giveRating(event: any, tripId: number): void {
+    const ratedData = {
+      rate: event.detail,
+    };
+    const headers = this.authService.getHeaders();
+
+    this.http
+      .post<any>(
+        'http://localhost:8080/api/trips/' + tripId + '/rate',
+        ratedData,
+        {
+          headers,
+        }
+      )
+      .subscribe(
+        (response) => {
+          this.singleTripCard.rated = true;
+        },
+        (error) => {
+          console.error('Problem with liking post', error);
         }
       );
   }

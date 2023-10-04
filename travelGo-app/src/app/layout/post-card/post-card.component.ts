@@ -56,7 +56,6 @@ export class PostCardComponent implements OnInit {
       .subscribe(
         (response) => {
           const post = this.postCards.find((post) => post.id === postId);
-          console.log(post);
           if (post) {
             post.liked = true;
           }

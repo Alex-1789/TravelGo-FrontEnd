@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,8 +35,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SingleOfferComponent } from './pages/single-offer/single-offer.component';
 import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 import { MatIconModule } from '@angular/material/icon';
+import { defineComponents, IgcRatingComponent } from '../../node_modules/igniteui-webcomponents';
 
+defineComponents(IgcRatingComponent);
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     HeaderComponent,

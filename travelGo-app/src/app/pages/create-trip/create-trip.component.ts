@@ -31,8 +31,8 @@ export class CreateTripComponent {
 
     const tripData = {
       date: this.tripForm.value.date,
-      tripName: this.tripForm.value.trip_name,
-      gatheringPlace: this.tripForm.value.gathering_place,
+      tripName: this.tripForm.value.tripName,
+      gatheringPlace: this.tripForm.value.gatheringPlace,
     };
 
     const headers = this.authService.getHeaders();

@@ -36,6 +36,7 @@ import { SingleOfferComponent } from './pages/single-offer/single-offer.componen
 import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 import { MatIconModule } from '@angular/material/icon';
 import { defineComponents, IgcRatingComponent } from '../../node_modules/igniteui-webcomponents';
+import {NgToastModule} from 'ng-angular-popup';
 
 defineComponents(IgcRatingComponent);
 @NgModule({
@@ -78,6 +79,7 @@ defineComponents(IgcRatingComponent);
     MatNativeDateModule,
     BrowserAnimationsModule,
     MatIconModule,
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

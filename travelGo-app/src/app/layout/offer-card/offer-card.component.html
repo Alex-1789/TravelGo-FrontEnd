@@ -1,1 +1,15 @@
-<p>offer-card works!</p>
+<div class="row">
+  <div *ngFor="let offerCard of offerCards" class="card col-lg-4 mb-3">
+    <div class="card-body">
+      <h2 class="text-center ml-3">
+        <a [routerLink]="['/offer']" [queryParams]="{ id: offerCard.id }">{{
+          offerCard.title
+        }}</a>
+      </h2>
+      <p class="text-center ml-3">{{ offerCard.about }}</p>
+      <p class="text-center ml-3">{{ offerCard.username }}</p>
+      <p class="text-center ml-3">{{ offerCard.likes }}</p>
+      <small>{{ offerCard.likes }}</small>
+    </div>
+  </div>
+</div>

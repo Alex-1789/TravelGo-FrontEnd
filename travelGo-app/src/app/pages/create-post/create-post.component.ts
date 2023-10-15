@@ -24,7 +24,7 @@ export class CreatePostComponent {
     });
   }
 
-  create_post() {
+  createPost() {
     if (this.postForm.invalid) {
       return;
     }

@@ -13,6 +13,9 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { TripsComponent } from './pages/trips/trips.component';
 import { CreateTripComponent } from './pages/create-trip/create-trip.component';
 import { SingleTripComponent } from './pages/single-trip/single-trip.component';
+import { BusinessOfferComponent } from './pages/business-offer/business-offer.component';
+import { CreateOfferComponent } from './pages/create-offer/create-offer.component';
+import { SingleOfferComponent } from './pages/single-offer/single-offer.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +31,9 @@ const routes: Routes = [
   { path: 'trips', component: TripsComponent },
   { path: 'create-trip', component: CreateTripComponent },
   { path: 'trip', component: SingleTripComponent },
+  { path: 'business-offer', component: BusinessOfferComponent },
+  { path: 'create-offer', component: CreateOfferComponent },
+  { path: 'offer', component: SingleOfferComponent },
 ];
 
 @NgModule({

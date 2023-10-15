@@ -24,7 +24,7 @@ export class CreateTripComponent {
     });
   }
 
-  create_trip() {
+  createTrip() {
     if (this.tripForm.invalid) {
       return;
     }

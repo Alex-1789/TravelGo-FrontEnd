@@ -62,7 +62,7 @@ export class PostCardComponent implements OnInit {
         },
         (error) => {
           console.error('Problem with liking post', error);
-          if (error.error === 'Post already liked') {
+          if (error.error.message === 'Post already liked') {
             const post = this.postCards.find((post) => post.id === postId);
             if (post) {
               post.liked = true;
@@ -89,7 +89,6 @@ export class PostCardComponent implements OnInit {
         (response) => {
           const post = this.postCards.find((post) => post.id === postId);
           if (post) {
-            console.log(postId);
             post.liked = false;
           }
         },

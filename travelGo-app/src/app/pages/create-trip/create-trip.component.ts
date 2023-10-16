@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-create-trip',
@@ -15,7 +16,8 @@ export class CreateTripComponent {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: NgToastService
   ) {
     this.tripForm = this.formBuilder.group({
       date: ['', Validators.required],
@@ -26,6 +28,7 @@ export class CreateTripComponent {
 
   createTrip() {
     if (this.tripForm.invalid) {
+      this.emptyCreateTrip();
       return;
     }
 
@@ -42,10 +45,31 @@ export class CreateTripComponent {
       .subscribe(
         (response) => {
           this.router.navigate(['/trips']);
+          this.successfulCreateTrip();
         },
         (error) => {
           console.error('Trip creating failed:', error);
         }
       );
+  }
+
+  successfulCreateTrip(): void {
+    this.toast.success({
+      detail: 'Trip created Successfully!',
+      summary: 'Trip created Successfully!',
+      sticky: true,
+      position: 'topLeft',
+      duration: 2000,
+    });
+  }
+
+  emptyCreateTrip(): void {
+    this.toast.warning({
+      detail: 'Some fields are empty!',
+      summary: 'Some fields are empty!',
+      sticky: true,
+      position: 'topLeft',
+      duration: 2000,
+    });
   }
 }

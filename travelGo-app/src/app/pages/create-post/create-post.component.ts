@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-create-post',
@@ -15,7 +16,8 @@ export class CreatePostComponent {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: NgToastService
   ) {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -26,6 +28,7 @@ export class CreatePostComponent {
 
   createPost() {
     if (this.postForm.invalid) {
+      this.emptyCreatePost();
       return;
     }
 
@@ -41,10 +44,31 @@ export class CreatePostComponent {
     this.http.post<any>('http://localhost:8080/api/posts/', postData, { headers }).subscribe(
       (response) => {
         this.router.navigate(['/forum']);
+        this.successfulCreatePost();
       },
       (error) => {
         console.error('Post creating failed:', error);
       }
     );
+  }
+
+    successfulCreatePost(): void {
+    this.toast.success({
+      detail: 'Post created Successfully!',
+      summary: 'Post created Successfully!',
+      sticky: true,
+      position: 'topLeft',
+      duration: 2000,
+    });
+  }
+
+  emptyCreatePost(): void {
+    this.toast.warning({
+      detail: 'Some fields are empty!',
+      summary: 'Some fields are empty!',
+      sticky: true,
+      position: 'topLeft',
+      duration: 2000,
+    });
   }
 }

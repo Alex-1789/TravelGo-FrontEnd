@@ -10,6 +10,7 @@
       <p class="text-center ml-3">{{ offerCard.username }}</p>
       <p class="text-center ml-3">{{ offerCard.likes }}</p>
       <small>{{ offerCard.likes }}</small>
+      <small id="delete" (click)="deleteOffer(offerCard.id)">Delete</small>
     </div>
   </div>
 </div>

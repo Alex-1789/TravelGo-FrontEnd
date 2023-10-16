@@ -75,6 +75,7 @@ export class SingleTripComponent implements OnInit {
       .subscribe(
         (response) => {
           this.singleTripCard.rated = true;
+          location.reload();
         },
         (error) => {
           console.error('Problem with liking post', error);

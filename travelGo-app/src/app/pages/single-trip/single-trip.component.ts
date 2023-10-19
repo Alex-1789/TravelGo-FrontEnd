@@ -15,6 +15,14 @@ interface SingleTripCard {
   tripGuideId: number;
   rated: boolean;
 }
+
+interface Documents {
+  id: number;
+  filename: string;
+  title: string;
+  tripId: number;
+  username: string;
+}
 @Component({
   selector: 'app-single-trip',
   templateUrl: './single-trip.component.html',
@@ -23,6 +31,7 @@ interface SingleTripCard {
 export class SingleTripComponent implements OnInit {
   selectedRating: number = 0;
   tripId: number = -1;
+  documents: Documents[] = [];
   singleTripCard: SingleTripCard = {
     id: 0,
     date: new Date(2023, 1, 1),
@@ -60,6 +69,19 @@ export class SingleTripComponent implements OnInit {
           console.error('Problem while fetching data', error);
         }
       );
+
+      this.http
+        .get<Documents[]>('http://localhost:8080/api/trips/' + this.tripId + '/documents/', {
+          headers,
+        })
+        .subscribe(
+          (data) => {
+            this.documents = data;
+          },
+          (error) => {
+            console.error('Problem while fetching data', error);
+          }
+        );
   }
 
   giveRating(event: any, tripId: number): void {

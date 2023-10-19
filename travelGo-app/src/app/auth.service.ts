@@ -6,35 +6,29 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private accessToken: string | null = null;
-  private userId: string | null = null;
 
   constructor() {
-    const storedToken = localStorage.getItem('Authorization');
-    const idToken = localStorage.getItem('Id');
+    const storedToken = localStorage.getItem('Response');
     if (storedToken) {
       this.isAuthenticated = true;
-      this.accessToken = storedToken;
-      this.userId = idToken;
-
     }
   }
 
-
   login(response: any) {
     this.isAuthenticated = true;
-    this.accessToken = response.accessToken;
-    this.userId = response.id;
-    localStorage.setItem('Authorization', response.accessToken);
-    localStorage.setItem('Id', response.id);
+
+    let Response = {
+      Id: response.id,
+      Authorization: response.accessToken,
+      Roles: response.roles,
+    };
+
+    localStorage.setItem('Response', JSON.stringify(Response));
   }
 
   logout() {
     this.isAuthenticated = false;
-    this.accessToken = null;
-    this.userId = null;
-    localStorage.removeItem('Authorization');
-    localStorage.removeItem('Id');
+    localStorage.removeItem('Response');
   }
 
   isLoggedIn(): boolean {
@@ -42,7 +36,9 @@ export class AuthService {
   }
 
   getAccessToken(): string | null {
-    return this.accessToken;
+    let valueInStorage = localStorage.getItem('Response');
+    let user = JSON.parse(valueInStorage ?? '');
+    return user.Authorization;
   }
 
   getHeaders(): HttpHeaders {
@@ -55,6 +51,15 @@ export class AuthService {
   }
 
   getUserId(): string | null {
-    return this.userId;
+    let valueInStorage = localStorage.getItem('Response');
+    let user = JSON.parse(valueInStorage ?? '');
+    return user.Id;
+  }
+
+  getUserRoles(): string | null {
+    let valueInStorage = localStorage.getItem('Response');
+    let user = JSON.parse(valueInStorage ?? '');
+    let rolesNames = user.roles.map((role: { name: any }) => role.name);
+    return rolesNames;
   }
 }

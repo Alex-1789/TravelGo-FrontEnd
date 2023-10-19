@@ -10,6 +10,8 @@ interface TripCard {
   rate: number;
   numberOfRates: number;
   achived: number;
+  participats: Array<string>;
+  tripGuideId: number;
 }
 
 @Component({

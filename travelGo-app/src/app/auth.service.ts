@@ -56,10 +56,10 @@ export class AuthService {
     return user.Id;
   }
 
-  getUserRoles(): string | null {
+  getUserRoles(): string[] | null {
     let valueInStorage = localStorage.getItem('Response');
     let user = JSON.parse(valueInStorage ?? '');
-    let rolesNames = user.roles.map((role: { name: any }) => role.name);
+    let rolesNames = user.Roles.map((role: any) => role.name);
     return rolesNames;
   }
 }

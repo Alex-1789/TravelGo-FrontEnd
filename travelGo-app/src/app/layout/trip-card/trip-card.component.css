@@ -3,3 +3,9 @@
   margin-left: 4px;
   max-width: 32.5%;
 }
+
+#function {
+  cursor:pointer;
+  color:#0dcaf0;
+  text-decoration:underline;
+}

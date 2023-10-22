@@ -21,12 +21,17 @@ interface TripCard {
 })
 export class TripCardComponent {
   tripCards: TripCard[] = [];
-
+  hasAccessDelete = false;
+  hasAccessArchive = false;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
     const headers = this.authService.getHeaders();
-
+    const roles = this.authService.getUserRoles();
+    console.log(headers);
+    console.log(headers);
+    console.log(headers);
+    console.log(headers);
     this.http
       .get<TripCard[]>('http://localhost:8080/api/trips/', { headers })
       .subscribe(
@@ -35,6 +40,51 @@ export class TripCardComponent {
         },
         (error) => {
           console.error('Problem while fetching data', error);
+        }
+      );
+
+    roles?.forEach((role) => {
+      if (role === 'MODERATOR' || role === 'GUIDE') {
+        if (role === 'MODERATOR') {
+          this.hasAccessArchive = true;
+        }
+        this.hasAccessDelete = true;
+      }
+    });
+  }
+
+  deleteTrip(tripId: number): void {
+    const headers = this.authService.getHeaders();
+    console.log(headers);
+    this.http
+      .delete<any>('http://localhost:8080/api/trips/' + tripId, { headers })
+      .subscribe(
+        (respond) => {
+          location.reload();
+        },
+        (error) => {
+          console.error('Problem while deleting trip', error);
+        }
+      );
+  }
+
+  archiveTrip(tripId: number): void {
+    const headers = this.authService.getHeaders();
+    console.log(headers);
+    this.http
+      .put<any>(
+        'http://localhost:8080/api/trips/' + tripId + '/archive',
+        null,
+        {
+          headers,
+        }
+      )
+      .subscribe(
+        (respond) => {
+          location.reload();
+        },
+        (error) => {
+          console.error('Problem while archeving trip', error);
         }
       );
   }

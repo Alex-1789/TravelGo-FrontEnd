@@ -61,6 +61,7 @@ export class CommentListComponent implements OnInit {
        )
        .subscribe(
          (respond) => {
+          window.location.reload();
          },
          (error) => {
            console.error('Problem while deleting comment', error);

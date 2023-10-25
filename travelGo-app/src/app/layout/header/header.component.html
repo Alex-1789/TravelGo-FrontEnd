@@ -1,14 +1,35 @@
-<header class="navbar navbar-expand-lg">
-  <a href="http://localhost:4200/" class="site-logo"><span>TravelGo</span></a>
-  <a href="http://localhost:4200/login" *ngIf="!isLoggedIn()" class="login"
-    >Login</a
-  >
-  <mat-icon
-    ><a
-      href="http://localhost:4200/account"
-      *ngIf="isLoggedIn()"
-      class="account"
-      >account_circle</a
-    ></mat-icon
-  >
-</header>
+<div class="row menu p-4">
+  <div class="col-lg-4 page-name justify-content-start d-flex align-items-center">
+    <a class="logo" href="http://localhost:4200/">
+      TRAVEL PORTAL
+    </a>
+  </div>
+
+  <div class="col-lg-4 center-menu align-items-start">
+    <nav>
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:4200/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:4200/forum">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:4200/trips">Trips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:4200/business-offer">Business Offers</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col-lg-4 login-button justify-content-end d-flex align-items-center">
+    <a href="http://localhost:4200/login" *ngIf="!isLoggedIn()" class="login-link">Login</a>
+    <mat-icon>
+      <a href="http://localhost:4200/account" *ngIf="isLoggedIn()" class="account">
+        account_circle
+      </a>
+    </mat-icon>
+  </div>
+</div>

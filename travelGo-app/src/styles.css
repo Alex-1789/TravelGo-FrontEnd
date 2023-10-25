@@ -9,12 +9,12 @@
 :root {
     --background: #EDEDED;
     --text: #56716F;
-    --on-text: #127369;
-    --footer: #B5D0CD;
+    --primary-color: #127369;
+    --secondary-color: #B5D0CD;
 }
 
 .bg-theme {
-    background-color: var(--footer);
+    background-color: var(--secondary-color);
 }
 
 body {
@@ -22,4 +22,8 @@ body {
     font-size: 17px;
     color: var(--background);
     background-color: var(--background);
+}
+
+h1 {
+  color: var(--primary-color);
 }

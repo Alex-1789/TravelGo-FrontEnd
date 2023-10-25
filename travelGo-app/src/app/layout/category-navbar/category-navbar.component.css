@@ -1,6 +1,6 @@
 nav {
     height: 30px;
-    background-color: var(--footer);
+    background-color: var(--secondary-color);
 }
 
 .nav-link{
@@ -10,7 +10,7 @@ nav {
 }
 .nav-link:hover{
     text-transform: uppercase;
-    color: var(--on-text);
+    color: var(--primary-color);
 }
 
 .nav-item {

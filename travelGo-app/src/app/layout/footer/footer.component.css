@@ -1,19 +1,18 @@
-footer{
-    height: 100px;
-    padding: 5px;
-    background-color: var(--footer);
+.footer {
+  color: #fff;
+  text-align: center;
 }
 
-.nav-link{
-    color: var(--text);
-}
-.nav-link:hover{
-    color: var(--on-text);
-}
-p{
-    color: var(--background);
+.upper-footer {
+  background-color: var(--secondary-color);
 }
 
-.nav-item {
-  padding-left: 30px;
+.copyright {
+  background-color: var(--primary-color);
+}
+
+.footer-link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--text);
 }

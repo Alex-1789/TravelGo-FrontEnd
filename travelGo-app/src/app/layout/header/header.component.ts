@@ -10,7 +10,6 @@ export class HeaderComponent {
   constructor(private authService: AuthService) {}
 
   isLoggedIn() {
-    const loggedIn = this.authService.isLoggedIn();
-    return loggedIn;
+    return this.authService.isLoggedIn();
   }
 }

@@ -1,40 +1,18 @@
-header {
-  height: 50px;
-  background-color: var(--footer);
+.menu {
+  background-color: var(--primary-color);
 }
 
-.site-logo {
-  width: 80px;
-  height: 40px;
-  transform: skewX(-40deg);
-  display: flex;
-  justify-content: center;
-  margin-right: 80%;
-  margin-left: 5%;
-  margin-bottom: 0.2rem;
-  align-items: center;
-  background-color: var(--on-text);
-  text-decoration: none;
-}
-
-.site-logo > span {
-  transform: skewX(30deg);
-  color: var(--background);
-}
-.site-logo > span:hover {
-  color: var(--footer);
-}
 .login {
   margin-bottom: 0.2rem;
   margin-left: 2rem;
   padding: 8px 20px;
   border-radius: 20px;
-  background-color: var(--on-text);
+  background-color: var(--primary-color);
   color: var(--background);
   text-decoration: none;
 }
 .login:hover {
-  color: var(--footer);
+  color: var(--secondary-color);
 }
 
 mat-icon {
@@ -44,8 +22,46 @@ mat-icon {
 
 .account {
   text-decoration: none;
-  color: var(--on-text);
+  color: var(--secondary-color);
 }
 .account:hover {
-  color: var(--text);
+  color: var(--background);
+}
+
+.page-name {
+  text-align: left;
+}
+.center-menu {
+  text-align: center;
+}
+.login-button {
+  text-align: right;
+}
+
+.login-link {
+  padding: 10px 50px;
+  background: var(--primary-color);
+  color: var(--background);
+  text-decoration: none;
+}
+
+.menu .nav-link{
+  text-transform: uppercase;
+  color: var(--secondary-color);
+}
+
+.menu .nav-link:hover{
+  text-transform: uppercase;
+  color: var(--background);
+}
+
+.menu .nav-item {
+  padding-left: 30px;
+}
+
+.logo {
+  color: var(--secondary-color);
+  text-transform: none;
+  text-decoration: none;
+  font-weight: bold;
 }

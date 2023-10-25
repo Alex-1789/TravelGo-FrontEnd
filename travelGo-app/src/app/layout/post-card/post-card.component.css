@@ -5,19 +5,19 @@
 }
 
 #toLike {
-  color: var(--footer);
+  color: var(--secondary-color);
 }
 
 #toLike:hover {
-  color: var(--on-text);
+  color: var(--primary-color);
 }
 
 #liked {
-  color: var(--on-text);
+  color: var(--primary-color);
 }
 
 #liked:hover {
-  color: var(--footer);
+  color: var(--secondary-color);
 }
 
 #delete {

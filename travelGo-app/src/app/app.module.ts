@@ -37,6 +37,14 @@ import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 import { MatIconModule } from '@angular/material/icon';
 import { defineComponents, IgcRatingComponent } from '../../node_modules/igniteui-webcomponents';
 import {NgToastModule} from 'ng-angular-popup';
+import {
+  CarouselCaptionComponent,
+  CarouselComponent, CarouselControlComponent,
+  CarouselIndicatorsComponent,
+  CarouselInnerComponent,
+  CarouselItemComponent
+} from "@coreui/angular";
+import {CarouselHomeComponent} from "./layout/carousel-home/carousel-home.component";
 
 
 defineComponents(IgcRatingComponent);
@@ -68,6 +76,7 @@ defineComponents(IgcRatingComponent);
     SingleOfferComponent,
     SingleTripComponent,
     BusinessOfferComponent,
+    CarouselHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +90,12 @@ defineComponents(IgcRatingComponent);
     BrowserAnimationsModule,
     MatIconModule,
     NgToastModule,
+    CarouselIndicatorsComponent,
+    CarouselComponent,
+    CarouselInnerComponent,
+    CarouselItemComponent,
+    CarouselCaptionComponent,
+    CarouselControlComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

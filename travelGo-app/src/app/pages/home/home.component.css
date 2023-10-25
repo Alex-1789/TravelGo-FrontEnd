@@ -10,3 +10,12 @@
 img {
   height: 400px;
 }
+
+.card-title {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.card-body a {
+  color: var(--text);
+}

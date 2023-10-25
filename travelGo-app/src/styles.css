@@ -7,10 +7,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 :root {
-    --background: #EDEDED;
-    --text: #56716F;
-    --primary-color: #127369;
-    --secondary-color: #B5D0CD;
+    --background: #fffdf4;
+    --text: #5c8c6c;
+    --primary-color: #444c24;
+    --secondary-color: #c9ceb6;
 }
 
 .bg-theme {

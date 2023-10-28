@@ -28,10 +28,6 @@ export class TripCardComponent {
   ngOnInit(): void {
     const headers = this.authService.getHeaders();
     const roles = this.authService.getUserRoles();
-    console.log(headers);
-    console.log(headers);
-    console.log(headers);
-    console.log(headers);
     this.http
       .get<TripCard[]>('http://localhost:8080/api/trips/', { headers })
       .subscribe(
@@ -55,7 +51,6 @@ export class TripCardComponent {
 
   deleteTrip(tripId: number): void {
     const headers = this.authService.getHeaders();
-    console.log(headers);
     this.http
       .delete<any>('http://localhost:8080/api/trips/' + tripId, { headers })
       .subscribe(
@@ -70,7 +65,6 @@ export class TripCardComponent {
 
   archiveTrip(tripId: number): void {
     const headers = this.authService.getHeaders();
-    console.log(headers);
     this.http
       .put<any>(
         'http://localhost:8080/api/trips/' + tripId + '/archive',

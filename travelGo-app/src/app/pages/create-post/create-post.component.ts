@@ -12,6 +12,7 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class CreatePostComponent {
   postForm: FormGroup;
+  selectedImage: File | null = null;
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -26,33 +27,43 @@ export class CreatePostComponent {
     });
   }
 
+  onImageSelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      this.selectedImage = files[0];
+    }
+  }
+
   createPost() {
     if (this.postForm.invalid) {
       this.emptyCreatePost();
       return;
     }
 
-    const postData = {
-      title: this.postForm.value.title,
-      about: this.postForm.value.about,
-      content: this.postForm.value.content,
-      status: 1
-    };
+    const postData = new FormData();
+    postData.append('title', this.postForm.value.title);
+    postData.append('about', this.postForm.value.about);
+    postData.append('content', this.postForm.value.content);
+    if (this.selectedImage) {
+      postData.append('image', this.selectedImage);
+    }
 
     const headers = this.authService.getHeaders();
 
-    this.http.post<any>('http://localhost:8080/api/posts/', postData, { headers }).subscribe(
-      (response) => {
-        this.router.navigate(['/forum']);
-        this.successfulCreatePost();
-      },
-      (error) => {
-        console.error('Post creating failed:', error);
-      }
-    );
+    this.http
+      .post('http://localhost:8080/api/posts/', postData, { headers })
+      .subscribe(
+        (response) => {
+          this.router.navigate(['/forum']);
+          this.successfulCreatePost();
+        },
+        (error) => {
+          console.error('Post creating failed:', error);
+        }
+      );
   }
 
-    successfulCreatePost(): void {
+  successfulCreatePost(): void {
     this.toast.success({
       detail: 'Post created Successfully!',
       summary: 'Post created Successfully!',

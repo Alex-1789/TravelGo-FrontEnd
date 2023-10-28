@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
 
 interface PostCard {
   id: number;
   title: string;
   content: string;
-  likes: number;
   username: string;
+  userID: string;
   about: string;
-  updatedAt: Date;
   createdAt: Date;
+  imagesDir: string;
   status: 1;
+  likes: number;
   liked: boolean;
 }
 
@@ -27,7 +27,6 @@ export class PostCardComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {

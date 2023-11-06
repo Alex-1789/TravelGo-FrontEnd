@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-comment-form',
@@ -17,7 +18,8 @@ export class CommentFormComponent {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: NgToastService
   ) {
     this.commentForm = this.formBuilder.group({
       content: ['', Validators.required],
@@ -47,10 +49,21 @@ export class CommentFormComponent {
       .subscribe(
         (response) => {
           window.location.reload();
+          this.successfulCreateComment();
         },
         (error) => {
           console.error('Post creating failed:', error);
         }
       );
+  }
+
+  successfulCreateComment(): void {
+    this.toast.success({
+      detail: 'Comment created Successfully!',
+      summary: 'Comment created Successfully!',
+      sticky: true,
+      position: 'topLeft',
+      duration: 2000,
+    });
   }
 }

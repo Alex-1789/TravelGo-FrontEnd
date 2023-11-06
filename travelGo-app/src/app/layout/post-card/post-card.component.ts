@@ -7,12 +7,14 @@ interface PostCard {
   title: string;
   content: string;
   username: string;
-  userID: string;
+  userID: number;
   about: string;
   createdAt: Date;
+  updatedAt: Date;
   imagesDir: string;
-  status: 1;
+  status: null;
   likes: number;
+  numberOfComments: number;
   liked: boolean;
 }
 

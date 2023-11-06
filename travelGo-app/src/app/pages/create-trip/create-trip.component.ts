@@ -23,6 +23,7 @@ export class CreateTripComponent {
       date: ['', Validators.required],
       tripName: ['', Validators.required],
       gatheringPlace: ['', Validators.required],
+      guidesIDs: ['', Validators.required],
     });
   }
 
@@ -36,6 +37,7 @@ export class CreateTripComponent {
       date: this.tripForm.value.date,
       tripName: this.tripForm.value.tripName,
       gatheringPlace: this.tripForm.value.gatheringPlace,
+      guidesIDs: this.tripForm.value.guidesIDs,
     };
 
     const headers = this.authService.getHeaders();

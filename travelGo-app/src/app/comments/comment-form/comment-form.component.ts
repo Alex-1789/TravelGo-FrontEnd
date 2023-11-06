@@ -17,7 +17,6 @@ export class CommentFormComponent {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthService
   ) {
     this.commentForm = this.formBuilder.group({

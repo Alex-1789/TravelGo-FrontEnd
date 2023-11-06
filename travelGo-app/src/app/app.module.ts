@@ -45,6 +45,7 @@ import {
   CarouselItemComponent
 } from "@coreui/angular";
 import {CarouselHomeComponent} from "./layout/carousel-home/carousel-home.component";
+import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moderator-user-access.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -77,6 +78,7 @@ defineComponents(IgcRatingComponent);
     SingleTripComponent,
     BusinessOfferComponent,
     CarouselHomeComponent,
+    ModeratorUserAccessComponent,
   ],
   imports: [
     BrowserModule,

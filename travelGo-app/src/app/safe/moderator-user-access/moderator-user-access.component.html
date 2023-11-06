@@ -1,0 +1,64 @@
+<div class="container mt-3 mb-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-5 shadow-effect" *ngFor="let userCard of userCards">
+        <div class="card-body">
+          <div class="mt-3 text-center">
+            <p>ID: {{ userCard.id }}</p>
+            <p>Username: {{ userCard.username }}</p>
+            <p>Name: {{ userCard.name }}</p>
+            <p>Surname: {{ userCard.surname }}</p>
+            <p>Email: {{ userCard.email }}</p>
+            <p>PhoneNumber: {{ userCard.phoneNumber }}</p>
+            <p>Privlages: {{ userCard.privileges }}</p>
+            <div *ngFor="let role of userCard.roles">
+              <p>Roles:</p>
+              <p>ID: {{ role.id }}</p>
+              <p>Role Name: {{ role.name }}</p>
+            </div>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="drone"
+              value="CLUB_MEMBER"
+              [checked]="selectedValue === 'CLUB_MEMBER'"
+              (change)="onRadioChange($event)"
+            />
+            <label for="CLUB_MEMBER">CLUB MEMBER</label>
+            <br />
+            <input
+              type="radio"
+              name="drone"
+              value="GUIDE"
+              [checked]="selectedValue === 'GUIDE'"
+              (change)="onRadioChange($event)"
+            />
+            <label for="GUIDE">GUIDE</label>
+            <br />
+            <input
+              type="radio"
+              name="drone"
+              value="BUSINESS_PARTNER"
+              [checked]="selectedValue === 'BUSINESS_PARTNER'"
+              (change)="onRadioChange($event)"
+            />
+            <label for="BUSINESS_PARTNER">BUSINESS PARTNER</label>
+            <br />
+            <input
+              type="radio"
+              name="drone"
+              value="MODERATOR"
+              [checked]="selectedValue === 'MODERATOR'"
+              (change)="onRadioChange($event)"
+            />
+            <label for="MODERATOR">MODERATOR</label>
+          </div>
+
+          <button class="btn btn-info btn-block btn-theme" (click)="addPrivlage(userCard.id)">Add Privlage</button>
+          <button class="btn btn-info btn-block btn-theme" (click)="removePrivlage(userCard.id)">Remove Privlage</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

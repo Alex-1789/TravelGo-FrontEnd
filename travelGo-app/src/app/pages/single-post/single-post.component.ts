@@ -12,9 +12,11 @@ interface SinglePostCard {
   userID: number;
   about: string;
   createdAt: Date;
+  updatedAt: Date;
   imagesDir: string;
-  status: number;
+  status: null;
   likes: number;
+  numberOfComments: number;
 }
 
 @Component({
@@ -35,9 +37,11 @@ export class SinglePostComponent implements OnInit {
     userID: 0,
     about: '',
     createdAt: new Date(2023, 1, 1),
+    updatedAt: new Date(2023, 1, 1),
     imagesDir: '',
-    status: 0,
+    status: null,
     likes: 0,
+    numberOfComments: 0
   };
 
   constructor(

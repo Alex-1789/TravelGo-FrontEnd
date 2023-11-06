@@ -24,6 +24,7 @@ export class CreatePostComponent {
       title: ['', Validators.required],
       about: ['', Validators.required],
       content: ['', Validators.required],
+      status: ['Published', Validators.required]
     });
   }
 
@@ -44,6 +45,7 @@ export class CreatePostComponent {
     postData.append('title', this.postForm.value.title);
     postData.append('about', this.postForm.value.about);
     postData.append('content', this.postForm.value.content);
+    postData.append('status', this.postForm.value.status);
     if (this.selectedImage) {
       postData.append('image', this.selectedImage);
     }

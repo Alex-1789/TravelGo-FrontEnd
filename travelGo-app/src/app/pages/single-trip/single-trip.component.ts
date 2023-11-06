@@ -12,7 +12,7 @@ interface SingleTripCard {
   numberOfRates: number;
   achived: boolean;
   participats: Array<string>;
-  tripGuideId: number;
+  tripGuides: Array<number>;
   rated: boolean;
 }
 
@@ -41,7 +41,7 @@ export class SingleTripComponent implements OnInit {
     numberOfRates: 0,
     achived: false,
     participats: [],
-    tripGuideId: 0,
+    tripGuides: [],
     rated: false,
   };
   constructor(

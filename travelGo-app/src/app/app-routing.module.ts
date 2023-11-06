@@ -16,6 +16,7 @@ import { SingleTripComponent } from './pages/single-trip/single-trip.component';
 import { BusinessOfferComponent } from './pages/business-offer/business-offer.component';
 import { CreateOfferComponent } from './pages/create-offer/create-offer.component';
 import { SingleOfferComponent } from './pages/single-offer/single-offer.component';
+import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moderator-user-access.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'business-offer', component: BusinessOfferComponent },
   { path: 'create-offer', component: CreateOfferComponent },
   { path: 'offer', component: SingleOfferComponent },
+  { path: 'moderator', component: ModeratorUserAccessComponent },
 ];
 
 @NgModule({

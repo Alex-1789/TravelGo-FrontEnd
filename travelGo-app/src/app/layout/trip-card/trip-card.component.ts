@@ -11,7 +11,7 @@ interface TripCard {
   numberOfRates: number;
   achived: number;
   participats: Array<string>;
-  tripGuideId: number;
+  tripGuides: Array<number>;
 }
 
 @Component({

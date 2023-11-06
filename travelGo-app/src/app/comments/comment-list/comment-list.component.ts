@@ -6,10 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 interface CommentCard {
   id: number;
   content: string;
-  user_id: number;
-  post_id: number;
-  created_at: Date;
   username: string;
+  userID: number;
+  post: number;
 }
 
 @Component({

@@ -20,7 +20,7 @@ import { SignupComponent } from './safe/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForumComponent } from './pages/forum/forum.component';
-import { PostCardComponent } from './layout/post-card/post-card.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 import { AccountComponent } from './safe/account/account.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { TripCardComponent } from './layout/trip-card/trip-card.component';

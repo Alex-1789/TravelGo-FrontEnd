@@ -1,0 +1,60 @@
+<!--   Card start -->
+<div class="card post-card">
+  <div class="card-body profile p-0">
+
+    <div class="pt-3 px-3">
+      <div class="d-flex align-items-center mb-3">
+        <a href="#"><img
+          src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt="" style="width: 50px; height: 50px; object-fit: cover;"
+          class="rounded-circle"/></a>
+        <div class="flex-fill ps-2">
+          <div class="fw-bold"><a href="#" class="text-decoration-none post-author">{{ postCard?.username }}</a>
+          </div>
+          <div class="small text-body text-opacity-50">{{ postCard?.createdAt }}</div>
+        </div>
+      </div>
+      <h4>
+        <a class="post-title" [routerLink]="['/post']" [queryParams]="{ id: postCard?.id }">{{
+          postCard?.title
+          }}</a>
+      </h4>
+      <p>{{ postCard?.about }}</p>
+      <div class="profile-img-list">
+        <div class="profile-img-list-item main">
+          <a href="#" data-lity="" class="profile-img-list-link">
+                <span class="profile-img-content"
+                      style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/South_Africa_-_Drakensberg_%2816422630006%29.jpg/1200px-South_Africa_-_Drakensberg_%2816422630006%29.jpg);"></span>
+          </a>
+        </div>
+        <ng-container *ngFor="let image of images$ | async">
+          <div class="profile-img-list-item">
+            <a href="#" data-lity="" class="profile-img-list-link">
+                <span class="profile-img-content"
+                      [ngStyle]="{'background-image': 'url(' + getImageUrl(image) + ')'}"></span>
+            </a>
+          </div>
+        </ng-container>
+      </div>
+      <hr class="mb-1 opacity-1"/>
+    </div>
+
+
+    <div class="row text-center fw-bold">
+      <div class="col">
+        <a class="text-body text-opacity-50 text-decoration-none d-block p-2">
+          Likes </a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> <i
+          class="far fa-comment me-1 d-block d-sm-inline"></i> Comment </a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> <i
+          class="fa fa-share me-1 d-block d-sm-inline"></i> Share </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--   Card end -->
+

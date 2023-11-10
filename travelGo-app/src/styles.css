@@ -20,8 +20,7 @@
 body {
     font-family: 'PT Sans', sans-serif;
     font-size: 17px;
-    color: var(--background);
-    background-color: var(--background);
+    background-color: #fff;
 }
 
 h1 {

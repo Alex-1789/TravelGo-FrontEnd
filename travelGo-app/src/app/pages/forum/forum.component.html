@@ -14,13 +14,16 @@
           <a
             href="http://localhost:4200/create-post"
             class="btn btn-info btn-block btn-theme"
-            >Add new post</a
+          >Add new post</a
           >
         </div>
       </div>
     </div>
   </div>
 
-  <app-post-card></app-post-card>
-
+  <div class="row">
+    <div *ngFor="let postCard of postCards" class="col-lg-4 p-3">
+      <app-post-card [postCard]="postCard" [postId]="postCard.id"></app-post-card>
+    </div>
+  </div>
 </div>

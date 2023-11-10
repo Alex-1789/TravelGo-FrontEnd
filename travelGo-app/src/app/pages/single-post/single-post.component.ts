@@ -3,21 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
-interface SinglePostCard {
-  id: number;
-  title: string;
-  content: string;
-  username: string;
-  userID: number;
-  about: string;
-  createdAt: Date;
-  updatedAt: Date;
-  imagesDir: string;
-  status: null;
-  likes: number;
-  numberOfComments: number;
-}
+import {PostCard} from "../../types/post-card";
 
 @Component({
   selector: 'app-single-post',
@@ -29,7 +15,7 @@ export class SinglePostComponent implements OnInit {
   imagesNames: string[] = [];
   image: SafeUrl | undefined;
 
-  singlePostCard: SinglePostCard = {
+  singlePostCard: PostCard = {
     id: 0,
     title: '',
     content: '',
@@ -39,8 +25,9 @@ export class SinglePostComponent implements OnInit {
     createdAt: new Date(2023, 1, 1),
     updatedAt: new Date(2023, 1, 1),
     imagesDir: '',
-    status: null,
+    status: 0,
     likes: 0,
+    liked: false,
     numberOfComments: 0
   };
 
@@ -94,7 +81,7 @@ export class SinglePostComponent implements OnInit {
       );
 
     this.http
-      .get<SinglePostCard>('http://localhost:8080/api/posts/' + this.postId, {
+      .get<PostCard>('http://localhost:8080/api/posts/' + this.postId, {
         headers,
       })
       .subscribe(

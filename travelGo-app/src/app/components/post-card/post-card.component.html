@@ -1,4 +1,4 @@
-<!--   Card start -->
+
 <div class="card post-card">
   <div class="card-body profile p-0">
 
@@ -21,19 +21,23 @@
       </h4>
       <p>{{ postCard?.about }}</p>
       <div class="profile-img-list">
-        <div class="profile-img-list-item main">
-          <a href="#" data-lity="" class="profile-img-list-link">
+        <ng-container *ngFor="let image of images$ | async | slice:0:9; let isFirst = first">
+          <ng-container *ngIf="isFirst; else photoList">
+            <div class="profile-img-list-item main">
+              <a href="#" data-lity="" class="profile-img-list-link">
                 <span class="profile-img-content"
-                      style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/South_Africa_-_Drakensberg_%2816422630006%29.jpg/1200px-South_Africa_-_Drakensberg_%2816422630006%29.jpg);"></span>
-          </a>
-        </div>
-        <ng-container *ngFor="let image of images$ | async">
-          <div class="profile-img-list-item">
-            <a href="#" data-lity="" class="profile-img-list-link">
+                      [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
+              </a>
+            </div>
+          </ng-container>
+          <ng-template #photoList>
+            <div class="profile-img-list-item">
+              <a href="#" data-lity="" class="profile-img-list-link">
                 <span class="profile-img-content"
-                      [ngStyle]="{'background-image': 'url(' + getImageUrl(image) + ')'}"></span>
-            </a>
-          </div>
+                      [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
+              </a>
+            </div>
+          </ng-template>
         </ng-container>
       </div>
       <hr class="mb-1 opacity-1"/>
@@ -43,11 +47,11 @@
     <div class="row text-center fw-bold">
       <div class="col">
         <a class="text-body text-opacity-50 text-decoration-none d-block p-2">
-          Likes </a>
+          {{ postCard?.likes }} Likes
+        </a>
       </div>
       <div class="col">
-        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> <i
-          class="far fa-comment me-1 d-block d-sm-inline"></i> Comment </a>
+        <a [routerLink]="['/post']" [queryParams]="{ id: postCard?.id }" class="text-discussion text-opacity-50 text-decoration-none d-block p-2">Join Discussion</a>
       </div>
       <div class="col">
         <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> <i
@@ -56,5 +60,4 @@
     </div>
   </div>
 </div>
-<!--   Card end -->
 

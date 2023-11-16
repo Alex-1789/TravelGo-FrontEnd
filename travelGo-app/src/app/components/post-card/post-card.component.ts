@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../services/posts.service";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {DomSanitizer} from "@angular/platform-browser";
 import {PostCard} from "../../types/post-card";
-import {catchError, map, Observable, of} from "rxjs";
+import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-post-card',
@@ -17,21 +17,19 @@ export class PostCardComponent implements OnInit {
   public images$: Observable<string[] | null> | undefined;
 
   ngOnInit(): void {
-    console.log(this.postCard)
     this.images$ = this.fetchImagesList(this.postId);
   }
 
   constructor(
-    private postsService: PostsService,
-    private sanitizer: DomSanitizer
+    private postsService: PostsService
   ) {}
 
   private fetchImagesList(postId: number): Observable<string[] | null> {
 
     return this.postsService.getPostImages(postId).pipe(
-      map(images => {
-        console.log(images)
-        return images
+      mergeMap(images => {
+        const imageUrlObservables = images.map(image => this.getImageUrl(image));
+        return forkJoin(imageUrlObservables);
       }),
       catchError(error => {
         console.error('Wystąpił błąd podczas pobierania obrazków:', error);
@@ -41,10 +39,12 @@ export class PostCardComponent implements OnInit {
   }
 
   public getImageUrl(fileName: string) {
-    let imageUrl: SafeUrl = "";
-
-
-
-    return fileName;
+    return this.postsService.getPostImage(this.postId, fileName).pipe(
+      map((blob: Blob) => {
+        const imageUrl = URL.createObjectURL(blob);
+        console.log(imageUrl)
+        return imageUrl;
+      })
+    );
   }
 }

@@ -91,3 +91,7 @@
   text-align: center;
   text-shadow: 2px 2px #fff;
 }
+
+.text-discussion {
+  color: var(--primary-color)
+}

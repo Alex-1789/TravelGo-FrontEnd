@@ -11,6 +11,7 @@
     --text: #5c8c6c;
     --primary-color: #444c24;
     --secondary-color: #c9ceb6;
+    --gray-bg: #eee;
 }
 
 .bg-theme {
@@ -25,4 +26,16 @@ body {
 
 h1 {
   color: var(--primary-color);
+}
+
+.btn-primary-travel {
+  background: var(--primary-color);
+  color: var(--background);
+  border-radius: 0px;
+  padding: 10px 15px;
+}
+
+.btn-primary-travel:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
 }

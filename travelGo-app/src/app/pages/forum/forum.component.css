@@ -1,5 +1,6 @@
 .app-forum {
   background: var(--gray-bg);
+  min-height: 90vh;
 }
 
 .title-section {

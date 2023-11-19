@@ -1,16 +1,58 @@
-<div class="row">
-  <div *ngFor="let offerCard of offerCards" class="card col-lg-4 mb-3">
-    <div class="card-body">
-      <h2 class="text-center ml-3">
-        <a [routerLink]="['/offer']" [queryParams]="{ id: offerCard.id }">{{
-          offerCard.title
-        }}</a>
-      </h2>
-      <p class="text-center ml-3">{{ offerCard.about }}</p>
-      <p class="text-center ml-3">{{ offerCard.username }}</p>
-      <p class="text-center ml-3">{{ offerCard.likes }}</p>
-      <small>{{ offerCard.likes }}</small>
-      <small id="delete" (click)="deleteOffer(offerCard.id)">Delete</small>
+<div class="card post-card">
+  <div class="card-body profile p-0">
+
+    <div class="pt-3 px-3">
+      <div class="d-flex align-items-center mb-3">
+        <a href="#"><img
+          src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt="" style="width: 50px; height: 50px; object-fit: cover;"
+          class="rounded-circle"/></a>
+        <div class="flex-fill ps-2">
+          <div class="fw-bold"><a href="#" class="text-decoration-none post-author">{{ offerCard?.username }}</a>
+          </div>
+          <div class="small text-body text-opacity-50">{{ offerCard?.createdAt }}</div>
+        </div>
+      </div>
+      <h4>
+        <a class="post-title" [routerLink]="['/offer']" [queryParams]="{ id: offerId }">{{
+          offerCard?.title
+          }}</a>
+      </h4>
+      <p>{{ offerCard?.about }}</p>
+      <div class="profile-img-list">
+        <ng-container *ngFor="let image of images$ | async | slice:0:9; let isFirst = first">
+          <ng-container *ngIf="isFirst; else photoList">
+            <div class="profile-img-list-item main">
+              <a href="#" data-lity="" class="profile-img-list-link">
+                <span class="profile-img-content"
+                      [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
+              </a>
+            </div>
+          </ng-container>
+          <ng-template #photoList>
+            <div class="profile-img-list-item">
+              <a href="#" data-lity="" class="profile-img-list-link">
+                <span class="profile-img-content"
+                      [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
+              </a>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+      <hr class="mb-1 opacity-1"/>
+    </div>
+
+
+    <div class="row text-center fw-bold">
+      <div class="col">
+        <a class="text-body text-opacity-50 text-decoration-none d-block p-2">
+          {{ offerCard?.likes }} Likes
+        </a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2" id="delete" (click)="deleteOffer(offerId)">
+          Delete </a>
+      </div>
     </div>
   </div>
 </div>

@@ -13,3 +13,16 @@ export interface PostCard {
   liked: boolean
   numberOfComments: number
 }
+
+export interface OfferCard {
+  id: number;
+  title: string;
+  content: string;
+  username: string;
+  userID: number;
+  about: string;
+  createdAt: Date;
+  status: null;
+  likes: number;
+  liked: boolean;
+}

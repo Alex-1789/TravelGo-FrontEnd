@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../services/posts.service";
-import {DomSanitizer} from "@angular/platform-browser";
 import {PostCard} from "../../types/post-card";
 import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
 

@@ -1,17 +1,11 @@
-<div class="container mt-4 mb-4">
-  <div class="row">
-
-      <div class="card">
-        <div  class="card-body">
-          <small class="bg-light text-center">Last Updated:</small>
-          <h1 class="mt-3 mb-3">{{ singlePostCard.title }}</h1>
-          <p>{{ singlePostCard.content }}</p>
-          <small class="bg-light text-center">{{ singlePostCard.likes }}</small>
-         <img *ngIf="image" [src]="image" alt="Image">
-        </div>
-      </div>
+<div class="app-content">
+  <div class="container py-3">
+    <div class="row">
+      <app-post-card [postCard]="postCard | async" [postId]="postId" [displayedImagesCount]="50"
+                     [joinDiscussionButton]="false" [showFullContent]="true"></app-post-card>
       <app-comment-form></app-comment-form>
       <app-comment-list></app-comment-list>
     </div>
   </div>
+</div>
 

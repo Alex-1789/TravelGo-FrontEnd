@@ -12,6 +12,9 @@ export class PostCardComponent implements OnInit {
 
   @Input() postCard: PostCard | null = null
   @Input() postId: number = 0
+  @Input() displayedImagesCount: number = 9
+  @Input() joinDiscussionButton: boolean = true
+  @Input() showFullContent: boolean = false
 
   public images$: Observable<string[] | null> | undefined;
 
@@ -24,7 +27,8 @@ export class PostCardComponent implements OnInit {
   ) {}
 
   private fetchImagesList(postId: number): Observable<string[] | null> {
-
+    console.log("Pobieranie obrazkow")
+    console.log(this.postId)
     return this.postsService.getPostImages(postId).pipe(
       mergeMap(images => {
         const imageUrlObservables = images.map(image => this.getImageUrl(image));

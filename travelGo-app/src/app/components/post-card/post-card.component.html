@@ -19,8 +19,9 @@
           }}</a>
       </h4>
       <p>{{ postCard?.about }}</p>
+      <p *ngIf="showFullContent">{{ postCard?.content }}</p>
       <div class="profile-img-list">
-        <ng-container *ngFor="let image of images$ | async | slice:0:9; let isFirst = first">
+        <ng-container *ngFor="let image of images$ | async | slice:0:displayedImagesCount; let isFirst = first">
           <ng-container *ngIf="isFirst; else photoList">
             <div class="profile-img-list-item main">
               <a href="#" data-lity="" class="profile-img-list-link">
@@ -50,12 +51,11 @@
         </a>
       </div>
       <div class="col">
-        <a [routerLink]="['/post']" [queryParams]="{ id: postCard?.id }"
+        <a *ngIf="joinDiscussionButton" [routerLink]="['/post']" [queryParams]="{ id: postCard?.id }"
            class="text-discussion text-opacity-50 text-decoration-none d-block p-2">Join Discussion</a>
       </div>
       <div class="col">
-        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> <i
-          class="fa fa-share me-1 d-block d-sm-inline"></i> Share </a>
+        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> Delete </a>
       </div>
     </div>
   </div>

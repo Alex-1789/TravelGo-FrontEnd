@@ -73,3 +73,15 @@ mat-icon {
 .login-link {
   padding: 0px;
 }
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.spacer {
+  height: 90px;
+}

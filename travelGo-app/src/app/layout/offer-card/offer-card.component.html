@@ -18,7 +18,8 @@
           offerCard?.title
           }}</a>
       </h4>
-      <p>{{ offerCard?.about }}</p>
+      <div [innerHTML]="offerCard?.about"></div>
+      <div [innerHTML]="offerCard?.content"></div>
       <div class="profile-img-list">
         <ng-container *ngFor="let image of images$ | async | slice:0:9; let isFirst = first">
           <ng-container *ngIf="isFirst; else photoList">

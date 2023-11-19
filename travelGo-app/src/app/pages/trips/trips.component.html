@@ -1,26 +1,15 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-11 text-center mt-3 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h3>Trips</h3>
-          <p>Remember to behave and be polite to others!</p>
-        </div>
+<div class="app-content">
+  <div class="container py-3">
+    <div class="card post-card p-3 rounded-0">
+      <div class="card-body profile p-0">
+        <a href="http://localhost:4200/create-trip" class="btn btn-primary-travel">+ Add new trip</a>
       </div>
     </div>
-    <div class="col-lg-1 text-center mt-3 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <a
-            href="http://localhost:4200/create-trip"
-            class="btn btn-info btn-block btn-theme"
-            >Add new trip</a
-          >
-        </div>
-      </div>
+
+    <div class="row">
+      <app-trip-card></app-trip-card>
     </div>
+
   </div>
-
-  <app-trip-card></app-trip-card>
-
 </div>
+

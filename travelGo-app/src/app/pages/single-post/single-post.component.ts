@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PostCard} from "../../types/post-card";
 import {PostsService} from "../../services/posts.service";
 import {ActivatedRoute} from "@angular/router";

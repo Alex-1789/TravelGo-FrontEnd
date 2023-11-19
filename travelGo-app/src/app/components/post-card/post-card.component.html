@@ -18,13 +18,13 @@
           postCard?.title
           }}</a>
       </h4>
-      <p>{{ postCard?.about }}</p>
-      <p *ngIf="showFullContent">{{ postCard?.content }}</p>
+      <div [innerHTML]="postCard?.about"></div>
+      <div *ngIf="showFullContent" [innerHTML]="postCard?.content"></div>
       <div class="profile-img-list">
         <ng-container *ngFor="let image of images$ | async | slice:0:displayedImagesCount; let isFirst = first">
           <ng-container *ngIf="isFirst; else photoList">
             <div class="profile-img-list-item main">
-              <a href="#" data-lity="" class="profile-img-list-link">
+              <a [href]="image" target="_blank" data-lity="" class="profile-img-list-link">
                 <span class="profile-img-content"
                       [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
               </a>
@@ -32,7 +32,7 @@
           </ng-container>
           <ng-template #photoList>
             <div class="profile-img-list-item">
-              <a href="#" data-lity="" class="profile-img-list-link">
+              <a [href]="image" target="_blank" data-lity="" class="profile-img-list-link">
                 <span class="profile-img-content"
                       [ngStyle]="{'background-image': 'url(' + image + ')'}"></span>
               </a>

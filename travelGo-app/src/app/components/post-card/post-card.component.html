@@ -43,10 +43,11 @@
       <hr class="mb-1 opacity-1"/>
     </div>
 
-
     <div class="row text-center fw-bold">
       <div class="col">
         <a class="text-body text-opacity-50 text-decoration-none d-block p-2">
+          <mat-icon class="mx-2" style="cursor: pointer" (click)="likePost()">thumb_up</mat-icon>
+          <mat-icon class="mx-2" style="cursor: pointer" (click)="unlikePost()">thumb_down</mat-icon>
           {{ postCard?.likes }} Likes
         </a>
       </div>
@@ -55,7 +56,7 @@
            class="text-discussion text-opacity-50 text-decoration-none d-block p-2">Join Discussion</a>
       </div>
       <div class="col">
-        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2"> Delete </a>
+        <a (click)="deletePost()" style="cursor: pointer" class="text-body text-opacity-50 text-decoration-none d-block p-2"> Delete </a>
       </div>
     </div>
   </div>

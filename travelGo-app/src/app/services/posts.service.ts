@@ -36,11 +36,7 @@ export class PostsService {
   }
 
   public likePost(postId: number): Observable<any> {
-    const likeData = {
-      postId: postId,
-    };
-
-    return this.http.post<any>('http://localhost:8080/api/posts/' + postId + '/like', likeData,
+    return this.http.post<any>('http://localhost:8080/api/posts/' + postId + '/like', {},
       {headers: this.headers});
   }
 
@@ -51,6 +47,10 @@ export class PostsService {
 
     return this.http.post<any>('http://localhost:8080/api/posts/' + postId + '/unlike', likeData,
       {headers: this.headers});
+  }
+
+  public getPostLikes(postId: number): Observable<number> {
+    return this.http.get<any>('http://localhost:8080/api/posts/' + postId + '/likes',{headers: this.headers});
   }
 
   public deletePost(postId: number): Observable<any> {

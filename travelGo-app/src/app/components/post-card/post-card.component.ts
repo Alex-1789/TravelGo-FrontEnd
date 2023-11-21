@@ -10,7 +10,7 @@ import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
 })
 export class PostCardComponent implements OnInit {
 
-  @Input() postCard: PostCard | null = null
+  @Input() postCard: PostCard | null | undefined = null
   @Input() postId: number = 0
   @Input() displayedImagesCount: number = 9
   @Input() joinDiscussionButton: boolean = true
@@ -26,9 +26,37 @@ export class PostCardComponent implements OnInit {
     private postsService: PostsService
   ) {}
 
+  public async likePost(): Promise<void> {
+    try {
+      await this.postsService.likePost(this.postId).toPromise();
+      this.postCard = await this.fetchUpdatedPostCard(this.postId).toPromise();
+    } catch (error) {
+      console.error('Error liking post', error);
+    }
+  }
+
+  public async unlikePost(): Promise<void> {
+    try {
+      await this.postsService.dislikePost(this.postId).toPromise();
+      this.postCard = await this.fetchUpdatedPostCard(this.postId).toPromise();
+    } catch (error) {
+      console.error('Error unliking post', error);
+    }
+  }
+
+  public async deletePost(): Promise<void> {
+    try {
+      await this.postsService.deletePost(this.postId).toPromise();
+    } catch (error) {
+      console.error('Error deleting post', error);
+    }
+  }
+
+  private fetchUpdatedPostCard(postId: number): Observable<PostCard | null> {
+    return this.postsService.getPost(postId);
+  }
+
   private fetchImagesList(postId: number): Observable<string[] | null> {
-    console.log("Pobieranie obrazkow")
-    console.log(this.postId)
     return this.postsService.getPostImages(postId).pipe(
       mergeMap(images => {
         const imageUrlObservables = images.map(image => this.getImageUrl(image));
@@ -41,12 +69,10 @@ export class PostCardComponent implements OnInit {
     );
   }
 
-  public getImageUrl(fileName: string) {
+  private getImageUrl(fileName: string) {
     return this.postsService.getPostImage(this.postId, fileName).pipe(
       map((blob: Blob) => {
-        const imageUrl = URL.createObjectURL(blob);
-        console.log(imageUrl)
-        return imageUrl;
+        return URL.createObjectURL(blob);
       })
     );
   }

@@ -22,9 +22,9 @@ export class PostsService {
     return this.http.get<string[]>('http://localhost:8080/api/files/posts/' + postId, {headers: this.headers});
   }
 
-  public getPostImage(postId: number, fileName: string) {
+  public getPostImage(postId: number, fileName: string): Observable<Blob> {
     return this.http.get('http://localhost:8080/api/files/posts/' + postId + `/${encodeURIComponent(fileName)}`,
-      { responseType: 'blob', headers: this.headers });
+      {responseType: 'blob', headers: this.headers});
   }
 
   public getPost(postId: number): Observable<PostCard> {
@@ -50,10 +50,14 @@ export class PostsService {
   }
 
   public getPostLikes(postId: number): Observable<number> {
-    return this.http.get<any>('http://localhost:8080/api/posts/' + postId + '/likes',{headers: this.headers});
+    return this.http.get<any>('http://localhost:8080/api/posts/' + postId + '/likes', {headers: this.headers});
   }
 
   public deletePost(postId: number): Observable<any> {
-    return this.http.delete<any>('http://localhost:8080/api/posts/' + postId, { headers: this.headers })
+    return this.http.delete<any>('http://localhost:8080/api/posts/' + postId, {headers: this.headers})
+  }
+
+  public createPost(postData: FormData) {
+    return this.http.post('http://localhost:8080/api/posts/', postData, {headers: this.headers})
   }
 }

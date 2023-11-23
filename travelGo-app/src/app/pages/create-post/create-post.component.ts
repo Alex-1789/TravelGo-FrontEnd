@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
-import { NgToastService } from 'ng-angular-popup';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {NgToastService} from 'ng-angular-popup';
+import {PostsService} from "../../services/posts.service";
+import {TripsService} from "../../services/trips.service";
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css'],
 })
-export class CreatePostComponent {
-  postForm: FormGroup;
-  selectedImage: File | null = null;
+export class CreatePostComponent implements OnDestroy {
+  @Input() tripId : number | null = null
+  @Output() refreshPosts = new EventEmitter<string>();
+
+  public postForm: FormGroup;
+  public selectedImage: File | null = null;
+
+  private createPostSub: any = null
+
   constructor(
-    private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private postsService: PostsService,
+    private tripService: TripsService
   ) {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -26,6 +32,12 @@ export class CreatePostComponent {
       content: ['', Validators.required],
       status: ['Published', Validators.required]
     });
+  }
+
+  ngOnDestroy() {
+    if (this.createPostSub !== null) {
+      this.createPostSub.unsubscribe()
+    }
   }
 
   onImageSelected(event: any) {
@@ -46,26 +58,38 @@ export class CreatePostComponent {
     postData.append('about', this.postForm.value.about);
     postData.append('content', this.postForm.value.content);
     postData.append('status', this.postForm.value.status);
+
     if (this.selectedImage) {
       postData.append('image', this.selectedImage);
     }
 
-    const headers = this.authService.getHeaders();
+    if (this.tripId === null) {
+      this.createPostSub = this.postsService.createPost(postData)
+        .subscribe({
+          next: value => {
+            this.router.navigate(['/forum']);
+            this.successfulCreatePost();
+          },
+          error: err => console.error('Post creating failed:', err)
+        });
+    }
 
-    this.http
-      .post('http://localhost:8080/api/posts/', postData, { headers })
-      .subscribe(
-        (response) => {
-          this.router.navigate(['/forum']);
-          this.successfulCreatePost();
-        },
-        (error) => {
-          console.error('Post creating failed:', error);
-        }
-      );
+    else {
+      this.createPostSub = this.tripService.addPostToTripDiscussion(this.tripId, postData)
+        .subscribe({
+          next: value => {
+            this.successfulCreatePost();
+          },
+          error: err => console.error('Post creating failed:', err)
+        });
+    }
   }
 
   successfulCreatePost(): void {
+    this.refreshPosts.emit("refresh");
+
+    this.postForm.reset()
+
     this.toast.success({
       detail: 'Post created Successfully!',
       summary: 'Post created Successfully!',

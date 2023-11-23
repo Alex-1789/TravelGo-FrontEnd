@@ -1,23 +1,44 @@
-<div class="container mt-4 mb-4">
-  <div class="row">
+<div class="app-content">
+  <div class="container py-3">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <small class="bg-light text-center">Last Updated:</small>
+          <h1 class="mt-3 mb-3">{{ tripData?.tripName }}</h1>
+          <p>{{ tripData?.gatheringPlace }}</p>
+          <small class="bg-light text-center">{{ tripData?.rate }}</small>
+          <igc-rating
+            label="Rate Experience"
+            max="5"
+            step=".5"
+            size="large"
+            hover-preview
+            (igcChange)="giveRating($event, tripData?.id)"
+          ></igc-rating>
+          <h3>Dostepne dokumenty</h3>
+          <div *ngFor="let document of documents" class="card col-lg-4 mb-3">
+            <p>{{document.title}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-body">
-        <small class="bg-light text-center">Last Updated:</small>
-        <h1 class="mt-3 mb-3">{{ singleTripCard.tripName }}</h1>
-        <p>{{ singleTripCard.gatheringPlace }}</p>
-        <small class="bg-light text-center">{{ singleTripCard.rate }}</small>
-        <igc-rating
-          label="Rate Experience"
-          max="5"
-          step=".5"
-          size="large"
-          hover-preview
-          (igcChange)="giveRating($event, singleTripCard.id)"
-        ></igc-rating>
-        <h3>Dostepne dokumenty</h3>
-        <div *ngFor="let document of documents" class="card col-lg-4 mb-3">
-          <p>{{document.title}}</p>
+        <h2>Participants</h2>
+        <div *ngFor="let user of tripData?.participants" class="card col-lg-4 mb-3">
+          {{ user.username }}
         </div>
+        <a *ngIf="!isCurrentUserEnrolled()" (click)="enrollToTrip()" class="btn btn-primary-travel">+ Enroll to trip</a>
+      </div>
+    </div>
+
+    <app-create-post *ngIf="isCurrentUserEnrolled()" [tripId]="tripId" (refreshPosts)="refreshDiscussion($event)"></app-create-post>
+
+    <div *ngIf="isCurrentUserEnrolled()" class="row">
+      <div *ngFor="let postCard of discussion" class="col-lg-12 py-3">
+        <app-post-card [postCard]="postCard" [postId]="postCard.id">
+        </app-post-card>
       </div>
     </div>
   </div>

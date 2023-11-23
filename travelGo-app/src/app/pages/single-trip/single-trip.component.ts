@@ -1,111 +1,109 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../auth.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
+import {Documents, SingleTripCard} from "../../types/trip-types";
+import {TripsService} from "../../services/trips.service";
+import {NgToastService} from "ng-angular-popup";
+import {PostCard} from "../../types/post-card";
+import {AuthService} from "../../auth.service";
 
-interface SingleTripCard {
-  id: number;
-  date: Date;
-  gatheringPlace: string;
-  tripName: string;
-  rate: number;
-  numberOfRates: number;
-  achived: boolean;
-  participats: Array<string>;
-  tripGuides: Array<number>;
-  rated: boolean;
-}
-
-interface Documents {
-  id: number;
-  filename: string;
-  title: string;
-  tripId: number;
-  username: string;
-}
 @Component({
   selector: 'app-single-trip',
   templateUrl: './single-trip.component.html',
   styleUrls: ['./single-trip.component.css'],
 })
-export class SingleTripComponent implements OnInit {
-  selectedRating: number = 0;
-  tripId: number = -1;
-  documents: Documents[] = [];
-  singleTripCard: SingleTripCard = {
-    id: 0,
-    date: new Date(2023, 1, 1),
-    gatheringPlace: '',
-    tripName: '',
-    rate: 0,
-    numberOfRates: 0,
-    achived: false,
-    participats: [],
-    tripGuides: [],
-    rated: false,
-  };
+export class SingleTripComponent implements OnInit, OnDestroy {
+  selectedRating: number = 0
+  tripId: number = -1
+  documents: Documents[] = []
+  tripData: SingleTripCard | null = null
+
+  public discussion: PostCard[] | null = null
+
+  private tripsSub: any
+  private discussionSub: any
+
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private tripsService: TripsService,
+    private toast: NgToastService,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.tripId = params['id'];
+    const snapshot: ActivatedRouteSnapshot = this.route.snapshot
+    this.tripId = snapshot.queryParams['id']
+
+    this.tripsSub = this.tripsService.getTrip(this.tripId).subscribe({
+      next: value => this.tripData = value,
+      error: err => console.log("Data trip loading error " + err)
     });
 
-    const headers = this.authService.getHeaders();
-
-    this.http
-      .get<SingleTripCard>('http://localhost:8080/api/trips/' + this.tripId, {
-        headers,
-      })
-      .subscribe(
-        (data) => {
-          this.singleTripCard = data;
-        },
-        (error) => {
-          console.error('Problem while fetching data', error);
-        }
-      );
-
-      this.http
-        .get<Documents[]>('http://localhost:8080/api/trips/' + this.tripId + '/documents/', {
-          headers,
-        })
-        .subscribe(
-          (data) => {
-            this.documents = data;
-          },
-          (error) => {
-            console.error('Problem while fetching data', error);
-          }
-        );
+    this.discussionSub = this.tripsService.getTripDiscussion(this.tripId).subscribe({
+      next: value => this.discussion = value,
+      error: err => console.error("Discussion loading error " + err)
+    })
   }
 
-  giveRating(event: any, tripId: number): void {
+  ngOnDestroy() {
+    this.tripsSub.unsubscribe()
+    this.discussionSub.unsubscribe()
+  }
+
+  public enrollToTrip(): void {
+    this.tripsService.enrollToTrip(this.tripId)
+      .subscribe({
+        next: value => {
+          this.toast.success({
+            detail: 'Enrolled Successfully!',
+            summary: 'Enrolled Successfully!',
+            sticky: true,
+            position: 'topLeft',
+            duration: 2000,
+          })
+        },
+        error: err => {
+          this.toast.success({
+            detail: 'Enrolled Successfully!',
+            summary: 'Enrolled Successfully!',
+            sticky: true,
+            position: 'topLeft',
+            duration: 2000,
+          })
+        }
+      });
+
+    window.location.reload();
+  }
+
+  public giveRating(event: any, tripId: number | undefined): void {
     const ratedData = {
       rate: event.detail,
-    };
-    const headers = this.authService.getHeaders();
-
-    this.http
-      .post<any>(
-        'http://localhost:8080/api/trips/' + tripId + '/rate',
-        ratedData,
-        {
-          headers,
-        }
-      )
-      .subscribe(
-        (response) => {
-          this.singleTripCard.rated = true;
-          location.reload();
-        },
-        (error) => {
-          console.error('Problem with liking post', error);
-        }
-      );
+    }
   }
+
+  public refreshDiscussion(data: any): void {
+    if (this.tripId) {
+      if (this.discussionSub) {
+        this.discussionSub.unsubscribe();
+      }
+
+      this.discussionSub = this.tripsService.getTripDiscussion(this.tripId).subscribe({
+        next: value => this.discussion = value,
+        error: err => console.error("Discussion loading error " + err)
+      });
+    }
+  }
+
+  public isCurrentUserEnrolled(): boolean {
+    const userId: number | null = this.authService.getUserId()
+
+    if (this.tripData !== null) {
+      return this.tripData.participants.some(user => user.id === userId);
+    }
+
+    return false
+  }
+
+  protected readonly console = console;
 }

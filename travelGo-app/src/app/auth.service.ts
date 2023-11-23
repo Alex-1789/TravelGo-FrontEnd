@@ -50,7 +50,7 @@ export class AuthService {
     return headers;
   }
 
-  getUserId(): string | null {
+  getUserId(): number | null {
     let valueInStorage = localStorage.getItem('Response');
     let user = JSON.parse(valueInStorage ?? '');
     return user.Id;

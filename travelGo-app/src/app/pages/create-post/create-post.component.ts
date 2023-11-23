@@ -12,11 +12,10 @@ import {TripsService} from "../../services/trips.service";
 })
 export class CreatePostComponent implements OnDestroy {
   @Input() tripId : number | null = null
-  @Output() refreshPosts = new EventEmitter<string>();
+  @Output() refreshPosts = new EventEmitter<string>()
 
-  public postForm: FormGroup;
-  public selectedImage: File | null = null;
-
+  public postForm: FormGroup
+  public selectedImages: File[] = []
   private createPostSub: any = null
 
   constructor(
@@ -43,7 +42,9 @@ export class CreatePostComponent implements OnDestroy {
   onImageSelected(event: any) {
     const files: FileList = event.target.files;
     if (files.length > 0) {
-      this.selectedImage = files[0];
+      for (let i = 0; i < files.length; i++) {
+        this.selectedImages.push(files[i]);
+      }
     }
   }
 
@@ -59,9 +60,9 @@ export class CreatePostComponent implements OnDestroy {
     postData.append('content', this.postForm.value.content);
     postData.append('status', this.postForm.value.status);
 
-    if (this.selectedImage) {
-      postData.append('image', this.selectedImage);
-    }
+    this.selectedImages.forEach((image, index) => {
+      postData.append('images', image, `image${index}`);
+    });
 
     if (this.tripId === null) {
       this.createPostSub = this.postsService.createPost(postData)

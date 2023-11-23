@@ -58,6 +58,8 @@ export class PostsService {
   }
 
   public createPost(postData: FormData) {
-    return this.http.post('http://localhost:8080/api/posts/', postData, {headers: this.headers})
+    const headers = this.headers
+    headers.append('Content-Type', 'multipart/form-data')
+    return this.http.post('http://localhost:8080/api/posts/', postData, {headers: headers})
   }
 }

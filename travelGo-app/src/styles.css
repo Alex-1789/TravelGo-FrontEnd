@@ -9,9 +9,9 @@
 :root {
     --background: #fffdf4;
     --text: #5c8c6c;
-    --primary-color: #444c24;
-    --secondary-color: #c9ceb6;
-    --gray-bg: #eee;
+    --primary-color: #425A07;
+    --secondary-color: #c5cfa7;
+    --gray-bg: #EAF0F1;
 }
 
 .bg-theme {
@@ -33,6 +33,7 @@ h1 {
   color: var(--background);
   border-radius: 0px;
   padding: 10px 15px;
+  min-width: 150px;
 }
 
 .btn-primary-travel:hover {

@@ -88,13 +88,17 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   }
 
   public giveRating(event: any): void {
-    console.log("Rating")
     const ratedData: {rate: number} = {
       rate: event.detail,
     }
 
+    if (this.rateSub !== null) {
+      this.rateSub.unsubscribe()
+    }
+
     this.rateSub = this.tripsService.rateTrip(this.tripId, ratedData).subscribe({
       next: () => {
+        this.refreshTripData()
       }
     })
   }
@@ -103,6 +107,10 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     if (this.tripId) {
       if (this.discussionSub) {
         this.discussionSub.unsubscribe();
+      }
+
+      if (this.discussionSub !== null) {
+        this.discussionSub.unsubscribe()
       }
 
       this.discussionSub = this.tripsService.getTripDiscussion(this.tripId).subscribe({
@@ -140,5 +148,16 @@ export class SingleTripComponent implements OnInit, OnDestroy {
 
   public ArchiveTrip() {
 
+  }
+
+  private refreshTripData(): void {
+    if (this.tripsSub !== null) {
+      this.tripsSub.unsubscribe()
+    }
+
+    this.tripsSub = this.tripsService.getTrip(this.tripId).subscribe({
+      next: value => this.tripData = value,
+      error: err => console.log("Data trip loading error " + err)
+    });
   }
 }

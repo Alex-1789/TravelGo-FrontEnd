@@ -1,27 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~bootstrap/dist/css/bootstrap.css';
-@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap');
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 :root {
-    --background: #fffdf4;
-    --text: #5c8c6c;
-    --primary-color: #425A07;
-    --secondary-color: #c5cfa7;
-    --gray-bg: #EAF0F1;
+  --tp-white: #fffdf4;
+  --text: #5c8c6c;
+  --primary-color: #425A07;
+  --secondary-color: #c5cfa7;
+  --gray-bg: #EAF0F1;
+  --lively-accent: #96A80A;
+  --mood-accent: #A5A187;
 }
 
 .bg-theme {
-    background-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 }
 
 body {
-    font-family: 'PT Sans', sans-serif;
-    font-size: 17px;
-    background-color: #fff;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 17px;
+  background-color: #fff;
 }
 
 h1 {
@@ -30,7 +34,7 @@ h1 {
 
 .btn-primary-travel {
   background: var(--primary-color);
-  color: var(--background);
+  color: var(--tp-white);
   border-radius: 0px;
   padding: 10px 15px;
   min-width: 150px;
@@ -44,4 +48,20 @@ h1 {
 .app-content {
   background: var(--gray-bg);
   min-height: 90vh;
+}
+
+/* Scroll bar styles */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px var(--mood-accent);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: var(--lively-accent);
 }

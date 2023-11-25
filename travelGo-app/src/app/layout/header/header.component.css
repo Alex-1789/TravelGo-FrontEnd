@@ -8,7 +8,7 @@
   padding: 8px 20px;
   border-radius: 20px;
   background-color: var(--primary-color);
-  color: var(--background);
+  color: var(--tp-white);
   text-decoration: none;
 }
 .login:hover {
@@ -25,7 +25,7 @@ mat-icon {
   color: var(--secondary-color);
 }
 .account:hover {
-  color: var(--background);
+  color: var(--tp-white);
 }
 
 .page-name {
@@ -41,13 +41,13 @@ mat-icon {
 .login-link {
   padding: 10px 50px;
   background: var(--primary-color);
-  color: var(--background);
+  color: var(--tp-white);
   text-decoration: none;
 }
 
 .menu .nav-link{
   text-transform: uppercase;
-  color: var(--background);
+  color: var(--tp-white);
 }
 
 .menu .nav-link:hover{

@@ -3,61 +3,72 @@
 
     <div class="card rounded-0">
       <div class="card-body">
-        <div class="py-3">
+        <div class="my-3 trip-title">
           <h1 class="">{{ tripData?.tripName }}</h1>
-          <h3>{{ tripData?.gatheringPlace }}</h3>
-          <div>{{ tripData?.description }}</div>
+          <h3 class="gathering">{{ tripData?.gatheringPlace }}</h3>
         </div>
 
+        <div class="row p-3">
+          <div class="col-md-6 right-separator">
+            <div class="pr-10p">
+              <div class="my-3">
+                <h3>Description</h3>
+                <div class="overflow-auto description">{{ tripData?.description }}</div>
+              </div>
 
-        <div class="row">
+              <div class="my-3">
+                <h3>Reviews</h3>
+                <app-rating-card [rating]="tripData?.rate" [numberOfRates]="tripData?.numberOfRates"></app-rating-card>
+
+                <div *ngIf="isCurrentUserMember()" class="py-3">
+                  <igc-rating label="Your opinion" max="5" step=".5" size="large" hover-preview
+                              (igcChange)="giveRating($event)"></igc-rating>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-6">
-
-            <div class="participants overflow-auto">
+            <div class="pl-10p">
               <h3>Guide</h3>
-              <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
-                <a><img
-                  src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
-                <div class="flex-fill ps-2">
-                  <div class="fw-bold"><a
-                    class="text-decoration-none post-author">{{ user.name }} {{ user.surname }}</a></div>
+              <div class="participants overflow-auto my-3">
+                <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
+                  <a><img
+                    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
+                  <div class="flex-fill ps-2">
+                    <div class="fw-bold"><a
+                      class="text-decoration-none participant-name">{{ user.username }}
+                      ({{ user.name }} {{ user.surname }})</a></div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="participants overflow-auto">
               <h3>Participants</h3>
-
-              <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
-                <a><img
-                  src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
-                <div class="flex-fill ps-2">
-                  <div class="fw-bold"><a
-                    class="text-decoration-none post-author">{{ user.name }} {{ user.surname }}</a></div>
+              <div class="participants overflow-auto my-3">
+                <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
+                  <a><img
+                    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
+                  <div class="flex-fill ps-2">
+                    <div class="fw-bold"><a
+                      class="text-decoration-none participant-name">{{ user.username }}
+                      ({{ user.name }} {{ user.surname }})</a></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <h3>Reviews</h3>
-            <app-rating-card [rating]="tripData?.rate" [numberOfRates]="tripData?.numberOfRates"></app-rating-card>
-
-            <div *ngIf="isCurrentUserMember()" class="py-3">
-              <igc-rating label="Your opinion" max="5" step=".5" size="large" hover-preview
-                          (igcChange)="giveRating($event)"></igc-rating>
             </div>
           </div>
         </div>
 
-        <h3>Dostępne dokumenty</h3>
-        <div class="row">
-          <div *ngFor="let document of documents" class="col-lg-4 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <p>{{document.title}}</p>
+        <div class="my-3">
+          <h3>Dostępne dokumenty</h3>
+          <div class="row">
+            <div *ngFor="let document of documents" class="col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <p>{{document.title}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -70,9 +81,10 @@
       </div>
     </div>
 
-
-    <app-create-post *ngIf="isCurrentUserMember() || isCurrentUserGuide()" [tripId]="tripId"
-                     (refreshPosts)="refreshDiscussion()"></app-create-post>
+    <div class="my-3">
+      <app-create-post *ngIf="isCurrentUserMember() || isCurrentUserGuide()" [tripId]="tripId"
+                       (refreshPosts)="refreshDiscussion()"></app-create-post>
+    </div>
 
     <div *ngIf="isCurrentUserMember() || isCurrentUserGuide()" class="row">
       <div *ngFor="let postCard of discussion" class="col-lg-12 py-3">

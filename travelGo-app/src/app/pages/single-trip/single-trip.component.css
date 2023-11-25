@@ -1,3 +1,42 @@
 .participants {
-  max-height: 350px;
+  max-height: 230px;
+}
+
+.description {
+  max-height: 400px;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+h3 {
+  color: var(--primary-color)
+}
+
+.gathering {
+  font-style: italic;
+}
+
+.trip-title {
+  border-left: 5px var(--lively-accent) solid;
+  padding-left: 30px;
+}
+
+.participant-name {
+  color: #000;
+  font-weight: normal;
+}
+
+.right-separator {
+  border-right: 1px solid #ddd;
+}
+
+.pr-10p {
+  padding-right: 10px;
+}
+
+.pl-10p {
+  padding-left: 10px;
 }

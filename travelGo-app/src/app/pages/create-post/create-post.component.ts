@@ -67,7 +67,7 @@ export class CreatePostComponent implements OnDestroy {
     if (this.tripId === null) {
       this.createPostSub = this.postsService.createPost(postData)
         .subscribe({
-          next: value => {
+          next: () => {
             this.router.navigate(['/forum']);
             this.successfulCreatePost();
           },
@@ -78,7 +78,7 @@ export class CreatePostComponent implements OnDestroy {
     else {
       this.createPostSub = this.tripService.addPostToTripDiscussion(this.tripId, postData)
         .subscribe({
-          next: value => {
+          next: () => {
             this.successfulCreatePost();
           },
           error: err => console.error('Post creating failed:', err)
@@ -87,7 +87,7 @@ export class CreatePostComponent implements OnDestroy {
   }
 
   successfulCreatePost(): void {
-    this.refreshPosts.emit("refresh");
+    this.refreshPosts.emit();
 
     this.postForm.reset()
 

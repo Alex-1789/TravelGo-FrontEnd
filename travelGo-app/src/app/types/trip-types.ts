@@ -1,22 +1,23 @@
-import {User} from "./user";
+import {User} from "./user"
 
 export interface SingleTripCard {
-  id: number;
-  date: Date;
-  gatheringPlace: string;
-  tripName: string;
-  rate: number;
-  numberOfRates: number;
-  achived: boolean;
-  participants: Array<User>;
-  tripGuides: Array<number>;
-  rated: boolean;
+  id: number
+  date: Date
+  gatheringPlace: string
+  tripName: string
+  rate: number
+  numberOfRates: number
+  achived: boolean
+  participants: Array<User>
+  tripGuides: Array<User>
+  rated: boolean
+  description: string
 }
 
 export interface Documents {
-  id: number;
-  filename: string;
-  title: string;
-  tripId: number;
-  username: string;
+  id: number
+  filename: string
+  title: string
+  tripId: number
+  username: string
 }

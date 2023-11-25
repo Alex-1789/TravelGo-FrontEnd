@@ -28,7 +28,7 @@ export class TripsService {
       .get<Documents[]>('http://localhost:8080/api/trips/' + tripId + '/documents/', {headers: this.headers})
   }
 
-  public rateTrip(tripId: number, rate: number): Observable<any> {
+  public rateTrip(tripId: number, rate: {rate: number}): Observable<any> {
     return this.http.post<any>(
       'http://localhost:8080/api/trips/' + tripId + '/rate', rate, {headers: this.headers}
     )
@@ -49,5 +49,9 @@ export class TripsService {
     return this.http.post(
       'http://localhost:8080/api/trips/' + tripId + '/discussion', postData, {headers: this.headers}
     )
+  }
+
+  public createTrip(tripData: any) {
+    return this.http.post<any>('http://localhost:8080/api/trips/', tripData, {headers: this.headers})
   }
 }

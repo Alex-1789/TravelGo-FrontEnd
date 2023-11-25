@@ -14,7 +14,7 @@ export class AuthService {
     }
   }
 
-  login(response: any) {
+  public login(response: any) {
     this.isAuthenticated = true;
 
     let Response = {
@@ -26,40 +26,41 @@ export class AuthService {
     localStorage.setItem('Response', JSON.stringify(Response));
   }
 
-  logout() {
+  public logout() {
     this.isAuthenticated = false;
     localStorage.removeItem('Response');
   }
 
-  isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
 
-  getAccessToken(): string | null {
+  public getAccessToken(): string | null {
     let valueInStorage = localStorage.getItem('Response');
     let user = JSON.parse(valueInStorage ?? '');
     return user.Authorization;
   }
 
-  getHeaders(): HttpHeaders {
+  public getHeaders(): HttpHeaders {
     const accessToken = this.getAccessToken() ?? '';
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       Authorization: 'Bearer ' + accessToken,
     });
-
-    return headers;
   }
 
-  getUserId(): number | null {
+  public getUserId(): number | null {
     let valueInStorage = localStorage.getItem('Response');
     let user = JSON.parse(valueInStorage ?? '');
     return user.Id;
   }
 
-  getUserRoles(): string[] | null {
+  public getUserRoles(): string[] | null {
     let valueInStorage = localStorage.getItem('Response');
     let user = JSON.parse(valueInStorage ?? '');
-    let rolesNames = user.Roles.map((role: any) => role.name);
-    return rolesNames;
+    return user.Roles.map((role: any) => role.name);
+  }
+
+  public isModerator(): boolean {
+    return <boolean>this.getUserRoles()?.includes('MODERATOR')
   }
 }

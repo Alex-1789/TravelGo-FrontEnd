@@ -1,41 +1,71 @@
 <div class="app-content">
   <div class="container py-3">
-    <div class="row">
+
       <div class="card">
         <div class="card-body">
-          <small class="bg-light text-center">Last Updated:</small>
-          <h1 class="mt-3 mb-3">{{ tripData?.tripName }}</h1>
-          <p>{{ tripData?.gatheringPlace }}</p>
-          <small class="bg-light text-center">{{ tripData?.rate }}</small>
-          <igc-rating
-            label="Rate Experience"
-            max="5"
-            step=".5"
-            size="large"
-            hover-preview
-            (igcChange)="giveRating($event, tripData?.id)"
-          ></igc-rating>
+          <div class="row">
+            <div class="col">
+              <h1 class="">{{ tripData?.tripName }}</h1>
+              <h2>Guide</h2>
+              <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
+                <a><img
+                  src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                  alt="" style="width: 50px; height: 50px; object-fit: cover;"
+                  class="rounded-circle"/></a>
+                <div class="flex-fill ps-2">
+                  <div class="fw-bold"><a class="text-decoration-none post-author">{{ user.name }} {{ user.surname }}</a></div>
+                </div>
+              </div>
+
+              <p>{{ tripData?.gatheringPlace }}</p>
+
+              <div>
+                {{ tripData?.description }}
+              </div>
+            </div>
+
+            <div class="col">
+              <h1>Reviews</h1>
+              <app-rating-card [rating]="tripData?.rate" [numberOfRates]="tripData?.numberOfRates"></app-rating-card>
+
+              <div *ngIf="isCurrentUserMember()" class="py-3">
+                <igc-rating
+                  label="Your opinion"
+                  max="5"
+                  step=".5"
+                  size="large"
+                  hover-preview
+                  (igcChange)="giveRating($event)"
+                ></igc-rating>
+              </div>
+            </div>
+          </div>
+
           <h3>Dostepne dokumenty</h3>
           <div *ngFor="let document of documents" class="card col-lg-4 mb-3">
             <p>{{document.title}}</p>
           </div>
+
+          <h2>Participants</h2>
+          <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
+            <a><img
+              src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              alt="" style="width: 50px; height: 50px; object-fit: cover;"
+              class="rounded-circle"/></a>
+            <div class="flex-fill ps-2">
+              <div class="fw-bold"><a class="text-decoration-none post-author">{{ user.name }} {{ user.surname }}</a></div>
+            </div>
+          </div>
+          <a *ngIf="!isCurrentUserMember() && !isCurrentUserGuide()" (click)="enrollToTrip()" class="btn btn-primary-travel">+ Enroll to trip</a>
+          <a *ngIf="isCurrentUserMember()" (click)="LeaveTrip()" class="btn btn-primary-travel">- Leave the trip</a>
+          <a *ngIf="isCurrentUserGuide()" (click)="ArchiveTrip()" class="btn btn-primary-travel">- Archive trip</a>
         </div>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-body">
-        <h2>Participants</h2>
-        <div *ngFor="let user of tripData?.participants" class="card col-lg-4 mb-3">
-          {{ user.username }}
-        </div>
-        <a *ngIf="!isCurrentUserEnrolled()" (click)="enrollToTrip()" class="btn btn-primary-travel">+ Enroll to trip</a>
-      </div>
-    </div>
 
-    <app-create-post *ngIf="isCurrentUserEnrolled()" [tripId]="tripId" (refreshPosts)="refreshDiscussion($event)"></app-create-post>
+    <app-create-post *ngIf="isCurrentUserMember() || isCurrentUserGuide()" [tripId]="tripId" (refreshPosts)="refreshDiscussion()"></app-create-post>
 
-    <div *ngIf="isCurrentUserEnrolled()" class="row">
+    <div *ngIf="isCurrentUserMember() || isCurrentUserGuide()" class="row">
       <div *ngFor="let postCard of discussion" class="col-lg-12 py-3">
         <app-post-card [postCard]="postCard" [postId]="postCard.id">
         </app-post-card>

@@ -21,13 +21,21 @@
             required
           />
         </div>
+        <textarea
+          cols="30"
+          rows="15"
+          class="form-control"
+          placeholder="Add trip description"
+          formControlName="description"
+          required
+        ></textarea>
         <mat-form-field>
-         <input matInput [matDatepicker]="myDatePicker" placeholder="MM/DD/YYYY" formControlName="date">
-         <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
-         <mat-datepicker #myDatePicker></mat-datepicker>
+          <input matInput [matDatepicker]="myDatePicker" placeholder="MM/DD/YYYY" formControlName="date">
+          <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #myDatePicker></mat-datepicker>
         </mat-form-field>
         <div class="form-group mb-2">
-        <button class="btn btn-info mt-3">Add</button>
+          <button class="btn btn-info mt-3">Add</button>
         </div>
       </form>
     </div>

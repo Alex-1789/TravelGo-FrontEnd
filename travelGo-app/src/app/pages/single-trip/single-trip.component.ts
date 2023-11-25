@@ -12,15 +12,15 @@ import {AuthService} from "../../auth.service";
   styleUrls: ['./single-trip.component.css'],
 })
 export class SingleTripComponent implements OnInit, OnDestroy {
-  selectedRating: number = 0
   tripId: number = -1
   documents: Documents[] = []
   tripData: SingleTripCard | null = null
 
   public discussion: PostCard[] | null = null
 
-  private tripsSub: any
-  private discussionSub: any
+  private tripsSub: any | null = null
+  private discussionSub: any | null = null
+  private rateSub: any | null = null
 
   constructor(
     private route: ActivatedRoute,
@@ -43,17 +43,28 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       next: value => this.discussion = value,
       error: err => console.error("Discussion loading error " + err)
     })
+
+    console.log(this.authService.getUserRoles())
   }
 
   ngOnDestroy() {
-    this.tripsSub.unsubscribe()
-    this.discussionSub.unsubscribe()
+    if (this.tripsSub !== null) {
+      this.tripsSub.unsubscribe()
+    }
+
+    if (this.discussionSub !== null) {
+      this.discussionSub.unsubscribe()
+    }
+
+    if (this.rateSub !== null) {
+      this.rateSub.unsubscribe()
+    }
   }
 
   public enrollToTrip(): void {
     this.tripsService.enrollToTrip(this.tripId)
       .subscribe({
-        next: value => {
+        next: () => {
           this.toast.success({
             detail: 'Enrolled Successfully!',
             summary: 'Enrolled Successfully!',
@@ -62,7 +73,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
             duration: 2000,
           })
         },
-        error: err => {
+        error: () => {
           this.toast.success({
             detail: 'Enrolled Successfully!',
             summary: 'Enrolled Successfully!',
@@ -76,13 +87,19 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     window.location.reload();
   }
 
-  public giveRating(event: any, tripId: number | undefined): void {
-    const ratedData = {
+  public giveRating(event: any): void {
+    console.log("Rating")
+    const ratedData: {rate: number} = {
       rate: event.detail,
     }
+
+    this.rateSub = this.tripsService.rateTrip(this.tripId, ratedData).subscribe({
+      next: () => {
+      }
+    })
   }
 
-  public refreshDiscussion(data: any): void {
+  public refreshDiscussion(): void {
     if (this.tripId) {
       if (this.discussionSub) {
         this.discussionSub.unsubscribe();
@@ -95,15 +112,33 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     }
   }
 
-  public isCurrentUserEnrolled(): boolean {
+  public isCurrentUserMember(): boolean {
     const userId: number | null = this.authService.getUserId()
 
-    if (this.tripData !== null) {
+    if (this.tripData !== null && userId !== null) {
       return this.tripData.participants.some(user => user.id === userId);
     }
 
     return false
   }
 
+  public isCurrentUserGuide(): boolean {
+    const userId: number | null = this.authService.getUserId()
+
+    if (this.tripData !== null && userId !== null) {
+      return this.tripData.tripGuides.some(user => user.id === userId)
+    }
+
+    return false
+  }
+
   protected readonly console = console;
+
+  public LeaveTrip() {
+
+  }
+
+  public ArchiveTrip() {
+
+  }
 }

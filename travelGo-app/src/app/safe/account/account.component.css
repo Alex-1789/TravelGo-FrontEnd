@@ -15,6 +15,16 @@
   text-decoration: underline;
 }
 
-.logout {
+.logout, .edit {
   cursor: pointer;
+  color: var(--primary-color);
+}
+
+.logout:hover, .edit:hover {
+  color: var(--lively-accent);
+}
+
+.edit {
+  margin-left: 10px;
+  text-decoration: none;
 }

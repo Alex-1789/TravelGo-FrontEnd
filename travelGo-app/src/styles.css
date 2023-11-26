@@ -40,6 +40,19 @@ h1 {
   min-width: 150px;
 }
 
+.btn-primary-travel:hover {
+  background: var(--lively-accent) !important;
+  color: var(--tp-white) !important;
+}
+
+.btn-secondary-travel {
+  background: var(--lively-accent);
+  color: var(--tp-white);
+  border-radius: 0px;
+  padding: 10px 15px;
+  min-width: 150px;
+}
+
 .btn-danger {
   border-radius: 0px;
   padding: 10px 15px;

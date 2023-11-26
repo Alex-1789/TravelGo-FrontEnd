@@ -47,6 +47,7 @@ import {
 import {CarouselHomeComponent} from "./layout/carousel-home/carousel-home.component";
 import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moderator-user-access.component';
 import { RatingCardComponent } from './components/rating-card/rating-card.component';
+import { AccountUpdateComponent } from './safe/account-update/account-update.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -81,6 +82,7 @@ defineComponents(IgcRatingComponent);
     CarouselHomeComponent,
     ModeratorUserAccessComponent,
     RatingCardComponent,
+    AccountUpdateComponent,
   ],
   imports: [
     BrowserModule,

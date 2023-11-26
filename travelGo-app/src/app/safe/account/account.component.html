@@ -4,8 +4,8 @@
       <div class="row justify-content-center p-3">
         <div class="col-md-6">
           <div class="text-center">
-            <img src="assets/images/avatar.png" class="profile-image">
-            <div class="text-center">
+            <img alt="profile" src="assets/images/avatar.png" class="profile-image">
+            <div class="text-center mt-3">
               <h2>{{ user?.username }}</h2>
               <a class="btn btn-primary-travel m-3" >Change profile image</a>
             </div>
@@ -17,14 +17,21 @@
             <a class="text-red delete-acc" (click)="deleteUser()">Delete account</a>
           </div>
 
+          <div>
+            <h1 class="py-3 d-inline-block">Your profile</h1>
+            <a href="http://localhost:4200/account-update" class=" ml-3 edit d-inline-block">
+              <mat-icon>create</mat-icon>
+              Edit
+            </a>
+          </div>
+
+
           <h3>{{ user?.name }} {{ user?.surname }}</h3>
           <h3>Email: {{ user?.email }}</h3>
           <h3>Phone number: {{ user?.phoneNumber }}</h3>
+
           <div>
-            <a class="btn btn-primary-travel my-3" >Edit account data</a>
-          </div>
-          <div>
-            <a class="my-3 logout" (click)="onLogoutClick()"><mat-icon>exit_to_app</mat-icon> Log out</a>
+            <a class="my-3 logout d-block" (click)="onLogoutClick()"><mat-icon>exit_to_app</mat-icon> Log out</a>
           </div>
         </div>
       </div>

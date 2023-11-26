@@ -19,7 +19,7 @@
           }}</a>
       </h4>
       <div [innerHTML]="postCard?.about"></div>
-      <div *ngIf="showFullContent" [innerHTML]="postCard?.content"></div>
+      <div class="py-3" *ngIf="showFullContent" [innerHTML]="postCard?.content"></div>
       <div class="profile-img-list">
         <ng-container *ngFor="let image of images$ | async | slice:0:displayedImagesCount; let isFirst = first">
           <ng-container *ngIf="isFirst; else photoList">

@@ -7,4 +7,6 @@ export interface User {
   name: String
   surname: String
   username: String
+  email: String
+  phoneNumber: number
 }

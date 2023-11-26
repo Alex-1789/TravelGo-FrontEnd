@@ -39,6 +39,11 @@ export class TripsService {
       {headers: this.headers});
   }
 
+  public leaveTrip(tripId: number): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/api/trips/' + tripId + '/withdraw', {},
+      {headers: this.headers});
+  }
+
   public getTripDiscussion(tripId: number): Observable<PostCard[]> {
     return this.http.get<PostCard[]>(
       'http://localhost:8080/api/trips/' + tripId + '/discussion', {headers: this.headers}

@@ -21,6 +21,8 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   private tripsSub: any | null = null
   private discussionSub: any | null = null
   private rateSub: any | null = null
+  private enrollToTripSub: any | null = null
+  private leaveTripSub: any | null = null
 
   constructor(
     private route: ActivatedRoute,
@@ -59,30 +61,26 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     if (this.rateSub !== null) {
       this.rateSub.unsubscribe()
     }
+
+    if (this.enrollToTripSub !== null) {
+      this.enrollToTripSub.unsubscribe()
+    }
+
+    if (this.leaveTripSub !== null) {
+      this.leaveTripSub.unsubscribe()
+    }
   }
 
   public enrollToTrip(): void {
-    this.tripsService.enrollToTrip(this.tripId)
-      .subscribe({
-        next: () => {
-          this.toast.success({
-            detail: 'Enrolled Successfully!',
-            summary: 'Enrolled Successfully!',
-            sticky: true,
-            position: 'topLeft',
-            duration: 2000,
-          })
-        },
-        error: () => {
-          this.toast.success({
-            detail: 'Enrolled Successfully!',
-            summary: 'Enrolled Successfully!',
-            sticky: true,
-            position: 'topLeft',
-            duration: 2000,
-          })
-        }
-      });
+    this.enrollToTripSub = this.tripsService.enrollToTrip(this.tripId)
+      .subscribe();
+
+    window.location.reload();
+  }
+
+  public LeaveTrip() {
+    this.leaveTripSub = this.tripsService.leaveTrip(this.tripId)
+      .subscribe();
 
     window.location.reload();
   }
@@ -141,10 +139,6 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   }
 
   protected readonly console = console;
-
-  public LeaveTrip() {
-
-  }
 
   public ArchiveTrip() {
 

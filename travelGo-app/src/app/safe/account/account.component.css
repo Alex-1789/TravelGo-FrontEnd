@@ -1,0 +1,20 @@
+.profile-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 200px;
+}
+
+.delete-acc {
+  text-decoration: none;
+  color: red;
+  cursor: pointer;
+}
+
+.delete-acc:hover {
+  text-decoration: underline;
+}
+
+.logout {
+  cursor: pointer;
+}

@@ -3,32 +3,16 @@ import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgToastService } from 'ng-angular-popup';
+import {User} from "../../types/user";
 
-interface AccountCard {
-  id: number;
-  username: string;
-  name: string;
-  surname: string;
-  email: string;
-  phoneNumber: string;
-  privileges: string;
-}
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit {
-  hasAccess = false;
-  singleAccountCard: AccountCard = {
-    id: 0,
-    username: '',
-    name: '',
-    surname: '',
-    email: '',
-    phoneNumber: '',
-    privileges: '',
-  };
+  public hasAccess = false;
+  public user: User | null = null
 
   constructor(
     private authService: AuthService,
@@ -43,23 +27,21 @@ export class AccountComponent implements OnInit {
     const roles = this.authService.getUserRoles();
 
     this.http
-      .get<AccountCard>('http://localhost:8080/api/users/' + userId, {
+      .get<User>('http://localhost:8080/api/users/' + userId + '/profile', {
         headers,
       })
       .subscribe(
         (data) => {
-          this.singleAccountCard = data;
+          this.user = data;
         },
         (error) => {
           console.error('Problem while fetching data', error);
         }
       );
 
-    roles?.forEach((role) => {
-      if (role === 'MODERATOR') {
-        this.hasAccess = true;
-      }
-    });
+    if (roles?.includes('MODERATOR')) {
+      this.hasAccess = true;
+    }
   }
 
   onLogoutClick() {
@@ -67,10 +49,10 @@ export class AccountComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  deleteUser(userId: number) {
+  deleteUser() {
     const headers = this.authService.getHeaders();
     this.http
-      .delete<any>('http://localhost:8080/api/users/' + userId, { headers })
+      .delete<any>('http://localhost:8080/api/users/' + this.user?.id, { headers })
       .subscribe(
         (respond) => {
           this.router.navigate(['/']);

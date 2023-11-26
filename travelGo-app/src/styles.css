@@ -40,6 +40,12 @@ h1 {
   min-width: 150px;
 }
 
+.btn-danger {
+  border-radius: 0px;
+  padding: 10px 15px;
+  min-width: 150px;
+}
+
 .btn-primary-travel:hover {
   background: var(--primary-color);
   color: var(--secondary-color);

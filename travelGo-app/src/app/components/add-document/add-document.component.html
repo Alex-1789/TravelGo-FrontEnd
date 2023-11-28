@@ -1,0 +1,12 @@
+<form (ngSubmit)="addDocument()">
+  <div class="form-group mb-2">
+    <input
+      type="file"
+      class="form-control"
+      placeholder="File"
+      (change)="onImageSelected($event)"
+      multiple
+    />
+  </div>
+  <button class="btn btn-primary-travel">+ Add Document</button>
+</form>

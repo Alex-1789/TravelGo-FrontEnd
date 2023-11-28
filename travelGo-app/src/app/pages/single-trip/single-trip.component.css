@@ -40,3 +40,13 @@ h3 {
 .pl-10p {
   padding-left: 10px;
 }
+
+.archive {
+  text-decoration: none;
+  color: red;
+  cursor: pointer;
+}
+
+.archive:hover {
+  text-decoration: underline;
+}

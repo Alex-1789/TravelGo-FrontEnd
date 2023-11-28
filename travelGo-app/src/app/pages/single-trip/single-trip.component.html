@@ -3,9 +3,18 @@
 
     <div class="card rounded-0">
       <div class="card-body">
-        <div class="my-3 trip-title">
-          <h1 class="">{{ tripData?.tripName }}</h1>
-          <h3 class="gathering">{{ tripData?.gatheringPlace }}</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="trip-title my-3">
+              <h1 class="">{{ tripData?.tripName }}</h1>
+              <h3 class="gathering">{{ tripData?.gatheringPlace }}</h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-end">
+              <a *ngIf="isCurrentUserGuide()" (click)="ArchiveTrip()" class="archive">Archive trip</a>
+            </div>
+          </div>
         </div>
 
         <div class="row p-3">
@@ -63,6 +72,11 @@
 
         <div class="my-3">
           <h3>Dostępne dokumenty</h3>
+
+          <div *ngIf="isCurrentUserGuide">
+            <app-add-document [tripId]="tripId"></app-add-document>
+          </div>
+
           <div class="row">
             <div *ngFor="let document of documents" class="col-lg-4 mb-3">
               <div class="card">
@@ -77,7 +91,6 @@
         <a *ngIf="!isCurrentUserMember() && !isCurrentUserGuide()" (click)="enrollToTrip()"
            class="btn btn-primary-travel">+ Enroll to trip</a>
         <a *ngIf="isCurrentUserMember()" (click)="LeaveTrip()" class="btn btn-primary-travel">- Leave the trip</a>
-        <a *ngIf="isCurrentUserGuide()" (click)="ArchiveTrip()" class="btn btn-primary-travel">- Archive trip</a>
       </div>
     </div>
 

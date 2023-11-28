@@ -23,6 +23,12 @@ export class TripsService {
     return this.http.get<SingleTripCard>('http://localhost:8080/api/trips/' + tripId, {headers: this.headers})
   }
 
+  public createTripDocument(tripId: number, params: any) {
+    return this.http.
+      post('http://localhost:8080/api/trips/' + tripId + '/documents/', params, {headers: this.headers})
+  }
+
+
   public getTripDocuments(tripId: number): Observable<Documents[]> {
     return this.http
       .get<Documents[]>('http://localhost:8080/api/trips/' + tripId + '/documents/', {headers: this.headers})

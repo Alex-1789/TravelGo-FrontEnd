@@ -18,7 +18,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { LoginComponent } from './safe/login/login.component';
 import { SignupComponent } from './safe/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ForumComponent } from './pages/forum/forum.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { AccountComponent } from './safe/account/account.component';
@@ -48,6 +48,7 @@ import {CarouselHomeComponent} from "./layout/carousel-home/carousel-home.compon
 import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moderator-user-access.component';
 import { RatingCardComponent } from './components/rating-card/rating-card.component';
 import { AccountUpdateComponent } from './safe/account-update/account-update.component';
+import { AddDocumentComponent } from './components/add-document/add-document.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -83,26 +84,28 @@ defineComponents(IgcRatingComponent);
     ModeratorUserAccessComponent,
     RatingCardComponent,
     AccountUpdateComponent,
+    AddDocumentComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    NgToastModule,
-    CarouselIndicatorsComponent,
-    CarouselComponent,
-    CarouselInnerComponent,
-    CarouselItemComponent,
-    CarouselCaptionComponent,
-    CarouselControlComponent,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        NgToastModule,
+        CarouselIndicatorsComponent,
+        CarouselComponent,
+        CarouselInnerComponent,
+        CarouselItemComponent,
+        CarouselCaptionComponent,
+        CarouselControlComponent,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

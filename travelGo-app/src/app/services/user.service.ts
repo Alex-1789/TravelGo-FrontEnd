@@ -27,4 +27,15 @@ export class UserService {
     return this.http
       .post('http://localhost:8080/api/users/' + userId + '/profile', profileData, {headers: this.headers})
   }
+
+  public uploadProfileImage(userId: number, image: FormData) {
+    return this.http
+      .post('http://localhost:8080/api/users/' + userId + '/profile', image, {headers: this.headers})
+  }
+
+  public getProfileImage(userId: number): Observable<Blob> {
+    console.log("API wysłano")
+    return this.http.get('http://localhost:8080/api/files/profile/' + userId,
+      {responseType: 'blob', headers: this.headers});
+  }
 }

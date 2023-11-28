@@ -37,7 +37,10 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     this.tripId = snapshot.queryParams['id']
 
     this.tripsSub = this.tripsService.getTrip(this.tripId).subscribe({
-      next: value => this.tripData = value,
+      next: value => {
+        this.tripData = value
+        console.log(this.tripData)
+      },
       error: err => console.log("Data trip loading error " + err)
     });
 
@@ -46,7 +49,6 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       error: err => console.error("Discussion loading error " + err)
     })
 
-    console.log(this.authService.getUserRoles())
   }
 
   ngOnDestroy() {
@@ -86,7 +88,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   }
 
   public giveRating(event: any): void {
-    const ratedData: {rate: number} = {
+    const ratedData: { rate: number } = {
       rate: event.detail,
     }
 

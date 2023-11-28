@@ -4,10 +4,20 @@
       <div class="row justify-content-center p-3">
         <div class="col-md-6">
           <div class="text-center">
-            <img alt="profile" src="assets/images/avatar.png" class="profile-image">
+            <img alt="profile" [src]="profileImagePath" class="profile-image">
             <div class="text-center mt-3">
               <h2>{{ user?.username }}</h2>
-              <a class="btn btn-primary-travel m-3" >Change profile image</a>
+              <form (ngSubmit)="changeProfileImage()" class="d-inline-block">
+                <div class="form-group mb-2" style="max-width: 300px">
+                  <input
+                    type="file"
+                    class="form-control"
+                    placeholder="Image"
+                    (change)="onImageSelected($event)"
+                  />
+                </div>
+                <button class="btn btn-primary-travel m-3" >Change profile image</button>
+              </form>
             </div>
           </div>
         </div>

@@ -19,17 +19,12 @@ export class PostEditComponent implements OnInit, OnDestroy {
   public images$: Observable<string[] | null> | undefined;
   public selectedImages: File[] = []
 
-  private readonly querySub: any = null
-  private postSub: any = null
-  private imagesSub: any = null
-  private updatePostSub: any = null
-
   constructor(
     private postsService: PostsService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     ) {
-    this.querySub = this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe((params) => {
       this.postId = params['id'];
     });
 
@@ -41,7 +36,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.postSub = this.postsService.getPost(this.postId).subscribe({
+    this.postsService.getPost(this.postId).subscribe({
       next: value => {
         this.post = value
         this.images$ = this.fetchImagesList(this.postId);
@@ -55,21 +50,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.querySub !== null) {
-      this.querySub.unsubscribe()
-    }
-
-    if (this.postSub !== null) {
-      this.postSub.unsubscribe()
-    }
-
-    if (this.imagesSub !== null) {
-      this.imagesSub.unsubscribe()
-    }
-
-    if (this.updatePostSub !== null) {
-      this.updatePostSub.unsubscribe()
-    }
   }
 
   public updatePost() {
@@ -83,7 +63,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
       content: this.postForm.value.content
     };
 
-    this.updatePostSub = this.postsService.updatePost(this.postId, updateRequest)
+    this.postsService.updatePost(this.postId, updateRequest)
       .subscribe({
         next: () => {
           console.log("post updated");

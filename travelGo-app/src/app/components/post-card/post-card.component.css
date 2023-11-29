@@ -95,3 +95,7 @@
 .text-discussion {
   color: var(--primary-color)
 }
+
+.edit {
+  color: var(--lively-accent)
+}

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../auth.service";
 import {User} from "../types/user";
 import {Observable} from "rxjs";
+import {Post} from "../types/post";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,6 @@ export class UserService {
   }
 
   public getProfileImage(userId: number): Observable<Blob> {
-    console.log("API wysłano")
     return this.http.get('http://localhost:8080/api/files/profile/' + userId,
       {responseType: 'blob', headers: this.headers});
   }

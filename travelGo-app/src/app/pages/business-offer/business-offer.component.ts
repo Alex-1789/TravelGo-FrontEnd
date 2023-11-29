@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {OffersService} from "../../services/offers.service";
-import {OfferCard} from "../../types/post-card";
+import {Offer} from "../../types/post";
 
 @Component({
   selector: 'app-business-offer',
@@ -8,7 +8,7 @@ import {OfferCard} from "../../types/post-card";
   styleUrls: ['./business-offer.component.css']
 })
 export class BusinessOfferComponent {
-  public offerCards: OfferCard[] = [];
+  public offerCards: Offer[] = [];
   constructor(private offersService: OffersService) {
     offersService.getAllOffers().subscribe(
       value => {

@@ -3,7 +3,7 @@ import {AuthService} from "../auth.service";
 import {Injectable} from "@angular/core";
 import {Documents, SingleTripCard} from "../types/trip-types";
 import {Observable} from "rxjs";
-import {PostCard} from "../types/post-card";
+import {Post} from "../types/post";
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +50,8 @@ export class TripsService {
       {headers: this.headers});
   }
 
-  public getTripDiscussion(tripId: number): Observable<PostCard[]> {
-    return this.http.get<PostCard[]>(
+  public getTripDiscussion(tripId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(
       'http://localhost:8080/api/trips/' + tripId + '/discussion', {headers: this.headers}
     );
   }

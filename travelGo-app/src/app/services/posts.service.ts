@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthService} from "../auth.service";
-import {PostCard} from "../types/post-card";
+import {Post, UpdatePostRequest} from "../types/post";
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +27,12 @@ export class PostsService {
       {responseType: 'blob', headers: this.headers});
   }
 
-  public getPost(postId: number): Observable<PostCard> {
-    return this.http.get<PostCard>('http://localhost:8080/api/posts/' + postId, {headers: this.headers});
+  public getPost(postId: number): Observable<Post> {
+    return this.http.get<Post>('http://localhost:8080/api/posts/' + postId, {headers: this.headers});
   }
 
-  public getAllPosts(): Observable<PostCard[]> {
-    return this.http.get<PostCard[]>('http://localhost:8080/api/posts/', {headers: this.headers});
+  public getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8080/api/posts/', {headers: this.headers});
   }
 
   public likePost(postId: number): Observable<any> {
@@ -61,5 +61,9 @@ export class PostsService {
     const headers = this.headers
     headers.append('Content-Type', 'multipart/form-data')
     return this.http.post('http://localhost:8080/api/posts/', postData, {headers: headers})
+  }
+
+  public updatePost(postId: number, postData: UpdatePostRequest) {
+    return this.http.put(`http://localhost:8080/api/posts/${postId}`, postData, { headers: this.headers });
   }
 }

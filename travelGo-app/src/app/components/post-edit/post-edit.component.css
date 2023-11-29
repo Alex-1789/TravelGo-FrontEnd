@@ -1,0 +1,4 @@
+.post-image {
+  max-height: 300px;
+  object-fit: contain;
+}

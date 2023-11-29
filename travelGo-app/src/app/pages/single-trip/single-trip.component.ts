@@ -3,7 +3,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 import {Documents, SingleTripCard} from "../../types/trip-types";
 import {TripsService} from "../../services/trips.service";
 import {NgToastService} from "ng-angular-popup";
-import {PostCard} from "../../types/post-card";
+import {Post} from "../../types/post";
 import {AuthService} from "../../auth.service";
 
 @Component({
@@ -16,7 +16,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   documents: Documents[] = []
   tripData: SingleTripCard | null = null
 
-  public discussion: PostCard[] | null = null
+  public discussion: Post[] | null = null
 
   private tripsSub: any | null = null
   private discussionSub: any | null = null

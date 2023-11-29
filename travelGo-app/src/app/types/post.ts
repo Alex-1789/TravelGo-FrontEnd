@@ -1,4 +1,4 @@
-export interface PostCard {
+export interface Post {
   id: number
   title: string
   content: string
@@ -14,7 +14,13 @@ export interface PostCard {
   numberOfComments: number
 }
 
-export interface OfferCard {
+export interface UpdatePostRequest {
+  title: string;
+  about: string;
+  content: string;
+}
+
+export interface Offer {
   id: number;
   title: string;
   content: string;

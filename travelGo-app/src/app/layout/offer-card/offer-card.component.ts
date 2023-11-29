@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {OfferCard} from "../../types/post-card";
+import {Offer} from "../../types/post";
 import {Observable} from "rxjs";
 import {OffersService} from "../../services/offers.service";
 
@@ -9,7 +9,7 @@ import {OffersService} from "../../services/offers.service";
   styleUrls: ['./offer-card.component.css'],
 })
 export class OfferCardComponent {
-  @Input() offerCard: OfferCard | null = null
+  @Input() offerCard: Offer | null = null
   @Input() offerId: number = 0
 
   public images$: Observable<string[] | null> | undefined;

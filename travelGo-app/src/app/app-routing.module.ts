@@ -18,6 +18,7 @@ import {CreateOfferComponent} from './pages/create-offer/create-offer.component'
 import {SingleOfferComponent} from './pages/single-offer/single-offer.component';
 import {ModeratorUserAccessComponent} from './safe/moderator-user-access/moderator-user-access.component';
 import {AccountUpdateComponent} from "./safe/account-update/account-update.component";
+import {PostEditComponent} from "./components/post-edit/post-edit.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'account', component: AccountComponent},
   {path: 'account-update', component: AccountUpdateComponent},
   {path: 'create-post', component: CreatePostComponent},
+  {path: 'edit-post', component: PostEditComponent},
   {path: 'trips', component: TripsComponent},
   {path: 'create-trip', component: CreateTripComponent},
   {path: 'trip', component: SingleTripComponent},

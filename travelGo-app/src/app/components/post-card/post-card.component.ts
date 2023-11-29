@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../services/posts.service";
-import {PostCard} from "../../types/post-card";
+import {Post} from "../../types/post";
 import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
 
 @Component({
@@ -10,7 +10,7 @@ import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
 })
 export class PostCardComponent implements OnInit {
 
-  @Input() postCard: PostCard | null | undefined = null
+  @Input() postCard: Post | null | undefined = null
   @Input() postId: number = 0
   @Input() displayedImagesCount: number = 9
   @Input() joinDiscussionButton: boolean = true
@@ -52,7 +52,7 @@ export class PostCardComponent implements OnInit {
     }
   }
 
-  private fetchUpdatedPostCard(postId: number): Observable<PostCard | null> {
+  private fetchUpdatedPostCard(postId: number): Observable<Post | null> {
     return this.postsService.getPost(postId);
   }
 

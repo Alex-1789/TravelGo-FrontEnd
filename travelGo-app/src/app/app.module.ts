@@ -49,6 +49,7 @@ import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moder
 import { RatingCardComponent } from './components/rating-card/rating-card.component';
 import { AccountUpdateComponent } from './safe/account-update/account-update.component';
 import { AddDocumentComponent } from './components/add-document/add-document.component';
+import { PostEditComponent } from './components/post-edit/post-edit.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -85,6 +86,7 @@ defineComponents(IgcRatingComponent);
     RatingCardComponent,
     AccountUpdateComponent,
     AddDocumentComponent,
+    PostEditComponent,
   ],
     imports: [
         BrowserModule,

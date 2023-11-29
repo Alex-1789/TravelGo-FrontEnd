@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {PostCard} from "../../types/post-card";
+import {Post} from "../../types/post";
 import {PostsService} from "../../services/posts.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {PostsService} from "../../services/posts.service";
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent {
-  public postCards: PostCard[] = [];
+  public postCards: Post[] = [];
 
   constructor(
     private postsService: PostsService

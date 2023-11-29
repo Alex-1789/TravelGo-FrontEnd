@@ -88,7 +88,6 @@ export class CreatePostComponent implements OnDestroy {
 
   successfulCreatePost(): void {
     this.refreshPosts.emit();
-
     this.postForm.reset()
 
     this.toast.success({

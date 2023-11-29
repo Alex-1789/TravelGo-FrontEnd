@@ -1,14 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from "../../services/posts.service";
 import {Post} from "../../types/post";
 import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-post-card',
   templateUrl: './post-card.component.html',
   styleUrls: ['./post-card.component.css'],
 })
-export class PostCardComponent implements OnInit {
+export class PostCardComponent implements OnInit, OnDestroy {
 
   @Input() postCard: Post | null | undefined = null
   @Input() postId: number = 0
@@ -17,13 +18,24 @@ export class PostCardComponent implements OnInit {
   @Input() showFullContent: boolean = false
 
   public images$: Observable<string[] | null> | undefined;
+  public profileImagePath: string = 'assets/images/avatar.png'
+
+  private profileImageSub: any = null
 
   ngOnInit(): void {
     this.images$ = this.fetchImagesList(this.postId);
+    this.fetchProfileImage()
+  }
+
+  ngOnDestroy(): void {
+    if (this.profileImageSub !== null) {
+      this.profileImageSub.unsubscribe()
+    }
   }
 
   constructor(
-    private postsService: PostsService
+    private postsService: PostsService,
+    private userService: UserService
   ) {}
 
   public async likePost(): Promise<void> {
@@ -75,5 +87,15 @@ export class PostCardComponent implements OnInit {
         return URL.createObjectURL(blob);
       })
     );
+  }
+
+  private fetchProfileImage() {
+    if (this.postCard !== undefined && this.postCard !== null) {
+      this.profileImageSub = this.userService.getProfileImage(this.postCard.userID).subscribe({
+        next: value => {
+          this.profileImagePath = URL.createObjectURL(value)
+        }
+      })
+    }
   }
 }

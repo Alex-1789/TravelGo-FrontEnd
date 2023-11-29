@@ -4,7 +4,6 @@ import {Router} from '@angular/router'
 import {NgToastService} from 'ng-angular-popup'
 import {User} from "../../types/user"
 import {UserService} from "../../services/user.service"
-import {map} from "rxjs"
 
 @Component({
   selector: 'app-account',
@@ -94,8 +93,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   public onImageSelected(event: any) {
-    const file: File = event.target.files[0]
-    this.selectedImage = file
+    this.selectedImage = event.target.files[0]
   }
 
   public changeProfileImage() {
@@ -116,6 +114,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             position: 'topLeft',
             duration: 2000,
           })
+          window.location.reload()
         }
       })
     }

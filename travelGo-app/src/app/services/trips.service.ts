@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../auth.service";
 import {Injectable} from "@angular/core";
-import {Documents, SingleTripCard} from "../types/trip-types";
+import {Documents, Rate, SingleTripCard} from "../types/trip-types";
 import {Observable} from "rxjs";
 import {Post} from "../types/post";
 
@@ -38,6 +38,10 @@ export class TripsService {
     return this.http.post<any>(
       'http://localhost:8080/api/trips/' + tripId + '/rate', rate, {headers: this.headers}
     )
+  }
+
+  public getRates(tripId: number): Observable<Rate[]> {
+    return this.http.get<Rate[]>('http://localhost:8080/api/trips/' + tripId + '/rates', {headers: this.headers})
   }
 
   public enrollToTrip(tripId: number): Observable<any> {

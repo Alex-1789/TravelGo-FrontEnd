@@ -21,3 +21,8 @@ export interface Documents {
   tripId: number
   username: string
 }
+
+export interface Rate {
+  userId: number;
+  rate: number;
+}

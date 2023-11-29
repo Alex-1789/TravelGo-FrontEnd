@@ -42,9 +42,7 @@
               <h3>Guide</h3>
               <div class="participants overflow-auto my-3">
                 <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
-                  <a><img
-                    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                    alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
+                  <a><mat-icon style="">stars</mat-icon></a>
                   <div class="flex-fill ps-2">
                     <div class="fw-bold"><a
                       class="text-decoration-none participant-name">{{ user.username }}
@@ -56,9 +54,7 @@
               <h3>Participants</h3>
               <div class="participants overflow-auto my-3">
                 <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
-                  <a><img
-                    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                    alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle"/></a>
+                  <a><mat-icon>supervised_user_circle</mat-icon></a>
                   <div class="flex-fill ps-2">
                     <div class="fw-bold"><a
                       class="text-decoration-none participant-name">{{ user.username }}

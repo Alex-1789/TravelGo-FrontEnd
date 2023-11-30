@@ -37,15 +37,15 @@
           </ng-template>
         </ng-container>
       </div>
-      <hr class="mb-1 opacity-1"/>
     </div>
 
-
     <div class="row text-center fw-bold">
-      <div class="col">
-        <a href="#" class="text-body text-opacity-50 text-decoration-none d-block p-2" id="delete" (click)="deleteOffer(offerId)">
+      <div class="col" *ngIf="isCurrentUserAuthor() || isCurrentUserModerator()">
+        <hr class="mb-1 opacity-1"/>
+        <a class="text-body text-opacity-50 text-decoration-none d-block p-2" id="delete" (click)="deleteOffer(offerId)">
           Delete </a>
       </div>
+      <div *ngIf="!isCurrentUserAuthor() && !isCurrentUserModerator()" class="pb-3"></div>
     </div>
   </div>
 </div>

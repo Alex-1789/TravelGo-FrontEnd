@@ -51,6 +51,7 @@ import { AccountUpdateComponent } from './safe/account-update/account-update.com
 import { AddDocumentComponent } from './components/add-document/add-document.component';
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { ProfileImageComponent } from './components/profile-image/profile-image.component';
+import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -89,6 +90,7 @@ defineComponents(IgcRatingComponent);
     AddDocumentComponent,
     PostEditComponent,
     ProfileImageComponent,
+    ProfileMenuComponent,
   ],
     imports: [
         BrowserModule,

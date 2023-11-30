@@ -48,17 +48,21 @@ export class PostCardComponent implements OnInit {
         })
     }
 
-    public async deletePost(): Promise<void> {
-        try {
-            await this.postsService.deletePost(this.postId).toPromise();
-        } catch (error) {
-            console.error('Error deleting post', error);
+    public deletePost(): void {
+      this.postsService.deletePost(this.postId).subscribe({
+        next: () => {
+          window.location.reload()
         }
+      })
     }
 
     public isCurrentUserAuthor(): boolean {
         return this.postCard?.userID === this.authService.getUserId()
     }
+
+  public isCurrentUserModerator(): boolean {
+    return this.authService.isModerator()
+  }
 
     private fetchUpdatedPostCard(postId: number) {
         this.postsService.getPost(postId).subscribe({

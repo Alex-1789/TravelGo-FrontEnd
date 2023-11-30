@@ -42,7 +42,7 @@ export class LoginComponent {
       .subscribe(
         (response) => {
           this.authService.login(response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/account']);
           this.successfulLogin();
         },
         (error) => {

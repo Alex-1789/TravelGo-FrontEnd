@@ -48,4 +48,10 @@
     </div>
   </div>
 
+  <div *ngIf="hasAccess">
+    <app-moderator-user-access></app-moderator-user-access>
+  </div>
+  <div *ngIf="!hasAccess">
+    <app-profile-menu></app-profile-menu>
+  </div>
 </div>

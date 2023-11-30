@@ -1,0 +1,17 @@
+.profile-menu .profile-menu-item {
+  display: inline-block;
+  width: 650px;
+  height: 500px;
+  padding-top: 120px;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.profile-menu .profile-menu-item mat-icon {
+  width: 180px;
+  height: 180px;
+  font-size: 180px;
+  color: var(--lively-accent);
+}

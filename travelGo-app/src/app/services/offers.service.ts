@@ -25,4 +25,10 @@ export class OffersService {
   public deleteOfferCard(offerId: number): Observable<any> {
     return this.http.delete<any>('http://localhost:8080/api/offer/' + offerId, { headers: this.headers });
   }
+
+  public createOffer(offerData: FormData) {
+    const headers = this.headers
+    headers.append('Content-Type', 'multipart/form-data')
+    return this.http.post('http://localhost:8080/api/offer/', offerData, {headers: headers})
+  }
 }

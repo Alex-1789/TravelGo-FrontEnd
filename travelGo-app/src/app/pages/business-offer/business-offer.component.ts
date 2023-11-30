@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {OffersService} from "../../services/offers.service";
 import {Offer} from "../../types/post";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-business-offer',
@@ -9,12 +10,19 @@ import {Offer} from "../../types/post";
 })
 export class BusinessOfferComponent {
   public offerCards: Offer[] = [];
-  constructor(private offersService: OffersService) {
+  constructor(
+    private offersService: OffersService,
+    private authService: AuthService
+  ) {
     offersService.getAllOffers().subscribe(
       value => {
         this.offerCards = value;
       }
     )
+  }
+
+  public canActualUserPostOffers() {
+    return this.authService.isBusinessPartner()
   }
 
 }

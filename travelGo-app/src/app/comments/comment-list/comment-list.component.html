@@ -2,11 +2,11 @@
   <h4 class="">Comments</h4>
   <div *ngFor="let commentCard of commentCards"  class="card-body">
     <div class="comment-box">
-      <h5 class="username">{{commentCard.username}}</h5>
+      <h5 class="username"><app-profile-image [userId]="commentCard.userID"></app-profile-image> {{commentCard.username}}</h5>
       <div class="content">
        <p>{{commentCard.content}}</p>
       </div>
-      <small id="delete" (click)="deleteComment(commentCard.id)">Delete</small>
+      <small *ngIf="isCurrentUserAuthorOrModerator(commentCard.userID)" id="delete" (click)="deleteComment(commentCard.id)">Delete</small>
       <hr>
     </div>
   </div>

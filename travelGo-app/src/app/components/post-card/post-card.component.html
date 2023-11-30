@@ -63,7 +63,7 @@
         <a *ngIf="joinDiscussionButton" [routerLink]="['/post']" [queryParams]="{ id: postCard?.id }"
            class="text-discussion text-opacity-50 text-decoration-none d-block p-2">Join Discussion</a>
       </div>
-      <div class="col">
+      <div class="col" *ngIf="isCurrentUserAuthor() || isCurrentUserModerator()">
         <a (click)="deletePost()" style="cursor: pointer" class="text-body text-opacity-50 text-decoration-none d-block p-2"> Delete </a>
       </div>
     </div>

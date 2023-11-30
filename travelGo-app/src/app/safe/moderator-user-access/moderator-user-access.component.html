@@ -1,64 +1,89 @@
 <div class="container mt-3 mb-3">
+  <h1>Manage user permissions</h1>
+
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card p-5 shadow-effect" *ngFor="let userCard of userCards">
-        <div class="card-body">
-          <div class="mt-3 text-center">
-            <p>ID: {{ userCard.id }}</p>
-            <p>Username: {{ userCard.username }}</p>
-            <p>Name: {{ userCard.name }}</p>
-            <p>Surname: {{ userCard.surname }}</p>
-            <p>Email: {{ userCard.email }}</p>
-            <p>PhoneNumber: {{ userCard.phoneNumber }}</p>
-            <p>Privlages: {{ userCard.privileges }}</p>
-            <div *ngFor="let role of userCard.roles">
-              <p>Roles:</p>
-              <p>ID: {{ role.id }}</p>
-              <p>Role Name: {{ role.name }}</p>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6 my-3" *ngFor="let userCard of userCards">
+          <div class="card shadow-effect">
+            <div class="card-body">
+              <div class="py-3">
+                <h4>Username: {{ userCard.username }}</h4>
+                <p>ID: {{ userCard.id }}</p>
+                <p>Name: {{ userCard.name }}</p>
+                <p>Surname: {{ userCard.surname }}</p>
+                <p>Email: {{ userCard.email }}</p>
+                <p>PhoneNumber: {{ userCard.phoneNumber }}</p>
+
+                <div class="py-3">
+                  <h4>User roles:</h4>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Role name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let role of userCard.roles">
+                      <td>{{ role.id }}</td>
+                      <td>{{ role.name }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+              <h4 class="py-3">Manage privileges</h4>
+              <div class="privileges-list">
+                <input
+                  type="radio"
+                  name="drone"
+                  value="CLUB_MEMBER"
+                  [checked]="selectedValue === 'CLUB_MEMBER'"
+                  (change)="onRadioChange($event)"
+                />
+                <label for="CLUB_MEMBER">CLUB MEMBER</label>
+                <br/>
+                <input
+                  type="radio"
+                  name="drone"
+                  value="GUIDE"
+                  [checked]="selectedValue === 'GUIDE'"
+                  (change)="onRadioChange($event)"
+                />
+                <label for="GUIDE">GUIDE</label>
+                <br/>
+                <input
+                  type="radio"
+                  name="drone"
+                  value="BUSINESS_PARTNER"
+                  [checked]="selectedValue === 'BUSINESS_PARTNER'"
+                  (change)="onRadioChange($event)"
+                />
+                <label for="BUSINESS_PARTNER">BUSINESS PARTNER</label>
+                <br/>
+                <input
+                  type="radio"
+                  name="drone"
+                  value="MODERATOR"
+                  [checked]="selectedValue === 'MODERATOR'"
+                  (change)="onRadioChange($event)"
+                />
+                <label for="MODERATOR">MODERATOR</label>
+              </div>
+
+              <div class="py-3">
+                <button class="btn btn-primary-travel add-privilege-button" (click)="addPrivlage(userCard.id)">Add
+                  Privilege
+                </button>
+                <button class="btn btn-danger" (click)="removePrivlage(userCard.id)">Remove Privilege</button>
+              </div>
             </div>
           </div>
-          <div>
-            <input
-              type="radio"
-              name="drone"
-              value="CLUB_MEMBER"
-              [checked]="selectedValue === 'CLUB_MEMBER'"
-              (change)="onRadioChange($event)"
-            />
-            <label for="CLUB_MEMBER">CLUB MEMBER</label>
-            <br />
-            <input
-              type="radio"
-              name="drone"
-              value="GUIDE"
-              [checked]="selectedValue === 'GUIDE'"
-              (change)="onRadioChange($event)"
-            />
-            <label for="GUIDE">GUIDE</label>
-            <br />
-            <input
-              type="radio"
-              name="drone"
-              value="BUSINESS_PARTNER"
-              [checked]="selectedValue === 'BUSINESS_PARTNER'"
-              (change)="onRadioChange($event)"
-            />
-            <label for="BUSINESS_PARTNER">BUSINESS PARTNER</label>
-            <br />
-            <input
-              type="radio"
-              name="drone"
-              value="MODERATOR"
-              [checked]="selectedValue === 'MODERATOR'"
-              (change)="onRadioChange($event)"
-            />
-            <label for="MODERATOR">MODERATOR</label>
-          </div>
-
-          <button class="btn btn-info btn-block btn-theme" (click)="addPrivlage(userCard.id)">Add Privlage</button>
-          <button class="btn btn-info btn-block btn-theme" (click)="removePrivlage(userCard.id)">Remove Privlage</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>

@@ -59,12 +59,16 @@ export class CommentListComponent implements OnInit {
          { headers }
        )
        .subscribe(
-         (respond) => {
+         () => {
           window.location.reload();
          },
          (error) => {
            console.error('Problem while deleting comment', error);
          }
        );
+  }
+
+  public isCurrentUserAuthorOrModerator(authorUserId: number) {
+    return authorUserId === this.authService.getUserId() || this.authService.isModerator()
   }
 }

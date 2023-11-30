@@ -42,7 +42,7 @@
               <h3>Guide</h3>
               <div class="participants overflow-auto my-3">
                 <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
-                  <a><mat-icon style="">stars</mat-icon></a>
+                  <app-profile-image [userId]="user.id"></app-profile-image>
                   <div class="flex-fill ps-2">
                     <div class="fw-bold"><a
                       class="text-decoration-none participant-name">{{ user.username }}
@@ -54,7 +54,7 @@
               <h3>Participants</h3>
               <div class="participants overflow-auto my-3">
                 <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
-                  <a><mat-icon>supervised_user_circle</mat-icon></a>
+                  <app-profile-image [userId]="user.id"></app-profile-image>
                   <div class="flex-fill ps-2">
                     <div class="fw-bold"><a
                       class="text-decoration-none participant-name">{{ user.username }}

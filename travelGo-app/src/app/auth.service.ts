@@ -63,4 +63,8 @@ export class AuthService {
   public isModerator(): boolean {
     return <boolean>this.getUserRoles()?.includes('MODERATOR')
   }
+
+  public isBusinessPartner(): boolean {
+    return <boolean>this.getUserRoles()?.includes('BUSINESS_PARTNER')
+  }
 }

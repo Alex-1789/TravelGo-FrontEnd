@@ -1,60 +1,93 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
-import { NgToastService } from 'ng-angular-popup';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {NgToastService} from 'ng-angular-popup';
+import {TripsService} from "../../services/trips.service";
+import {OffersService} from "../../services/offers.service";
 
 @Component({
   selector: 'app-create-offer',
   templateUrl: './create-offer.component.html',
   styleUrls: ['./create-offer.component.css'],
 })
-export class CreateOfferComponent {
-  offerForm: FormGroup;
+export class CreateOfferComponent implements OnDestroy {
+  @Input() tripId : number | null = null
+  @Output() refreshPosts = new EventEmitter<string>()
+
+  public postForm: FormGroup
+  public selectedImages: File[] = []
+  private createPostSub: any = null
 
   constructor(
-    private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private offerService: OffersService,
+    private tripService: TripsService
   ) {
-    this.offerForm = this.formBuilder.group({
+    this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
       about: ['', Validators.required],
-      content: ['', Validators.required],
+      content: ['', Validators.required]
     });
   }
 
-  createOffer() {
-    if (this.offerForm.invalid) {
+  ngOnDestroy() {
+    if (this.createPostSub !== null) {
+      this.createPostSub.unsubscribe()
+    }
+  }
+
+  public onImageSelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedImages.push(files[i]);
+      }
+    }
+  }
+
+  public createOffer() {
+    if (this.postForm.invalid) {
       this.emptyCreateOffer();
       return;
     }
 
-    const offerData = {
-      title: this.offerForm.value.title,
-      content: this.offerForm.value.content,
-      about: this.offerForm.value.about,
-    };
+    const postData = new FormData();
+    postData.append('title', this.postForm.value.title);
+    postData.append('about', this.postForm.value.about);
+    postData.append('content', this.postForm.value.content);
 
-    const headers = this.authService.getHeaders();
+    this.selectedImages.forEach((image, index) => {
+      postData.append('images', image, `image${index}`);
+    });
 
-    this.http
-      .post<any>('http://localhost:8080/api/offer/', offerData, { headers })
-      .subscribe(
-        (response) => {
-          this.router.navigate(['/business-offer']);
-          this.successfulCreateOffer();
-        },
-        (error) => {
-          console.error('Offer creating failed:', error);
-        }
-      );
+    if (this.tripId === null) {
+      this.createPostSub = this.offerService.createOffer(postData)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/business-offer']);
+            this.successfulCreateOffer();
+          },
+          error: err => console.error('Post creating failed:', err)
+        });
+    }
+
+    else {
+      this.createPostSub = this.tripService.addPostToTripDiscussion(this.tripId, postData)
+        .subscribe({
+          next: () => {
+            this.successfulCreateOffer();
+          },
+          error: err => console.error('Post creating failed:', err)
+        });
+    }
   }
 
-  successfulCreateOffer(): void {
+  private successfulCreateOffer(): void {
+    this.refreshPosts.emit();
+    this.postForm.reset()
+
     this.toast.success({
       detail: 'Offer created Successfully!',
       summary: 'Offer created Successfully!',
@@ -64,7 +97,7 @@ export class CreateOfferComponent {
     });
   }
 
-  emptyCreateOffer(): void {
+  private emptyCreateOffer(): void {
     this.toast.warning({
       detail: 'Some fields are empty!',
       summary: 'Some fields are empty!',

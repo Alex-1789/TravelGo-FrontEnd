@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 import {AuthService} from '../../auth.service'
 import {Router} from '@angular/router'
 import {NgToastService} from 'ng-angular-popup'
@@ -10,16 +10,12 @@ import {UserService} from "../../services/user.service"
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
-export class AccountComponent implements OnInit, OnDestroy {
+export class AccountComponent implements OnInit {
   public hasAccess = false
   public user: User | null = null
   public profileImagePath: string = 'assets/images/avatar.png'
 
   public selectedImage: File | null = null
-
-  private userSub: any = null
-  private imageUploadSub: any = null
-  private profileImageSub: any = null
 
   constructor(
     private authService: AuthService,
@@ -34,7 +30,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     const roles = this.authService.getUserRoles()
 
     if (userId !== null) {
-      this.userSub = this.userService.getUser(userId).subscribe(
+      this.userService.getUser(userId).subscribe(
         (data) => {
           this.user = data
           this.fetchProfileImage()
@@ -47,20 +43,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
     if (roles?.includes('MODERATOR')) {
       this.hasAccess = true
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.userSub !== null) {
-      this.userSub.unsubscribe()
-    }
-
-    if (this.imageUploadSub !== null) {
-      this.imageUploadSub.unsubscribe()
-    }
-
-    if (this.profileImageSub !== null) {
-      this.profileImageSub.unsubscribe()
     }
   }
 
@@ -101,11 +83,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       const formData: FormData = new FormData()
       formData.append('profileImage', this.selectedImage, this.selectedImage.name)
 
-      if (this.imageUploadSub !== null) {
-        this.imageUploadSub.unsubscribe()
-      }
-
-      this.imageUploadSub = this.userService.uploadProfileImage(this.user.id, formData).subscribe({
+      this.userService.uploadProfileImage(this.user.id, formData).subscribe({
         next: () => {
           this.toast.success({
             detail: 'Success',
@@ -122,7 +100,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   private fetchProfileImage() {
     if (this.user !== null) {
-      this.profileImageSub = this.userService.getProfileImage(this.user.id).subscribe({
+      this.userService.getProfileImage(this.user.id).subscribe({
         next: value => {
           this.profileImagePath = URL.createObjectURL(value)
         }

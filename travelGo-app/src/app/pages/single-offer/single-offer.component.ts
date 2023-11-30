@@ -2,18 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
-
-interface SingleOfferCard {
-  id: number;
-  title: string;
-  content: string;
-  username: string;
-  userID: number;
-  about: string;
-  createdAt: Date;
-  status: null;
-  likes: number;
-}
+import {Offer} from "../../types/post";
 
 @Component({
   selector: 'app-single-offer',
@@ -22,17 +11,7 @@ interface SingleOfferCard {
 })
 export class SingleOfferComponent implements OnInit {
   offerId: number = -1;
-  singleOfferCard: SingleOfferCard = {
-    id: 0,
-    title: '',
-    content: '',
-    username: '',
-    userID: 0,
-    about: '',
-    createdAt: new Date(),
-    status: null,
-    likes: 0,
-  };
+  singleOfferCard: Offer | null = null
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -47,7 +26,7 @@ export class SingleOfferComponent implements OnInit {
     const headers = this.authService.getHeaders();
 
     this.http
-      .get<SingleOfferCard>('http://localhost:8080/api/posts/' + this.offerId, {
+      .get<Offer>('http://localhost:8080/api/posts/' + this.offerId, {
         headers,
       })
       .subscribe(

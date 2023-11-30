@@ -3,10 +3,7 @@
 
     <div class="pt-3 px-3">
       <div class="d-flex align-items-center mb-3">
-        <a href="#"><img
-          src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          alt="" style="width: 50px; height: 50px; object-fit: cover;"
-          class="rounded-circle"/></a>
+        <app-profile-image [userId]="offerCard!.userID!"></app-profile-image>
         <div class="flex-fill ps-2">
           <div class="fw-bold"><a href="#" class="text-decoration-none post-author">{{ offerCard?.username }}</a>
           </div>

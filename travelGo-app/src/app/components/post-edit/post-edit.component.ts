@@ -4,6 +4,7 @@ import {Post, UpdatePostRequest} from "../../types/post";
 import {PostsService} from "../../services/posts.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-post-edit',
@@ -23,6 +24,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private toast: NgToastService
     ) {
     this.route.queryParams.subscribe((params) => {
       this.postId = params['id'];
@@ -66,8 +68,13 @@ export class PostEditComponent implements OnInit, OnDestroy {
     this.postsService.updatePost(this.postId, updateRequest)
       .subscribe({
         next: () => {
-          console.log("post updated");
-          window.location.reload();
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Post updated successfully',
+            sticky: true,
+            position: 'topLeft',
+            duration: 2000,
+          })
         },
         error: err => console.error('Post updating failed:', err)
       });

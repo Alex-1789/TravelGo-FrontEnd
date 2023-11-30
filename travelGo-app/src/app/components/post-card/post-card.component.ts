@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../services/posts.service";
 import {Post} from "../../types/post";
 import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
@@ -10,7 +10,7 @@ import {AuthService} from "../../auth.service";
     templateUrl: './post-card.component.html',
     styleUrls: ['./post-card.component.css'],
 })
-export class PostCardComponent implements OnInit, OnChanges, OnDestroy {
+export class PostCardComponent implements OnInit {
 
     @Input() postCard: Post | null = null
     @Input() postId: number = 0
@@ -19,25 +19,9 @@ export class PostCardComponent implements OnInit, OnChanges, OnDestroy {
     @Input() showFullContent: boolean = false
 
     public images$: Observable<string[] | null> | undefined;
-    public profileImagePath: string = 'assets/images/avatar.png'
-
-    private profileImageSub: any = null
-
 
     ngOnInit(): void {
         this.images$ = this.fetchImagesList(this.postId);
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['postCard'] && changes['postCard'].currentValue) {
-            this.fetchProfileImage(changes['postCard'].currentValue.userID)
-        }
-    }
-
-    ngOnDestroy(): void {
-        if (this.profileImageSub !== null) {
-            this.profileImageSub.unsubscribe()
-        }
     }
 
     constructor(
@@ -103,13 +87,5 @@ export class PostCardComponent implements OnInit, OnChanges, OnDestroy {
                 return URL.createObjectURL(blob);
             })
         );
-    }
-
-    private fetchProfileImage(userId: number) {
-        this.profileImageSub = this.userService.getProfileImage(userId).subscribe({
-            next: value => {
-                this.profileImagePath = URL.createObjectURL(value)
-            }
-        })
     }
 }

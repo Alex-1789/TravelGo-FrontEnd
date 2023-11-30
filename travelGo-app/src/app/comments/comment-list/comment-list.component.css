@@ -1,10 +1,14 @@
-.comment-box {
-  padding: 15px 35px;
-  background-color: #ebf4f4;
+.username {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.content {
+
 }
 
 #delete {
   cursor:pointer;
-  color:#0dcaf0;
+  color: var(--lively-accent);
   text-decoration:underline;
 }

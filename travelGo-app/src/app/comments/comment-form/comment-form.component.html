@@ -2,8 +2,8 @@
   <div class="card-body">
     <h4>Leave a Comment</h4>
     <form [formGroup]="commentForm" (ngSubmit)="create_comment()">
-      <textarea cols="30" rows="10" class="form-control" placeholder="Add you comment here!" formControlName="content"></textarea>
-      <button class="btn btn-info mt-2">Add a Comment</button>
+      <textarea cols="30" rows="10" class="form-control" placeholder="Write comment..." formControlName="content"></textarea>
+      <button class="btn btn-primary-travel mt-2">Add a Comment</button>
     </form>
   </div>
 </div>

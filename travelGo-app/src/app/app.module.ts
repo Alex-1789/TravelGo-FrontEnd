@@ -50,6 +50,7 @@ import { RatingCardComponent } from './components/rating-card/rating-card.compon
 import { AccountUpdateComponent } from './safe/account-update/account-update.component';
 import { AddDocumentComponent } from './components/add-document/add-document.component';
 import { PostEditComponent } from './components/post-edit/post-edit.component';
+import { ProfileImageComponent } from './components/profile-image/profile-image.component';
 
 
 defineComponents(IgcRatingComponent);
@@ -87,6 +88,7 @@ defineComponents(IgcRatingComponent);
     AccountUpdateComponent,
     AddDocumentComponent,
     PostEditComponent,
+    ProfileImageComponent,
   ],
     imports: [
         BrowserModule,

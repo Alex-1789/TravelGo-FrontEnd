@@ -43,7 +43,7 @@ export class CreatePostComponent implements OnDestroy {
     const files: FileList = event.target.files;
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        this.selectedImages.push(files[i]);
+        this.selectedImages.push(files[i])
       }
     }
   }
@@ -79,7 +79,7 @@ export class CreatePostComponent implements OnDestroy {
       this.createPostSub = this.tripService.addPostToTripDiscussion(this.tripId, postData)
         .subscribe({
           next: () => {
-            this.successfulCreatePost();
+            this.successfulCreatePost()
           },
           error: err => console.error('Post creating failed:', err)
         });

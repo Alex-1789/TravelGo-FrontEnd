@@ -4,10 +4,10 @@
       <div class="card-body text-center">
         <form [formGroup]="postForm" (ngSubmit)="updatePost()">
           <h2 class="mb-4">Update post</h2>
-          <ng-container *ngFor="let image of images$ | async">
+          <ng-container *ngFor="let image of postImages">
             <div class="d-inline-block p-3">
-              <img alt="post-image" [src]="image" class="post-image"><br>
-              <button class="btn btn-danger mt-3">Delete</button>
+              <img alt="post-image" [src]="getImageUrl(image)" class="post-image"><br>
+              <button class="btn btn-danger mt-3" (click)="deleteImage(image)">Delete</button>
             </div>
           </ng-container>
           <div class="form-group mb-2">

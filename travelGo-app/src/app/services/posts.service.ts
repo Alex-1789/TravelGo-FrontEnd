@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthService} from "../auth.service";
-import {Post, UpdatePostRequest} from "../types/post";
+import {Post} from "../types/post";
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +63,7 @@ export class PostsService {
     return this.http.post('http://localhost:8080/api/posts/', postData, {headers: headers})
   }
 
-  public updatePost(postId: number, postData: UpdatePostRequest) {
-    return this.http.put(`http://localhost:8080/api/posts/${postId}`, postData, { headers: this.headers });
+  public updatePost(postId: number, postData: FormData) {
+    return this.http.post(`http://localhost:8080/api/posts/${postId}`, postData, { headers: this.headers });
   }
 }

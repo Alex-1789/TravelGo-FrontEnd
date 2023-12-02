@@ -69,18 +69,3 @@ h1 {
   min-height: 90vh;
 }
 
-/* Scroll bar styles */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px var(--mood-accent);
-  border-radius: 0px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 0px;
-  background-color: var(--lively-accent);
-}

@@ -68,17 +68,19 @@
         </div>
 
         <div class="my-3">
-          <h3>Dostępne dokumenty</h3>
 
-          <div *ngIf="isCurrentUserGuide">
-            <app-add-document [tripId]="tripId"></app-add-document>
+          <div class="py-3" *ngIf="isCurrentUserGuide">
+            <h3 class="py-3">Add document</h3>
+            <app-add-document [tripId]="tripId" (onChange)="refreshTrip()"></app-add-document>
           </div>
 
+          <h3 class="py-3">Available documents</h3>
           <div class="row">
-            <div *ngFor="let document of documents" class="col-lg-4 mb-3">
+            <div *ngFor="let document of documents$ | async" class="col-lg-4 mb-3">
               <div class="card">
                 <div class="card-body">
-                  <p>{{document.title}}</p>
+                  <p>{{ document.document.fileName }}</p>
+                  <a [href]="document.url" target="_blank" class="green-link">Open document</a>
                 </div>
               </div>
             </div>

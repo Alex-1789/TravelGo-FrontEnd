@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TripService} from "../../../services/trip.service";
 
 @Component({
@@ -8,6 +8,7 @@ import {TripService} from "../../../services/trip.service";
 })
 export class AddDocumentComponent{
   @Input() tripId: number | null = null
+  @Output() onChange = new EventEmitter<any>();
 
   public selectedImage: File | null = null
 
@@ -23,6 +24,7 @@ export class AddDocumentComponent{
       formData.append('file', this.selectedImage, this.selectedImage.name)
 
       this.tripsService.createTripDocument(this.tripId, formData).subscribe()
+      this.onChange.emit()
     }
   }
 

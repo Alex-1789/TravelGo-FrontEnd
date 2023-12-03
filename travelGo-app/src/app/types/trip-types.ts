@@ -14,9 +14,9 @@ export interface Trip {
   description: string
 }
 
-export interface Documents {
+export interface Document {
   id: number
-  filename: string
+  fileName: string
   title: string
   tripId: number
   username: string

@@ -1,10 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
-import {Documents, Trip} from "../../types/trip-types";
+import {Document, Trip} from "../../types/trip-types";
 import {TripService} from "../../services/trip.service";
 import {NgToastService} from "ng-angular-popup";
 import {Post} from "../../types/post";
 import {AuthService} from "../../auth.service";
+import {catchError, forkJoin, map, mergeMap, Observable, of} from "rxjs";
+
+interface DocumentWithUrl {
+  document: Document
+  url: string
+}
 
 @Component({
   selector: 'app-single-trip',
@@ -13,7 +19,7 @@ import {AuthService} from "../../auth.service";
 })
 export class SingleTripComponent implements OnInit, OnDestroy {
   tripId: number = -1
-  documents: Documents[] = []
+  documents$: Observable<DocumentWithUrl[] | null> | null = null
   tripData: Trip | null = null
 
   public discussion: Post[] | null = null
@@ -50,6 +56,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       error: err => console.error("Discussion loading error " + err)
     })
 
+    this.documents$ = this.fetchDocumentsList()
   }
 
   ngOnDestroy() {
@@ -153,14 +160,39 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     }
   }
 
-  private refreshTripData(): void {
-    if (this.tripsSub !== null) {
-      this.tripsSub.unsubscribe()
-    }
+  public refreshTrip() {
+    window.location.reload()
+  }
 
-    this.tripsSub = this.tripService.getTrip(this.tripId).subscribe({
+  private refreshTripData(): void {
+    this.tripService.getTrip(this.tripId).subscribe({
       next: value => this.tripData = value,
       error: err => console.log("Data trip loading error " + err)
     });
+  }
+
+  private fetchDocumentsList(): Observable<DocumentWithUrl[] | null> {
+    return this.tripService.getTripDocuments(this.tripId).pipe(
+      mergeMap(documents => {
+        const documentsUrlObservables = documents.map(document => this.getDocumentUrl(document));
+        return forkJoin(documentsUrlObservables);
+      }),
+      catchError(error => {
+        console.error('Wystąpił błąd podczas pobierania obrazków:', error);
+        return of(null)
+      })
+    );
+  }
+
+  private getDocumentUrl(document: Document) {
+    return this.tripService.getTripDocument(document.id).pipe(
+      map((blob: Blob) => {
+        const doc: DocumentWithUrl = {
+          document: document,
+          url: URL.createObjectURL(blob)
+        }
+        return doc
+      })
+    );
   }
 }

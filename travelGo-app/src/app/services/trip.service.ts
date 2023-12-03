@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../auth.service";
 import {Injectable} from "@angular/core";
-import {Documents, Rate, Trip} from "../types/trip-types";
+import {Document, Rate, Trip} from "../types/trip-types";
 import {Observable} from "rxjs";
 import {Post} from "../types/post";
 
@@ -43,9 +43,9 @@ export class TripService {
   }
 
 
-  public getTripDocuments(tripId: number): Observable<Documents[]> {
+  public getTripDocuments(tripId: number): Observable<Document[]> {
     return this.http
-      .get<Documents[]>('http://localhost:8080/api/trips/' + tripId + '/documents/', {headers: this.headers})
+      .get<Document[]>('http://localhost:8080/api/trips/' + tripId + '/documents/', {headers: this.headers})
   }
 
   public rateTrip(tripId: number, rate: { rate: number }): Observable<any> {

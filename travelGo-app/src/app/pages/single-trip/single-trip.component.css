@@ -50,3 +50,7 @@ h3 {
 .archive:hover {
   text-decoration: underline;
 }
+
+.green-link {
+  color: var(--lively-accent)
+}

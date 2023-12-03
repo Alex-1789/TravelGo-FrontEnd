@@ -19,4 +19,8 @@ export class ForumComponent {
       }
     );
   }
+
+  public reload() {
+    window.location.reload()
+  }
 }

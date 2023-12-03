@@ -1,7 +1,7 @@
 <div class="app-content">
   <div class="container py-3">
     <div *ngIf="canActualUserPostOffers()">
-      <app-create-offer></app-create-offer>
+      <app-create-offer (refreshPosts)="reload()"></app-create-offer>
     </div>
 
     <div class="row">

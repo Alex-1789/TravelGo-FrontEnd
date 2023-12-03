@@ -25,4 +25,7 @@ export class BusinessOfferComponent {
     return this.authService.isBusinessPartner()
   }
 
+  public reload() {
+    window.location.reload()
+  }
 }

@@ -18,4 +18,8 @@ export class TripsComponent implements OnInit {
   ngOnInit(): void {
     this.trips$ = this.tripService.getAllTrips()
   }
+
+  public reload() {
+    window.location.reload()
+  }
 }

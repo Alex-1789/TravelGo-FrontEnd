@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
@@ -11,6 +11,7 @@ import {TripService} from "../../../services/trip.service";
   styleUrls: ['./create-trip.component.css'],
 })
 export class CreateTripComponent implements OnDestroy {
+  @Output() onChange = new EventEmitter<any>();
   public tripForm: FormGroup;
 
   private createTripSub: any | null = null
@@ -68,6 +69,7 @@ export class CreateTripComponent implements OnDestroy {
   }
 
   public successfulCreateTrip(): void {
+    this.onChange.emit()
     this.toast.success({
       detail: 'Trip created Successfully!',
       summary: 'Trip created Successfully!',

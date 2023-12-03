@@ -1,7 +1,7 @@
 <div class="app-content">
   <div class="container py-3">
 
-    <app-create-post></app-create-post>
+    <app-create-post (refreshPosts)="reload()"></app-create-post>
 
     <div class="row">
       <div *ngFor="let postCard of postCards" class="col-lg-12 py-3">

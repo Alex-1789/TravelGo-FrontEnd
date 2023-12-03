@@ -29,13 +29,17 @@
           formControlName="description"
           required
         ></textarea>
-        <mat-form-field>
-          <input matInput [matDatepicker]="myDatePicker" placeholder="MM/DD/YYYY" formControlName="date">
-          <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
-          <mat-datepicker #myDatePicker></mat-datepicker>
-        </mat-form-field>
+        <div class="mt-3">
+          <p>Select trip date:</p>
+          <mat-form-field>
+            <input matInput [matDatepicker]="myDatePicker" placeholder="MM/DD/YYYY" formControlName="date">
+            <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #myDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
         <div class="form-group mb-2">
-          <button class="btn btn-info mt-3">Add</button>
+          <button class="btn btn-primary-travel">+ Add trip</button>
         </div>
       </form>
     </div>

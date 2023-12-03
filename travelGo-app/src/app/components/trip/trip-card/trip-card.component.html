@@ -1,23 +1,66 @@
-<div class="row">
-  <div
-    *ngFor="let tripCard of tripCards"
-    class="card col-lg-4 mb-3 text-center"
-  >
-    <div class="card-body">
-      <h2 class="text-center ml-3">{{ tripCard.tripName }}</h2>
-      <small class="text-center ml-3">{{ tripCard.date }}</small>
-      <small class="text-center ml-3">{{ tripCard.gatheringPlace }}</small>
-      <small class="text-center ml-3">{{ tripCard.rate }}</small>
+<div class="card rounded-0">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="trip-title my-3">
+          <h1 class="">{{ tripData?.tripName }}</h1>
+          <h3 class="gathering">{{ tripData?.gatheringPlace }}</h3>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-end">
+          <a *ngIf="isCurrentUserGuide()" (click)="archiveTrip()" class="archive">Archive trip</a>
+        </div>
+      </div>
+    </div>
 
-      <h5 class="mt-1">
-        <a [routerLink]="['/trip']" [queryParams]="{ id: tripCard.id }"
-          >LDJJDLJDDJLJD</a
-        >
-      </h5>
-      <p>djdhggjshdjshd</p>
-      <small (click)="archiveTrip(tripCard.id)" *ngIf="hasAccessArchive">Archive</small>
-      <small class="text-center ml-3">Last UPDATED - At you funeral</small>
-      <small (click)="deleteTrip(tripCard.id)" *ngIf="hasAccessDelete">Delete</small>
+    <div class="row p-3">
+      <h4>Trip date: {{tripData?.date}}</h4>
+      <div class="col-md-6 right-separator">
+        <div class="pr-10p">
+          <div class="my-3">
+            <h3>Description</h3>
+            <div class="overflow-auto description">{{ tripData?.description }}</div>
+          </div>
+
+          <div class="my-3">
+            <h3>Reviews</h3>
+            <app-rating-card [rating]="tripData?.rate" [numberOfRates]="tripData?.numberOfRates"></app-rating-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="pl-10p">
+          <h3>Guide</h3>
+          <div class="participants overflow-auto my-3">
+            <div *ngFor="let user of tripData?.tripGuides" class="d-flex align-items-center mb-3">
+              <app-profile-image [userId]="user.id"></app-profile-image>
+              <div class="flex-fill ps-2">
+                <div class="fw-bold"><a
+                  class="text-decoration-none participant-name">{{ user.username }}
+                  ({{ user.name }} {{ user.surname }})</a></div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Participants</h3>
+          <div class="participants overflow-auto my-3">
+            <div *ngFor="let user of tripData?.participants" class="d-flex align-items-center mb-3">
+              <app-profile-image [userId]="user.id"></app-profile-image>
+              <div class="flex-fill ps-2">
+                <div class="fw-bold"><a
+                  class="text-decoration-none participant-name">{{ user.username }}
+                  ({{ user.name }} {{ user.surname }})</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="text-center">
+      <a class="btn btn-primary-travel" [routerLink]="['/trip']" [queryParams]="{ id: tripData?.id }">Show more</a>
     </div>
   </div>
 </div>

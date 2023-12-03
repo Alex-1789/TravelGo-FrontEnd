@@ -1,15 +1,15 @@
 <div class="app-content">
   <div class="container py-3">
-    <div class="card post-card p-3 rounded-0">
-      <div class="card-body profile p-0">
-        <a href="http://localhost:4200/create-trip" class="btn btn-primary-travel">+ Add new trip</a>
-      </div>
-    </div>
+
+    <app-create-trip></app-create-trip>
 
     <div class="row">
-      <app-trip-card></app-trip-card>
+      <div *ngFor="let trip of trips$ | async" class="col-lg-12 py-3">
+        <app-trip-card [tripData]="trip">
+        </app-trip-card>
+      </div>
     </div>
-
   </div>
+
 </div>
 

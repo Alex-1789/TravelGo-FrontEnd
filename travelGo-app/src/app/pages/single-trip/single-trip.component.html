@@ -12,12 +12,13 @@
           </div>
           <div class="col-md-6">
             <div class="text-end">
-              <a *ngIf="isCurrentUserGuide()" (click)="ArchiveTrip()" class="archive">Archive trip</a>
+              <a *ngIf="isCurrentUserGuide()" (click)="archiveTrip()" class="archive">Archive trip</a>
             </div>
           </div>
         </div>
 
         <div class="row p-3">
+          <h4>Trip date: {{tripData?.date}}</h4>
           <div class="col-md-6 right-separator">
             <div class="pr-10p">
               <div class="my-3">

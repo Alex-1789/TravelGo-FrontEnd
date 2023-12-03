@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../auth.service";
 import {Injectable} from "@angular/core";
-import {Documents, Rate, SingleTripCard} from "../types/trip-types";
+import {Documents, Rate, Trip} from "../types/trip-types";
 import {Observable} from "rxjs";
 import {Post} from "../types/post";
 
@@ -19,13 +19,27 @@ export class TripService {
     this.headers = authService.getHeaders();
   }
 
-  public getTrip(tripId: number): Observable<SingleTripCard> {
-    return this.http.get<SingleTripCard>('http://localhost:8080/api/trips/' + tripId, {headers: this.headers})
+  public getTrip(tripId: number): Observable<Trip> {
+    return this.http.get<Trip>('http://localhost:8080/api/trips/' + tripId, {headers: this.headers})
+  }
+
+  public getAllTrips(): Observable<Trip[]> {
+    return this.http
+      .get<Trip[]>('http://localhost:8080/api/trips/', {headers: this.headers})
+  }
+
+  public archiveTrip(tripId: number) {
+    return this.http
+      .put<any>('http://localhost:8080/api/trips/' + tripId + '/archive', null, {headers: this.headers})
+  }
+
+  public deleteTrip(tripId: number) {
+    return this.http
+      .delete<any>('http://localhost:8080/api/trips/' + tripId, {headers: this.headers})
   }
 
   public createTripDocument(tripId: number, params: any) {
-    return this.http.
-      post('http://localhost:8080/api/trips/' + tripId + '/documents/', params, {headers: this.headers})
+    return this.http.post('http://localhost:8080/api/trips/' + tripId + '/documents/', params, {headers: this.headers})
   }
 
 
@@ -34,7 +48,7 @@ export class TripService {
       .get<Documents[]>('http://localhost:8080/api/trips/' + tripId + '/documents/', {headers: this.headers})
   }
 
-  public rateTrip(tripId: number, rate: {rate: number}): Observable<any> {
+  public rateTrip(tripId: number, rate: { rate: number }): Observable<any> {
     return this.http.post<any>(
       'http://localhost:8080/api/trips/' + tripId + '/rate', rate, {headers: this.headers}
     )

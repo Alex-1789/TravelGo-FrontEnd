@@ -1,6 +1,6 @@
 import {User} from "./user"
 
-export interface SingleTripCard {
+export interface Trip {
   id: number
   date: Date
   gatheringPlace: string

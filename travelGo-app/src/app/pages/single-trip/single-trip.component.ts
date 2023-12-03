@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
-import {Documents, SingleTripCard} from "../../types/trip-types";
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {Documents, Trip} from "../../types/trip-types";
 import {TripService} from "../../services/trip.service";
 import {NgToastService} from "ng-angular-popup";
 import {Post} from "../../types/post";
@@ -14,7 +14,7 @@ import {AuthService} from "../../auth.service";
 export class SingleTripComponent implements OnInit, OnDestroy {
   tripId: number = -1
   documents: Documents[] = []
-  tripData: SingleTripCard | null = null
+  tripData: Trip | null = null
 
   public discussion: Post[] | null = null
 
@@ -26,7 +26,8 @@ export class SingleTripComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private tripsService: TripService,
+    private router: Router,
+    private tripService: TripService,
     private toast: NgToastService,
     private authService: AuthService
   ) {
@@ -36,7 +37,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
     const snapshot: ActivatedRouteSnapshot = this.route.snapshot
     this.tripId = snapshot.queryParams['id']
 
-    this.tripsSub = this.tripsService.getTrip(this.tripId).subscribe({
+    this.tripsSub = this.tripService.getTrip(this.tripId).subscribe({
       next: value => {
         this.tripData = value
         console.log(this.tripData)
@@ -44,7 +45,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       error: err => console.log("Data trip loading error " + err)
     });
 
-    this.discussionSub = this.tripsService.getTripDiscussion(this.tripId).subscribe({
+    this.discussionSub = this.tripService.getTripDiscussion(this.tripId).subscribe({
       next: value => this.discussion = value,
       error: err => console.error("Discussion loading error " + err)
     })
@@ -74,14 +75,14 @@ export class SingleTripComponent implements OnInit, OnDestroy {
   }
 
   public enrollToTrip(): void {
-    this.enrollToTripSub = this.tripsService.enrollToTrip(this.tripId)
+    this.enrollToTripSub = this.tripService.enrollToTrip(this.tripId)
       .subscribe();
 
     window.location.reload();
   }
 
   public LeaveTrip() {
-    this.leaveTripSub = this.tripsService.leaveTrip(this.tripId)
+    this.leaveTripSub = this.tripService.leaveTrip(this.tripId)
       .subscribe();
 
     window.location.reload();
@@ -96,7 +97,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       this.rateSub.unsubscribe()
     }
 
-    this.rateSub = this.tripsService.rateTrip(this.tripId, ratedData).subscribe({
+    this.rateSub = this.tripService.rateTrip(this.tripId, ratedData).subscribe({
       next: () => {
         this.refreshTripData()
       }
@@ -113,7 +114,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
         this.discussionSub.unsubscribe()
       }
 
-      this.discussionSub = this.tripsService.getTripDiscussion(this.tripId).subscribe({
+      this.discussionSub = this.tripService.getTripDiscussion(this.tripId).subscribe({
         next: value => this.discussion = value,
         error: err => console.error("Discussion loading error " + err)
       });
@@ -142,8 +143,14 @@ export class SingleTripComponent implements OnInit, OnDestroy {
 
   protected readonly console = console;
 
-  public ArchiveTrip() {
-
+  public archiveTrip() {
+    if (this.tripData) {
+      this.tripService.archiveTrip(this.tripData?.id).subscribe({
+        next: () => {
+          this.router.navigate(['/trips'])
+        }
+      })
+    }
   }
 
   private refreshTripData(): void {
@@ -151,7 +158,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
       this.tripsSub.unsubscribe()
     }
 
-    this.tripsSub = this.tripsService.getTrip(this.tripId).subscribe({
+    this.tripsSub = this.tripService.getTrip(this.tripId).subscribe({
       next: value => this.tripData = value,
       error: err => console.log("Data trip loading error " + err)
     });

@@ -1,11 +1,52 @@
-.card {
-  margin-right: 4px;
-  margin-left: 4px;
-  max-width: 32.5%;
+.participants {
+  max-height: 230px;
 }
 
-#function {
-  cursor:pointer;
-  color:#0dcaf0;
-  text-decoration:underline;
+.description {
+  max-height: 400px;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+h3 {
+  color: var(--primary-color)
+}
+
+.gathering {
+  font-style: italic;
+}
+
+.trip-title {
+  border-left: 5px var(--lively-accent) solid;
+  padding-left: 30px;
+}
+
+.participant-name {
+  color: #000;
+  font-weight: normal;
+}
+
+.right-separator {
+  border-right: 1px solid #ddd;
+}
+
+.pr-10p {
+  padding-right: 10px;
+}
+
+.pl-10p {
+  padding-left: 10px;
+}
+
+.archive {
+  text-decoration: none;
+  color: red;
+  cursor: pointer;
+}
+
+.archive:hover {
+  text-decoration: underline;
 }

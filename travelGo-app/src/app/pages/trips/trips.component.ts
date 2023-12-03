@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {Trip} from "../../types/trip-types";
+import {TripService} from "../../services/trip.service";
 
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.css'],
 })
-export class TripsComponent {
+export class TripsComponent implements OnInit {
+  trips$: Observable<Trip[]> | null = null
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private tripService: TripService
+  ) {}
 
-  whatRoles() {
-    let roles = this.authService.getUserRoles();
-    console.log(roles);
+  ngOnInit(): void {
+    this.trips$ = this.tripService.getAllTrips()
   }
 }

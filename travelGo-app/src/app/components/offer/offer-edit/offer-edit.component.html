@@ -1,0 +1,58 @@
+<div class="app-content">
+  <div class="container py-3">
+    <div class="card rounded-0">
+      <div class="card-body text-center">
+        <form [formGroup]="postForm" (ngSubmit)="updatePost()">
+          <h2 class="mb-4">Update offer</h2>
+          <ng-container *ngFor="let image of postImages">
+            <div class="d-inline-block p-3">
+              <img alt="post-image" [src]="getImageUrl(image)" class="post-image"><br>
+              <button class="btn btn-danger mt-3" (click)="deleteImage(image)">Delete</button>
+            </div>
+          </ng-container>
+          <div class="form-group mb-2">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Title"
+              formControlName="title"
+              [value]="post?.title"
+              required
+            />
+          </div>
+          <div class="form-group mb-2">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="About (max 100 characters)"
+              maxlength="100"
+              formControlName="about"
+              [value]="post?.about"
+              required
+            />
+          </div>
+          <div class="form-group mb-2">
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Image"
+              (change)="onImageSelected($event)"
+              multiple
+            />
+          </div>
+          <textarea
+            cols="30"
+            rows="15"
+            class="form-control"
+            placeholder="Add you content here!"
+            formControlName="content"
+            [value]="post?.content"
+            required
+          ></textarea>
+          <button class="btn btn-primary-travel mt-3">Publish</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

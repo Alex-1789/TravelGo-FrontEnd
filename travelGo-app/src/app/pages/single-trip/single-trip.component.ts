@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 import {Documents, SingleTripCard} from "../../types/trip-types";
-import {TripsService} from "../../services/trips.service";
+import {TripService} from "../../services/trip.service";
 import {NgToastService} from "ng-angular-popup";
 import {Post} from "../../types/post";
 import {AuthService} from "../../auth.service";
@@ -26,7 +26,7 @@ export class SingleTripComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private tripsService: TripsService,
+    private tripsService: TripService,
     private toast: NgToastService,
     private authService: AuthService
   ) {

@@ -1,0 +1,23 @@
+<div class="row">
+  <div
+    *ngFor="let tripCard of tripCards"
+    class="card col-lg-4 mb-3 text-center"
+  >
+    <div class="card-body">
+      <h2 class="text-center ml-3">{{ tripCard.tripName }}</h2>
+      <small class="text-center ml-3">{{ tripCard.date }}</small>
+      <small class="text-center ml-3">{{ tripCard.gatheringPlace }}</small>
+      <small class="text-center ml-3">{{ tripCard.rate }}</small>
+
+      <h5 class="mt-1">
+        <a [routerLink]="['/trip']" [queryParams]="{ id: tripCard.id }"
+          >LDJJDLJDDJLJD</a
+        >
+      </h5>
+      <p>djdhggjshdjshd</p>
+      <small (click)="archiveTrip(tripCard.id)" *ngIf="hasAccessArchive">Archive</small>
+      <small class="text-center ml-3">Last UPDATED - At you funeral</small>
+      <small (click)="deleteTrip(tripCard.id)" *ngIf="hasAccessDelete">Delete</small>
+    </div>
+  </div>
+</div>

@@ -9,16 +9,17 @@ import {SignupComponent} from './safe/signup/signup.component';
 import {SinglePostComponent} from './pages/single-post/single-post.component';
 import {ForumComponent} from './pages/forum/forum.component';
 import {AccountComponent} from './safe/account/account.component';
-import {CreatePostComponent} from './pages/create-post/create-post.component';
+import {CreatePostComponent} from './components/post/create-post/create-post.component';
 import {TripsComponent} from './pages/trips/trips.component';
-import {CreateTripComponent} from './pages/create-trip/create-trip.component';
+import {CreateTripComponent} from './components/trip/create-trip/create-trip.component';
 import {SingleTripComponent} from './pages/single-trip/single-trip.component';
 import {BusinessOfferComponent} from './pages/business-offer/business-offer.component';
-import {CreateOfferComponent} from './pages/create-offer/create-offer.component';
+import {CreateOfferComponent} from './components/offer/create-offer/create-offer.component';
 import {SingleOfferComponent} from './pages/single-offer/single-offer.component';
 import {ModeratorUserAccessComponent} from './safe/moderator-user-access/moderator-user-access.component';
 import {AccountUpdateComponent} from "./safe/account-update/account-update.component";
-import {PostEditComponent} from "./components/post-edit/post-edit.component";
+import {PostEditComponent} from "./components/post/post-edit/post-edit.component";
+import {OfferEditComponent} from "./components/offer/offer-edit/offer-edit.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'trip', component: SingleTripComponent},
   {path: 'business-offer', component: BusinessOfferComponent},
   {path: 'create-offer', component: CreateOfferComponent},
+  {path: 'edit-offer', component: OfferEditComponent},
   {path: 'offer', component: SingleOfferComponent},
   {path: 'moderator', component: ModeratorUserAccessComponent},
 ];

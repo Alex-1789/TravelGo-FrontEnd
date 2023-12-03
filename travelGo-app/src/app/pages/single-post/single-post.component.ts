@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from "../../types/post";
-import {PostsService} from "../../services/posts.service";
+import {PostService} from "../../services/post.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -15,7 +15,7 @@ export class SinglePostComponent implements OnInit {
   public postId: number = 0;
 
   constructor(
-    private postsService: PostsService,
+    private postsService: PostService,
     private route: ActivatedRoute,
   ) {
     this.route.queryParams.subscribe((params) => {

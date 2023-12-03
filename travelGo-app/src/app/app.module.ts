@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { CategoryNavbarComponent } from './layout/category-navbar/category-navbar.component';
+import { CategoryNavbarComponent } from './components/global/category-navbar/category-navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TripsComponent } from './pages/trips/trips.component';
@@ -20,13 +20,13 @@ import { SignupComponent } from './safe/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ForumComponent } from './pages/forum/forum.component';
-import { PostCardComponent } from './components/post-card/post-card.component';
+import { PostCardComponent } from './components/post/post-card/post-card.component';
 import { AccountComponent } from './safe/account/account.component';
-import { CreatePostComponent } from './pages/create-post/create-post.component';
-import { TripCardComponent } from './layout/trip-card/trip-card.component';
-import { OfferCardComponent } from './layout/offer-card/offer-card.component';
-import { CreateTripComponent } from './pages/create-trip/create-trip.component';
-import { CreateOfferComponent } from './pages/create-offer/create-offer.component';
+import { CreatePostComponent } from './components/post/create-post/create-post.component';
+import { TripCardComponent } from './components/trip/trip-card/trip-card.component';
+import { OfferCardComponent } from './components/offer/offer-card/offer-card.component';
+import { CreateTripComponent } from './components/trip/create-trip/create-trip.component';
+import { CreateOfferComponent } from './components/offer/create-offer/create-offer.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,14 +44,15 @@ import {
   CarouselInnerComponent,
   CarouselItemComponent
 } from "@coreui/angular";
-import {CarouselHomeComponent} from "./layout/carousel-home/carousel-home.component";
+import {CarouselHomeComponent} from "./components/global/carousel-home/carousel-home.component";
 import { ModeratorUserAccessComponent } from './safe/moderator-user-access/moderator-user-access.component';
-import { RatingCardComponent } from './components/rating-card/rating-card.component';
+import { RatingCardComponent } from './components/trip/rating-card/rating-card.component';
 import { AccountUpdateComponent } from './safe/account-update/account-update.component';
-import { AddDocumentComponent } from './components/add-document/add-document.component';
-import { PostEditComponent } from './components/post-edit/post-edit.component';
-import { ProfileImageComponent } from './components/profile-image/profile-image.component';
-import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
+import { AddDocumentComponent } from './components/trip/add-document/add-document.component';
+import { PostEditComponent } from './components/post/post-edit/post-edit.component';
+import { ProfileImageComponent } from './components/user-profile/profile-image/profile-image.component';
+import { ProfileMenuComponent } from './components/user-profile/profile-menu/profile-menu.component';
+import {OfferEditComponent} from "./components/offer/offer-edit/offer-edit.component";
 
 
 defineComponents(IgcRatingComponent);
@@ -78,6 +79,7 @@ defineComponents(IgcRatingComponent);
     CreatePostComponent,
     TripCardComponent,
     OfferCardComponent,
+    OfferEditComponent,
     CreateTripComponent,
     CreateOfferComponent,
     SingleOfferComponent,

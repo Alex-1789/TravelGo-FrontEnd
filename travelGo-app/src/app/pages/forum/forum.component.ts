@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Post} from "../../types/post";
-import {PostsService} from "../../services/posts.service";
+import {PostService} from "../../services/post.service";
 
 @Component({
   selector: 'app-forum',
@@ -11,7 +11,7 @@ export class ForumComponent {
   public postCards: Post[] = [];
 
   constructor(
-    private postsService: PostsService
+    private postsService: PostService
   ) {
     postsService.getAllPosts().subscribe(
       value => {

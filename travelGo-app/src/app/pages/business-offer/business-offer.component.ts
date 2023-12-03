@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {OffersService} from "../../services/offers.service";
+import {OfferService} from "../../services/offer.service";
 import {Offer} from "../../types/post";
 import {AuthService} from "../../auth.service";
 
@@ -11,7 +11,7 @@ import {AuthService} from "../../auth.service";
 export class BusinessOfferComponent {
   public offerCards: Offer[] = [];
   constructor(
-    private offersService: OffersService,
+    private offersService: OfferService,
     private authService: AuthService
   ) {
     offersService.getAllOffers().subscribe(
